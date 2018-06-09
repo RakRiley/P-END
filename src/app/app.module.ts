@@ -11,6 +11,8 @@ import { HttpModule} from '@angular/http'
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 ///
 import {LoginService} from './provider/login/login.service';
+import { GetApiService } from './get-api.service';
+import { UserService} from './components/service/user.service';
 import { Table1Component } from './components/table-1/table-1.component';
 import { Table2Component } from './components/table-2/table-2.component';
 import { DetailComponent } from './components/detail/detail.component';
@@ -50,7 +52,9 @@ const router : Routes =[
     HttpModule,
     NgbModule.forRoot()
   ],
-  providers: [LoginService],
+  providers: [LoginService, GetApiService, UserService
+  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

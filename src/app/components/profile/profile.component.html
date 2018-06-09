@@ -18,10 +18,10 @@
                           </div>
                           <br>
                           <div class="row">
-                            <h2 style="margin:auto">57021498</h2>
+                            <h2 style="margin:auto">{{ln.StudentCode}}</h2>
                           </div>
                         </div>
-                        <div class="col-10 border-left">
+                        <div class="col-10 border-left border-warning">
                           <div class="container border border-warning" style="padding-top: 30px;padding-right: 30px;padding-bottom: 30px;padding-left: 30px;border-radius: 6px; background-color:rgba(150, 150, 196, 0.959)">
                             <div class="row col-12">
                                 <table class="col-12 col-md-12">
@@ -36,31 +36,31 @@
                                     <tbody style="text-align:left;font-size: 1em;">
                                       <tr>
                                         <td scope="row" width="20%"><b>รหัสพนักงาน :</b></td>
-                                        <td >57021498</td>                                       
+                                        <td>{{ln.StudentCode}}</td>                                       
                                       </tr>
                                       <tr>
                                         <th scope="row">ชื่อ-สกุล :</th>
-                                        <td>กฤษติน ศรีบุญไชย</td>                                       
+                                        <td>{{ln.FirstName_TH}} {{ln.LastName_TH}}</td>                                       
                                       </tr>
                                       <tr>
                                         <th scope="row">ตำแหน่ง :</th>
-                                        <td>พนักงานระดับ2</td>                                       
+                                        <td>{{ln.ProgramName_TH}}</td>                                       
                                       </tr>
                                       <tr>
                                         <th scope="row">สถานะ :</th>
-                                        <td>ใช้งาน</td>                                       
+                                        <td>{{ln.CurrentStatus}}</td>                                       
                                       </tr>
                                       <tr>
                                         <th scope="row">จำนวนเอกสารที่มี :</th>
-                                        <td>36 รายการ</td>                                       
+                                        <td></td>                                       
                                       </tr>
                                       <tr>
                                         <th scope="row">หน่วยงาน :</th>
-                                        <td>ห้องช่าง</td>                                       
+                                        <td>{{ln.FacultyName_TH}}</td>                                       
                                       </tr>
                                       <tr>
                                         <th scope="row">เบอร์โทร :</th>
-                                        <td>084-5759780</td>                                       
+                                        <td>{{ln.Telephone}}</td>                                       
                                       </tr>     
                                     </tbody>
                                   </table>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../provider/login/login.service'
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +9,10 @@ import { LoginService } from '../../provider/login/login.service'
   providers:[LoginService]
 })
 export class LoginComponent implements OnInit {
-  constructor(public loginprovider:LoginService) {
-
+  constructor(public loginprovider:LoginService,public route:Router) {
+     if(JSON.parse(localStorage.getItem('user_profile'))){
+        this.route.navigate(['/'])
+     }
    }
 
    Login(username,password){
@@ -24,12 +26,17 @@ export class LoginComponent implements OnInit {
         var token = xmltoken.getElementsByTagName('string')
         console.log(data)
         console.log(token[0].innerHTML)
+        localStorage.setItem('token',token[0].innerHTML);
         this.loginprovider.getinfo(token[0].innerHTML).then((data1:any)=>{
           if(data.status=='error'){
             alert(data1)
+            localStorage.removeItem('token');
           }else{
-            var datareal = parser.parseFromString(data1,'text/xml')
-            console.log(datareal)
+            let datareal = JSON.parse(data1)
+            console.log(datareal.d)
+            let profile = JSON.stringify(datareal.d);
+            localStorage.setItem('user_profile',profile);
+            this.route.navigate(['/'])
           }
         })
       }

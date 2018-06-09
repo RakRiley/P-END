@@ -39,7 +39,8 @@ export class LoginService {
       this.http.post('https://ws.up.ac.th/mobile/StudentService.asmx/GetStudentInfo',{sessionID:ses},option)
       .map(res=>res.text())
       .subscribe(data=>{
-        res((data)),error=>{
+        res((data)),
+        error=>{
           rej(error)
         }
       })

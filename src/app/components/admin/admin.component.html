@@ -12,7 +12,7 @@
             <img src="/assets/P/superman.png" class="rounded-circle" alt="" width="70" height="70">
           </div>
           <div style="text-align: center" style="padding: 15px 15px 15px 25px;line-height: 1;">
-            <p>Admin Rak jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj</p>
+            <p>Admin Rak </p>
             <a href=""style="font-size:8px"><i class="fa fa-circle text-success"></i>  สถานะใช้งาน</a>
           </div>
           <br>
@@ -38,20 +38,20 @@
         <br>
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-              <a *ngIf="link==1"  class="nav-link active" href="javascript:void(0)" (click)="linkchange(1)">หน้า1</a>
-              <a *ngIf="link!=1" class="nav-link" href="javascript:void(0)" (click)="linkchange(1)">หน้า1</a>
+              <a *ngIf="link==1"  class="nav-link active" href="javascript:void(0)" (click)="linkchange(1)">หน้าจัดการผู้ใช้</a>
+              <a *ngIf="link!=1" class="nav-link" href="javascript:void(0)" (click)="linkchange(1)">หน้าจัดการผู้ใช้</a>
           </li>
           <li class="nav-item">
-              <a *ngIf="link==2"  class="nav-link active" href="javascript:void(0)" (click)="linkchange(2)">หน้า2</a>
-              <a *ngIf="link!=2" class="nav-link" href="javascript:void(0)" (click)="linkchange(2)">หน้า2</a>
+              <a *ngIf="link==2"  class="nav-link active" href="javascript:void(0)" (click)="linkchange(2)">หน้าจัดการแก้ไขข้อมูลหนังสือ</a>
+              <a *ngIf="link!=2" class="nav-link" href="javascript:void(0)" (click)="linkchange(2)">หน้าจัดการแก้ไขข้อมูลหนังสือ</a>
           </li>
           <li class="nav-item">
-             <a *ngIf="link==3"  class="nav-link active" href="javascript:void(0)" (click)="linkchange(3)">หน้า3</a>
-              <a *ngIf="link!=3" class="nav-link" href="javascript:void(0)" (click)="linkchange(3)">หน้า3</a>
+             <a *ngIf="link==3"  class="nav-link active" href="javascript:void(0)" (click)="linkchange(3)">หน้าจัดการรายระเอียดของหนัง</a>
+              <a *ngIf="link!=3" class="nav-link" href="javascript:void(0)" (click)="linkchange(3)">หน้าจัดการรายระเอียดของหนัง</a>
           </li>
           <li class="nav-item">
-             <a *ngIf="link==4"  class="nav-link active" href="javascript:void(0)" (click)="linkchange(4)">หน้า4</a>
-              <a *ngIf="link!=4" class="nav-link" href="javascript:void(0)" (click)="linkchange(4)">หน้า4</a>
+             <a *ngIf="link==4"  class="nav-link active" href="javascript:void(0)" (click)="linkchange(4)">หน้าสถิติของหนังสือในแต่ล่ะปี</a>
+              <a *ngIf="link!=4" class="nav-link" href="javascript:void(0)" (click)="linkchange(4)">หน้าสถิติของหนังสือในแต่ล่ะปี</a>
           </li>
           <li class="nav-item">
              <a *ngIf="link==5"  class="nav-link active" href="javascript:void(0)" (click)="linkchange(5)">หน้า5</a>
@@ -65,48 +65,38 @@
       </div>  
     </div>
     <div *ngIf="link==1" class="col-sm-9" style="background-color: royalblue">
-      <h4><small>RECENT POSTS</small></h4>
+      <h4><small></small></h4>
         <div class="container">
           <div class="row">
               <div class="card col-sm-12 col-md-12" style="background-color: goldenrod">
-                  <div class="card-body">Basic card
+                  <div class="card-body">
                     <br>
-                    <div class="card">
-                        <div class="card-header">Header</div>
+                    <div class="card ">
+                        <div class="card-header text-center">Header</div>
                         <div class="card-body">
                             <div class="table-responsive">
-                            <table class="table table-hover">
+                            <table class="table table-hover" >
                                 <thead>
                                   <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="col">ลำดับ</th>
+                                    <th scope="col">ชื่อ</th>
+                                    <th scope="col">สกุล</th>
+                                    <th scope="col">จัดการ</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
+                                  <tr *ngFor="let data of userData;let i = index">
+                                    <th scope="row">{{i+1}}</th>
+                                    <td>{{data.firstname}}</td>
+                                    <td>{{data.lastname}}</td>
+                                    <td></td>
                                   </tr>
                                   <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">3</th>
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
-                                  </tr>
                                 </tbody>
                               </table>
                             </div>
                         </div> 
-                        <div class="card-footer">Footer</div>
+                        <div class="card-footer text-center">Footer</div>
                       </div>
                     <br>
                   </div>
@@ -132,48 +122,48 @@
     </div>
 
     <div *ngIf="link==2" class="col-sm-9" style="background-color:darkmagenta">
-        <h4><small>RECENT POSTS</small></h4>
+        <h4><small></small></h4>
         <div class="container">
             <div class="row">
                 <div class="card col-sm-12 col-md-12" style="background-color: goldenrod">
-                    <div class="card-body">Basic card
+                    <div class="card-body">
                       <br>
                       <div class="card">
-                          <div class="card-header">Header</div>
+                          <div class="card-header text-center">Header</div>
                           <div class="card-body">
                               <div class="table-responsive">
-                              <table class="table table-hover">
+                              <table class="table table-hover" >
                                   <thead>
                                     <tr>
-                                      <th scope="col">#</th>
-                                      <th scope="col">First</th>
-                                      <th scope="col">Last</th>
-                                      <th scope="col">Handle</th>
+                                      <th scope="col">ลำดับ</th>
+                                      <th scope="col"></th>
+                                      <th scope="col"></th>
+                                      <th scope="col"></th>
                                     </tr>
                                   </thead>
                                   <tbody>
                                     <tr>
                                       <th scope="row">1</th>
-                                      <td>Mark</td>
-                                      <td>Otto</td>
-                                      <td>@mdo</td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
                                     </tr>
                                     <tr>
                                       <th scope="row">2</th>
-                                      <td>Jacob</td>
-                                      <td>Thornton</td>
-                                      <td>@fat</td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
                                     </tr>
                                     <tr>
                                       <th scope="row">3</th>
-                                      <td colspan="2">Larry the Bird</td>
-                                      <td>@twitter</td>
+                                      <td colspan="2"></td>
+                                      <td></td>
                                     </tr>
                                   </tbody>
                                 </table>
                                 </div>
                           </div> 
-                          <div class="card-footer">Footer</div>
+                          <div class="card-footer text-center">Footer</div>
                         </div>
                       <br>
                     </div>
@@ -199,48 +189,48 @@
     </div>
 
     <div *ngIf="link==3" class="col-sm-9" style="background-color:darkblue">
-        <h4><small>RECENT POSTS</small></h4>
+        <h4><small></small></h4>
       <div class="container">
           <div class="row">
               <div class="card col-sm-12 col-md-12" style="background-color: goldenrod">
-                  <div class="card-body">Basic card
+                  <div class="card-body">
                     <br>
                     <div class="card">
-                        <div class="card-header">Header</div>
+                        <div class="card-header text-center">Header</div>
                         <div class="card-body">
                             <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
                                   <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
+                                    <th scope="col">ลำดับ</th>
+                                    <th scope="col">ชื่อ</th>
+                                    <th scope="col">สกุล</th>
+                                    <th scope="col"></th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <tr>
                                     <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                   </tr>
                                   <tr>
                                     <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                   </tr>
                                   <tr>
                                     <th scope="row">3</th>
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
+                                    <td colspan="2"></td>
+                                    <td></td>
                                   </tr>
                                 </tbody>
                               </table>
                               </div>
                         </div> 
-                        <div class="card-footer">Footer</div>
+                        <div class="card-footer text-center">Footer</div>
                       </div>
                     <br>
                   </div>
@@ -266,16 +256,16 @@
     </div>
 
     <div *ngIf="link==4" class="col-sm-9" style="background-color:darkgreen">
-        <h4><small>RECENT POSTS</small></h4>
+        <h4><small></small></h4>
         <div class="container">
             <div class="row">
                 <div class="card col-sm-12 col-md-12" style="background-color: goldenrod">
-                    <div class="card-body">Basic card
+                    <div class="card-body">
                       <br>
                       <div class="card">
-                          <div class="card-header">Header</div>
+                          <div class="card-header text-center">Header</div>
                           <div class="card-body">Content</div> 
-                          <div class="card-footer">Footer</div>
+                          <div class="card-footer text-center">Footer</div>
                         </div>
                       <br>
                     </div>
@@ -301,16 +291,16 @@
     </div>
 
     <div *ngIf="link==5" class="col-sm-9" style="background-color:darkorange">
-        <h4><small>RECENT POSTS</small></h4>
+        <h4><small></small></h4>
         <div class="container">
             <div class="row">
                 <div class="card col-sm-12 col-md-12" style="background-color: goldenrod">
-                    <div class="card-body">Basic card
+                    <div class="card-body">
                       <br>
                       <div class="card">
-                          <div class="card-header">Header</div>
+                          <div class="card-header text-center">Header</div>
                           <div class="card-body">Content</div> 
-                          <div class="card-footer">Footer</div>
+                          <div class="card-footer text-center">Footer</div>
                         </div>
                       <br>
                     </div>
@@ -336,16 +326,16 @@
     </div>
 
     <div *ngIf="link==6" class="col-sm-9" style="background-color:fuchsia">
-        <h4><small>RECENT POSTS</small></h4>
+        <h4><small></small></h4>
         <div class="container">
             <div class="row">
                 <div class="card col-sm-12 col-md-12" style="background-color: goldenrod">
-                    <div class="card-body">Basic card
+                    <div class="card-body">
                       <br>
                       <div class="card">
-                          <div class="card-header">Header</div>
+                          <div class="card-header text-center">Header</div>
                           <div class="card-body">Content</div> 
-                          <div class="card-footer">Footer</div>
+                          <div class="card-footer text-center">Footer</div>
                         </div>
                       <br>
                     </div>

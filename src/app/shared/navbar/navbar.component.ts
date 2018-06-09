@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
+import { JsonpModule } from '@angular/http';
+import { parse } from 'url';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -7,7 +9,15 @@ import {  Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public router:Router) { }
+  is_login:boolean=false;
+  constructor(public router:Router) {
+    if(localStorage.getItem('token')){
+      this.is_login=true;
+    }else{
+      this.is_login=false;
+    }
+
+    }
 
   
   goTo(input){
@@ -22,7 +32,24 @@ export class NavbarComponent implements OnInit {
     
   }
 
+  logout(){
+    localStorage.removeItem('user_profile');
+    localStorage.removeItem('token');
+    this.router.navigate(['/login'])
+  }
+    sn:string;
+  showname(){
+    let item = localStorage.getItem('user_profile')
+    let obj = JSON.parse(item)
+    console.log(obj)
+    this.sn = obj
+
+  }
+
+
+
   ngOnInit() {
+    this.showname()
   }
 
 }

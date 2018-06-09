@@ -3,8 +3,8 @@
     <a class="navbar-brand" href="javascript:void(0)" (click)="goTo('0')">
         <img src="/assets/P/Flash2.jpg" width="30" height="30" alt="" style="border-radius: 6px;">
       </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+  <button style="border-color: white;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"><i class="fas fa-bars fa-lg" style="color: white"></i></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -37,14 +37,27 @@
         <a class="nav-link " href="#" [routerLink]="['/profile']">ข้อมูลส่วนตัว</a>
       </li>
     </ul>   
-        <div style="padding: 2px;">
+    <div style="padding: 2px;">
+      
+    </div>
+        <div *ngIf="!is_login" style="padding: 2px;">
           <form class="form-inline my-2 my-lg-0">
             <button [routerLink]="['/login']" class="btn btn-outline-light">เข้าสู่ระบบ <i class="fas fa-sign-in-alt"></i></button>
           </form>       
         </div>
-        <div style="padding:2px;">
+        <div style="padding: 2px;">
+        <!-- <button type="button"class="btn btn-outline-light"> -->
+          <!-- <span [routerLink]="['/profile']" style="background-color: rgb(56, 16, 85); padding-top:10px ;padding-bottom:10px ;padding-right:10px ;padding-left:10px ;border-radius: 6px; ">
+              <a>{{sn.FirstName_TH}} {{sn.LastName_TH}} </a>
+          </span> -->
+          <button class="btn btn-outline-light" [routerLink]="['/profile']" style="border-color: #832EBF">  
+            <a>{{sn.FirstName_TH}} {{sn.LastName_TH}} </a> 
+          </button>
+        <!-- </button> -->
+        </div>
+        <div *ngIf="is_login" style="padding:2px;">
           <form class="form-inline my-2 my-lg-0">
-            <button [routerLink]="['/login']" class="btn btn-outline-light">ออกจาระบบ <i class="fas fa-sign-out-alt"></i></button>
+            <button (click)="logout()" class="btn btn-outline-light">ออกจาระบบ <i class="fas fa-sign-out-alt"></i></button>
           </form>
         </div>
        <br>
