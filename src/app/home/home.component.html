@@ -8,821 +8,181 @@
                     <div class="card-body text-center" style="background-color:#832EBF">
                         <div class="card col-sm-12 col-md-12" style="background-color:#a6c9e2">
                             <div class="card-body">
-                                    <div class="container">
+                            <div class="container">
+                                <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12">
+                                <div id="middleblock">
+                                        <div class="card text-center">
+                                        <div class="card-header" style="background-color: #650DAD;color: aliceblue; padding-bottom: 45px; ">                                                                
+                                        </div>
+
+                                        <div class="card-body">
+                                        <div>
+                                            <h4>แบบหนังสือส่งภายใน</h4>
+                                            <p>รายละเอียดของหนังสือ</p>
+                                        </div>
+                                        <br>
+                                        <div class="container">
+                                        <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="inputGroupSelect01">ที่ ศธ.</label>
+                                                    </div>
+                                                    <input type="text" class="form-control" value="ศธ ๐๕๙๐.๑๕(๔)/" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="inputGroupSelect01">เลขหนังสือ</label>
+                                                    </div>
+                                                    <input type="text" class="form-control" value="{{('0000'+NumberB).slice(-5)}}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="inputGroupSelect01">ชั้นความเร็ว</label>
+                                                    </div>
+                                                    <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="speed" name="speed">
+                                                        <option  value="ปกติ">ปกติ</option>
+                                                        <option value="ด่วน">ด่วน</option>
+                                                        <option value="ด่วนมาก">ด่วนมาก</option>
+                                                        <option value="ด่วนที่สุด">ด่วนที่สุด</option>
+                                                    </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="inputGroupSelect01">ชั้นความลับ</label>
+                                                    </div>
+                                                    <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="secret" name="secret">
+                                                        <option value="ปกติ">ปกติ</option>
+                                                        <option value="ลับ">ลับ</option>
+                                                        <option value="ลับมาก">ลับมาก</option>
+                                                        <option value="ลับที่สุด">ลับที่สุด</option>
+                                                    </select>
+                                                        </div>        
+                                                </div>
+                                            </div>
                                             <div class="row">
-                                                <div class="col-12 col-sm-12 col-md-12">
-                                                    <div id="middleblock">
-                                                            <div class="card text-center">
-                                                            <div class="card-header" style="background-color: #650DAD;color: aliceblue">
-                                                                    <ul class="nav nav-tabs card-header-tabs">
-                                                                        <li class="nav-item">
-                                                                            <a *ngIf="tab==1"  class="nav-link active" href="javascript:void(0)" (click)="tabchange(1)">ชนิดที่1</a>
-                                                                            <a *ngIf="tab!=1" class="nav-link" href="javascript:void(0)" (click)="tabchange(1)">ชนิดที่1</a>
-                                                                        </li>
-                                                                        <li class="nav-item">
-                                                                            <a *ngIf="tab==2" class="nav-link active" href="javascript:void(0)" (click)="tabchange(2)">ชนิดที่2</a>
-                                                                            <a *ngIf="tab!=2" class="nav-link" href="javascript:void(0)" (click)="tabchange(2)">ชนิดที่2</a>
-                                                                        </li>                   
-                                                                        <li class="nav-item">
-                                                                            <a *ngIf="tab==3" class="nav-link active" href="javascript:void(0)"  (click)="tabchange(3)">ชนิดที่3</a>
-                                                                            <a *ngIf="tab!=3" class="nav-link" href="javascript:void(0)"  (click)="tabchange(3)">ชนิดที่3</a>
-                                                                        </li>
-                                                                        <li class="nav-item">
-                                                                            <a *ngIf="tab==4"class="nav-link active" href="javascript:void(0)" (click)="tabchange(4)">ชนิดที่4</a>
-                                                                            <a *ngIf="tab!=4"class="nav-link" href="javascript:void(0)" (click)="tabchange(4)">ชนิดที่4</a>
-                                                                        </li>
-                                                                        <li class="nav-item">
-                                                                            <a *ngIf="tab==5"class="nav-link active" href="javascript:void(0)" (click)="tabchange(5)">ชนิดที่5</a>
-                                                                            <a *ngIf="tab!=5"class="nav-link" href="javascript:void(0)" (click)="tabchange(5)">ชนิดที่5</a>
-                                                                        </li>
-                                                                        <li class="nav-item">
-                                                                            <a *ngIf="tab==6"class="nav-link active" href="javascript:void(0)" (click)="tabchange(6)">ชนิดที่6</a>
-                                                                            <a *ngIf="tab!=6"class="nav-link" href="javascript:void(0)" (click)="tabchange(6)">ชนิดที่6</a>
-                                                                        </li>
-                                                                        <!-- <li class="nav-item">
-                                                                            <a class="nav-link disabled" href="#">Disabled</a>
-                                                                        </li> -->
-                                                                    </ul>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <div *ngIf="tab==1">
-                                                                <div>
-                                                                    <h5 class="card-title">ชนิดหนังสือ1</h5>
-                                                                    <p class="card-text">กรอกข้อมูล</p>
-                                                                </div>
-                                                                <br>
-                                                            <div class="">
-                                                            <form class="col-12 col-sm-12 col-md-12">
-                                                                    <div class="form-group row">
-                                                                        <label for="inputPassword" class="col-sm-2 col-form-label">เลขทะเบียน :</label>
-                                                                        <div class="col-sm-4">
-                                                                            <input  class="form-control" placeholder="จะเเสดงเลขทะเบียน"readonly>
-                                                                        </div>
-                                                                        <label for="inputPassword" class="col-sm-2 col-form-label">เลขหนังสือ :</label>
-                                                                        <div class="col-sm-4">
-                                                                            <input  class="form-control" placeholder="จะแสดงเลขหนังสือ"readonly>
-                                                                        </div>
-                                                                    </div>                      
-                                                                    <div class="form-group row">
-                                                                        <div class="input-group col-sm-6 mb-3">
-                                                                        <div class="input-group-prepend">
-                                                                            <span class="input-group-text" id="basic-addon3" style="padding-right: 78px;">เรื่อง :</span>
-                                                                        </div>
-                                                                            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหัวข้อเรื่อง">
-                                                                        </div>
-                                                                        <div class="input-group col-sm-6 mb-3">
-                                                                        <div class="input-group-prepend">
-                                                                            <span class="input-group-text" id="basic-addon3" style="padding-right: 78px;">วันที่ :</span>
-                                                                        </div>
-                                                                            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="ลงวันที่"readonly>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <div class="input-group col-sm-6 mb-3">
-                                                                        <div class="input-group-prepend">
-                                                                            <span class="input-group-text" id="basic-addon3" style="padding-right: 22px;">จากหน่วยงาน :</span>
-                                                                        </div>
-                                                                            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหน่วยงาน">
-                                                                        </div>
-                                                                        <div class="input-group col-sm-6 mb-3">
-                                                                        <div class="input-group-prepend">
-                                                                            <span class="input-group-text" id="basic-addon3" style="padding-right: 30px;">ถึงหน่วยงาน :</span>
-                                                                        </div>
-                                                                            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหน่วยงาน">
-                                                                        </div>
-                                                                        <div class="input-group col-sm-6 mb-3">
-                                                                        <div class="input-group-prepend">
-                                                                            <span class="input-group-text" id="basic-addon3" style="padding-right: 55px;">จากผู้ส่ง :</span>
-                                                                        </div>
-                                                                            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="จากผู้ส่ง">
-                                                                        </div>
-                                                                        <div class="input-group col-sm-6 mb-3">
-                                                                        <div class="input-group-prepend">
-                                                                            <span class="input-group-text" id="basic-addon3" style="padding-right: 48px;">ถึงถึงผู้รับ :</span>
-                                                                        </div>
-                                                                            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกถึงผู้รับ">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                            <label for="inputPassword" class="col-sm-2 col-form-label">ลำดับชั้นความเร็ว :</label>
-                                                                        <div class="col-sm-4">
-                                                                            <select class="custom-select">
-                                                                                <option selected></option>
-                                                                                <option value="1">ด่วน</option>
-                                                                                <option value="2">ด่วนมาก</option>
-                                                                                <option value="3">ด่วนที่สุด</option>
-                                                                            </select>
-                                                                        </div>
-                                                                            <label for="inputPassword" class="col-sm-2 col-form-label">ลำดับชั้นความลับ :</label>
-                                                                        <div class="col-sm-4">
-                                                                            <select class="custom-select">
-                                                                                <option selected></option>
-                                                                                <option value="1">ลับ</option>
-                                                                                <option value="2">ลับมา</option>
-                                                                                <option value="3">ลับที่สุด</option>
-                                                                                </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row" >
-                                                                        <label for="inputPassword" class="col-sm-2 col-form-label">สถานะการใช้งาน :</label>
-                                                                        <div  class="custom-control custom-radio custom-control-inline">
-                                                                            <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-                                                                            <label class="custom-control-label" for="customRadioInline1">สถานะถูกใช้งาน</label>
-                                                                        </div>
-                                                                        <div class="custom-control custom-radio custom-control-inline">
-                                                                            <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                                                                            <label class="custom-control-label" for="customRadioInline2">สถานะไม่ถูกใช้งาน</label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row col-sm-6">
-                                                                        <label for="exampleFormControlTextarea1">*หมายเหตุ</label>
-                                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                    </div>
-                                                                    
-                                                                    <!-- <div class="input-group row col-sm-12">
-                                                                        <label for="inputPassword" class="col-sm-2 col-form-label">การอัพโหลดไฟล์ :</label>
-                                                                        <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons" >
-                                                                            <label class="btn btn-dark">
-                                                                            <input type="radio" name="options" id="option1" autocomplete="off"> เลือกไฟล์
-                                                                            </label>
-                                                                            <label class="btn btn-secondary">
-                                                                            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="เลือกไฟล์">
-                                                                            </label>
-                                                                            <label class="btn btn-dark">
-                                                                            <input type="radio" name="options" id="option3" autocomplete="off"> อัพโหลด
-                                                                            </label>
-                                                                        </div>
-                                                                    </div> -->
-                                                                    <div class="input-group input-group-sm mb-3 row ">
-                                                                        <label  class="col-sm-2 col-form-label">การอัพโหลดไฟล์ :</label>
-                                                                        <!-- <div class="input-group-prepend">
-                                                                            <button class="btn btn-danger" type="button">เลือกไฟล์</button>
-                                                                        </div>
-                                                                        <input type="text" class="form-control col-sm-2" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                                                        <div class="input-group-append">
-                                                                            <button class="btn btn-danger" type="button">อัพโหลด</button>
-                                                                        </div>   -->
-                                                                        <span class="input-group-btn" style="vertical-align: top;"> 
-                                                                                <button type="button" class="btn btn-warning">เลือกไฟล์</button> 
-                                                                                </span> 
-                                                                                <input type="text" name="name" class="col-2" aria-label="Default" aria-describedby="inputGroup-sizing-default" style="background-color: rgb(255, 255, 255);" />
-                                                                                <div class="input-group-btn"> 
-                                                                                 <button type="submit" class="btn btn-warning"> อัพไฟล์ </button> 
-                                                                                </div> 
-                                                                    </div>
-                                                            </form>
-                                                            </div>         
-                                                            </div>
-                                                                                                                            <div *ngIf="tab==2">
-                                                                                                                                    <div>
-                                                                                                                                            <h5 class="card-title">ชนิดหนังสือ2</h5>
-                                                                                                                                            <p class="card-text">กรอกข้อมูล</p>
-                                                                                                                                        </div>
-                                                                                                                                        <br>
-                                                                                                                                    <div class="">
-                                                                                                                                    <form class="col-12 col-sm-12 col-md-12">
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">เลขทะเบียน :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <input type="password" class="form-control" id="inputPassword" placeholder="จะเเสดงเลขทะเบียน"readonly>
-                                                                                                                                                </div>
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">เลขหนังสือ :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <input type="password" class="form-control" id="inputPassword" placeholder="จะแสดงเลขหนังสือ"readonly>
-                                                                                                                                                </div>
-                                                                                                                                            </div>                      
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 78px;">เรื่อง :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหัวข้อเรื่อง">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 78px;">วันที่ :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="ลงวันที่"readonly>
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 22px;">จากหน่วยงาน :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหน่วยงาน">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 30px;">ถึงหน่วยงาน :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหน่วยงาน">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 55px;">จากผู้ส่ง :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="จากผู้ส่ง">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 48px;">ถึงถึงผู้รับ :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกถึงผู้รับ">
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                    <label for="inputPassword" class="col-sm-2 col-form-label">ลำดับชั้นความเร็ว :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <select class="custom-select">
-                                                                                                                                                        <option selected></option>
-                                                                                                                                                        <option value="1">ด่วน</option>
-                                                                                                                                                        <option value="2">ด่วนมาก</option>
-                                                                                                                                                        <option value="3">ด่วนที่สุด</option>
-                                                                                                                                                    </select>
-                                                                                                                                                </div>
-                                                                                                                                                    <label for="inputPassword" class="col-sm-2 col-form-label">ลำดับชั้นความลับ :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <select class="custom-select">
-                                                                                                                                                        <option selected></option>
-                                                                                                                                                        <option value="1">ลับ</option>
-                                                                                                                                                        <option value="2">ลับมา</option>
-                                                                                                                                                        <option value="3">ลับที่สุด</option>
-                                                                                                                                                        </select>
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row" >
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">สถานะการใช้งาน :</label>
-                                                                                                                                                <div  class="custom-control custom-radio custom-control-inline">
-                                                                                                                                                    <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-                                                                                                                                                    <label class="custom-control-label" for="customRadioInline1">สถานะถูกใช้งาน</label>
-                                                                                                                                                </div>
-                                                                                                                                                <div class="custom-control custom-radio custom-control-inline">
-                                                                                                                                                    <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                                                                                                                                                    <label class="custom-control-label" for="customRadioInline2">สถานะไม่ถูกใช้งาน</label>
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row col-sm-6">
-                                                                                                                                                <label for="exampleFormControlTextarea1">*หมายเหตุ</label>
-                                                                                                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                                                                                            </div>
-                                                                                                                                            
-                                                                                                                                            <!-- <div class="input-group row col-sm-12">
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">การอัพโหลดไฟล์ :</label>
-                                                                                                                                                <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons" >
-                                                                                                                                                    <label class="btn btn-dark">
-                                                                                                                                                    <input type="radio" name="options" id="option1" autocomplete="off"> เลือกไฟล์
-                                                                                                                                                    </label>
-                                                                                                                                                    <label class="btn btn-secondary">
-                                                                                                                                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="เลือกไฟล์">
-                                                                                                                                                    </label>
-                                                                                                                                                    <label class="btn btn-dark">
-                                                                                                                                                    <input type="radio" name="options" id="option3" autocomplete="off"> อัพโหลด
-                                                                                                                                                    </label>
-                                                                                                                                                </div>
-                                                                                                                                            </div> -->
-                                                                                                                                            <div class="input-group input-group-sm mb-3 row ">
-                                                                                                                                                <label  class="col-sm-2 col-form-label">การอัพโหลดไฟล์ :</label>
-                                                                                                                                                <!-- <div class="input-group-prepend">
-                                                                                                                                                    <button class="btn btn-danger" type="button">เลือกไฟล์</button>
-                                                                                                                                                </div>
-                                                                                                                                                <input type="text" class="form-control col-sm-2" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                                                                                                                                <div class="input-group-append">
-                                                                                                                                                    <button class="btn btn-danger" type="button">อัพโหลด</button>
-                                                                                                                                                </div>   -->
-                                                                                                                                                <span class="input-group-btn" style="vertical-align: top;"> 
-                                                                                                                                                        <button type="button" class="btn btn-warning">เลือกไฟล์</button> 
-                                                                                                                                                        </span> 
-                                                                                                                                                        <input type="text" name="name" class="form-control col-2" aria-label="Default" aria-describedby="inputGroup-sizing-default" style="background-color: rgb(255, 255, 255);" />
-                                                                                                                                                        <div class="input-group-btn"> 
-                                                                                                                                                        <button type="submit" class="btn btn-warning"> Search </button> 
-                                                                                                                                                        </div> 
-                                                                                                                                            </div>
-                                                                                                                                    </form>
-                                                                                                                                    </div>
-                                                                                                                            </div>
-                                                                                                                            <div *ngIf="tab==3">
-                                                                                                                                    <div>
-                                                                                                                                            <h5 class="card-title">ชนิดหนังสือ3</h5>
-                                                                                                                                            <p class="card-text">กรอกข้อมูล</p>
-                                                                                                                                        </div>
-                                                                                                                                        <br>
-                                                                                                                                    <div class="">
-                                                                                                                                    <form class="col-12 col-sm-12 col-md-12">
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">เลขทะเบียน :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <input type="password" class="form-control" id="inputPassword" placeholder="จะเเสดงเลขทะเบียน"readonly>
-                                                                                                                                                </div>
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">เลขหนังสือ :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <input type="password" class="form-control" id="inputPassword" placeholder="จะแสดงเลขหนังสือ"readonly>
-                                                                                                                                                </div>
-                                                                                                                                            </div>                      
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 78px;">เรื่อง :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหัวข้อเรื่อง">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 78px;">วันที่ :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="ลงวันที่"readonly>
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 22px;">จากหน่วยงาน :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหน่วยงาน">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 30px;">ถึงหน่วยงาน :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหน่วยงาน">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 55px;">จากผู้ส่ง :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="จากผู้ส่ง">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 48px;">ถึงถึงผู้รับ :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกถึงผู้รับ">
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                    <label for="inputPassword" class="col-sm-2 col-form-label">ลำดับชั้นความเร็ว :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <select class="custom-select">
-                                                                                                                                                        <option selected></option>
-                                                                                                                                                        <option value="1">ด่วน</option>
-                                                                                                                                                        <option value="2">ด่วนมาก</option>
-                                                                                                                                                        <option value="3">ด่วนที่สุด</option>
-                                                                                                                                                    </select>
-                                                                                                                                                </div>
-                                                                                                                                                    <label for="inputPassword" class="col-sm-2 col-form-label">ลำดับชั้นความลับ :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <select class="custom-select">
-                                                                                                                                                        <option selected></option>
-                                                                                                                                                        <option value="1">ลับ</option>
-                                                                                                                                                        <option value="2">ลับมา</option>
-                                                                                                                                                        <option value="3">ลับที่สุด</option>
-                                                                                                                                                        </select>
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row" >
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">สถานะการใช้งาน :</label>
-                                                                                                                                                <div  class="custom-control custom-radio custom-control-inline">
-                                                                                                                                                    <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-                                                                                                                                                    <label class="custom-control-label" for="customRadioInline1">สถานะถูกใช้งาน</label>
-                                                                                                                                                </div>
-                                                                                                                                                <div class="custom-control custom-radio custom-control-inline">
-                                                                                                                                                    <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                                                                                                                                                    <label class="custom-control-label" for="customRadioInline2">สถานะไม่ถูกใช้งาน</label>
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row col-sm-6">
-                                                                                                                                                <label for="exampleFormControlTextarea1">*หมายเหตุ</label>
-                                                                                                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                                                                                            </div>
-                                                                                                                                            
-                                                                                                                                            <!-- <div class="input-group row col-sm-12">
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">การอัพโหลดไฟล์ :</label>
-                                                                                                                                                <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons" >
-                                                                                                                                                    <label class="btn btn-dark">
-                                                                                                                                                    <input type="radio" name="options" id="option1" autocomplete="off"> เลือกไฟล์
-                                                                                                                                                    </label>
-                                                                                                                                                    <label class="btn btn-secondary">
-                                                                                                                                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="เลือกไฟล์">
-                                                                                                                                                    </label>
-                                                                                                                                                    <label class="btn btn-dark">
-                                                                                                                                                    <input type="radio" name="options" id="option3" autocomplete="off"> อัพโหลด
-                                                                                                                                                    </label>
-                                                                                                                                                </div>
-                                                                                                                                            </div> -->
-                                                                                                                                            <div class="input-group input-group-sm mb-3 row ">
-                                                                                                                                                <label  class="col-sm-2 col-form-label">การอัพโหลดไฟล์ :</label>
-                                                                                                                                                <!-- <div class="input-group-prepend">
-                                                                                                                                                    <button class="btn btn-danger" type="button">เลือกไฟล์</button>
-                                                                                                                                                </div>
-                                                                                                                                                <input type="text" class="form-control col-sm-2" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                                                                                                                                <div class="input-group-append">
-                                                                                                                                                    <button class="btn btn-danger" type="button">อัพโหลด</button>
-                                                                                                                                                </div>   -->
-                                                                                                                                                <span class="input-group-btn" style="vertical-align: top;"> 
-                                                                                                                                                        <button type="button" class="btn btn-warning">เลือกไฟล์</button> 
-                                                                                                                                                        </span> 
-                                                                                                                                                        <input type="text" name="name" class="form-control col-2" aria-label="Default" aria-describedby="inputGroup-sizing-default" style="background-color: rgb(255, 255, 255);" />
-                                                                                                                                                        <div class="input-group-btn"> 
-                                                                                                                                                        <button type="submit" class="btn btn-warning"> Search </button> 
-                                                                                                                                                        </div> 
-                                                                                                                                            </div>
-                                                                                                                                    </form>
-                                                                                                                                    </div>
-                                                                                                                            </div>
-                                                                                                                            <div *ngIf="tab==4">
-                                                                                                                                    <div>
-                                                                                                                                            <h5 class="card-title">ชนิดหนังสือ4</h5>
-                                                                                                                                            <p class="card-text">กรอกข้อมูล</p>
-                                                                                                                                        </div>
-                                                                                                                                        <br>
-                                                                                                                                    <div class="">
-                                                                                                                                    <form class="col-12 col-sm-12 col-md-12">
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">เลขทะเบียน :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <input type="password" class="form-control" id="inputPassword" placeholder="จะเเสดงเลขทะเบียน"readonly>
-                                                                                                                                                </div>
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">เลขหนังสือ :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <input type="password" class="form-control" id="inputPassword" placeholder="จะแสดงเลขหนังสือ"readonly>
-                                                                                                                                                </div>
-                                                                                                                                            </div>                      
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 78px;">เรื่อง :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหัวข้อเรื่อง">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 78px;">วันที่ :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="ลงวันที่"readonly>
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 22px;">จากหน่วยงาน :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหน่วยงาน">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 30px;">ถึงหน่วยงาน :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหน่วยงาน">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 55px;">จากผู้ส่ง :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="จากผู้ส่ง">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 48px;">ถึงถึงผู้รับ :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกถึงผู้รับ">
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                    <label for="inputPassword" class="col-sm-2 col-form-label">ลำดับชั้นความเร็ว :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <select class="custom-select">
-                                                                                                                                                        <option selected></option>
-                                                                                                                                                        <option value="1">ด่วน</option>
-                                                                                                                                                        <option value="2">ด่วนมาก</option>
-                                                                                                                                                        <option value="3">ด่วนที่สุด</option>
-                                                                                                                                                    </select>
-                                                                                                                                                </div>
-                                                                                                                                                    <label for="inputPassword" class="col-sm-2 col-form-label">ลำดับชั้นความลับ :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <select class="custom-select">
-                                                                                                                                                        <option selected></option>
-                                                                                                                                                        <option value="1">ลับ</option>
-                                                                                                                                                        <option value="2">ลับมา</option>
-                                                                                                                                                        <option value="3">ลับที่สุด</option>
-                                                                                                                                                        </select>
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row" >
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">สถานะการใช้งาน :</label>
-                                                                                                                                                <div  class="custom-control custom-radio custom-control-inline">
-                                                                                                                                                    <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-                                                                                                                                                    <label class="custom-control-label" for="customRadioInline1">สถานะถูกใช้งาน</label>
-                                                                                                                                                </div>
-                                                                                                                                                <div class="custom-control custom-radio custom-control-inline">
-                                                                                                                                                    <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                                                                                                                                                    <label class="custom-control-label" for="customRadioInline2">สถานะไม่ถูกใช้งาน</label>
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row col-sm-6">
-                                                                                                                                                <label for="exampleFormControlTextarea1">*หมายเหตุ</label>
-                                                                                                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                                                                                            </div>
-                                                                                                                                            
-                                                                                                                                            <!-- <div class="input-group row col-sm-12">
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">การอัพโหลดไฟล์ :</label>
-                                                                                                                                                <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons" >
-                                                                                                                                                    <label class="btn btn-dark">
-                                                                                                                                                    <input type="radio" name="options" id="option1" autocomplete="off"> เลือกไฟล์
-                                                                                                                                                    </label>
-                                                                                                                                                    <label class="btn btn-secondary">
-                                                                                                                                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="เลือกไฟล์">
-                                                                                                                                                    </label>
-                                                                                                                                                    <label class="btn btn-dark">
-                                                                                                                                                    <input type="radio" name="options" id="option3" autocomplete="off"> อัพโหลด
-                                                                                                                                                    </label>
-                                                                                                                                                </div>
-                                                                                                                                            </div> -->
-                                                                                                                                            <div class="input-group input-group-sm mb-3 row ">
-                                                                                                                                                <label  class="col-sm-2 col-form-label">การอัพโหลดไฟล์ :</label>
-                                                                                                                                                <!-- <div class="input-group-prepend">
-                                                                                                                                                    <button class="btn btn-danger" type="button">เลือกไฟล์</button>
-                                                                                                                                                </div>
-                                                                                                                                                <input type="text" class="form-control col-sm-2" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                                                                                                                                <div class="input-group-append">
-                                                                                                                                                    <button class="btn btn-danger" type="button">อัพโหลด</button>
-                                                                                                                                                </div>   -->
-                                                                                                                                                <span class="input-group-btn" style="vertical-align: top;"> 
-                                                                                                                                                        <button type="button" class="btn btn-warning">เลือกไฟล์</button> 
-                                                                                                                                                        </span> 
-                                                                                                                                                        <input type="text" name="name" class="form-control col-2" aria-label="Default" aria-describedby="inputGroup-sizing-default" style="background-color: rgb(255, 255, 255);" />
-                                                                                                                                                        <div class="input-group-btn"> 
-                                                                                                                                                        <button type="submit" class="btn btn-warning"> Search </button> 
-                                                                                                                                                        </div> 
-                                                                                                                                            </div>
-                                                                                                                                    </form>
-                                                                                                                                    </div>
-                                                                                                                            </div>
-                                                                                                                            <div *ngIf="tab==5">
-                                                                                                                                    <div>
-                                                                                                                                            <h5 class="card-title">ชนิดหนังสือ5</h5>
-                                                                                                                                            <p class="card-text">กรอกข้อมูล</p>
-                                                                                                                                        </div>
-                                                                                                                                        <br>
-                                                                                                                                    <div class="">
-                                                                                                                                    <form class="col-12 col-sm-12 col-md-12">
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">เลขทะเบียน :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <input type="password" class="form-control" id="inputPassword" placeholder="จะเเสดงเลขทะเบียน"readonly>
-                                                                                                                                                </div>
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">เลขหนังสือ :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <input type="password" class="form-control" id="inputPassword" placeholder="จะแสดงเลขหนังสือ"readonly>
-                                                                                                                                                </div>
-                                                                                                                                            </div>                      
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 78px;">เรื่อง :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหัวข้อเรื่อง">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 78px;">วันที่ :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="ลงวันที่"readonly>
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 22px;">จากหน่วยงาน :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหน่วยงาน">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 30px;">ถึงหน่วยงาน :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหน่วยงาน">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 55px;">จากผู้ส่ง :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="จากผู้ส่ง">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 48px;">ถึงถึงผู้รับ :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกถึงผู้รับ">
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                    <label for="inputPassword" class="col-sm-2 col-form-label">ลำดับชั้นความเร็ว :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <select class="custom-select">
-                                                                                                                                                        <option selected></option>
-                                                                                                                                                        <option value="1">ด่วน</option>
-                                                                                                                                                        <option value="2">ด่วนมาก</option>
-                                                                                                                                                        <option value="3">ด่วนที่สุด</option>
-                                                                                                                                                    </select>
-                                                                                                                                                </div>
-                                                                                                                                                    <label for="inputPassword" class="col-sm-2 col-form-label">ลำดับชั้นความลับ :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <select class="custom-select">
-                                                                                                                                                        <option selected></option>
-                                                                                                                                                        <option value="1">ลับ</option>
-                                                                                                                                                        <option value="2">ลับมา</option>
-                                                                                                                                                        <option value="3">ลับที่สุด</option>
-                                                                                                                                                        </select>
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row" >
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">สถานะการใช้งาน :</label>
-                                                                                                                                                <div  class="custom-control custom-radio custom-control-inline">
-                                                                                                                                                    <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-                                                                                                                                                    <label class="custom-control-label" for="customRadioInline1">สถานะถูกใช้งาน</label>
-                                                                                                                                                </div>
-                                                                                                                                                <div class="custom-control custom-radio custom-control-inline">
-                                                                                                                                                    <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                                                                                                                                                    <label class="custom-control-label" for="customRadioInline2">สถานะไม่ถูกใช้งาน</label>
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row col-sm-6">
-                                                                                                                                                <label for="exampleFormControlTextarea1">*หมายเหตุ</label>
-                                                                                                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                                                                                            </div>
-                                                                                                                                            
-                                                                                                                                            <!-- <div class="input-group row col-sm-12">
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">การอัพโหลดไฟล์ :</label>
-                                                                                                                                                <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons" >
-                                                                                                                                                    <label class="btn btn-dark">
-                                                                                                                                                    <input type="radio" name="options" id="option1" autocomplete="off"> เลือกไฟล์
-                                                                                                                                                    </label>
-                                                                                                                                                    <label class="btn btn-secondary">
-                                                                                                                                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="เลือกไฟล์">
-                                                                                                                                                    </label>
-                                                                                                                                                    <label class="btn btn-dark">
-                                                                                                                                                    <input type="radio" name="options" id="option3" autocomplete="off"> อัพโหลด
-                                                                                                                                                    </label>
-                                                                                                                                                </div>
-                                                                                                                                            </div> -->
-                                                                                                                                            <div class="input-group input-group-sm mb-3 row ">
-                                                                                                                                                <label  class="col-sm-2 col-form-label">การอัพโหลดไฟล์ :</label>
-                                                                                                                                                <!-- <div class="input-group-prepend">
-                                                                                                                                                    <button class="btn btn-danger" type="button">เลือกไฟล์</button>
-                                                                                                                                                </div>
-                                                                                                                                                <input type="text" class="form-control col-sm-2" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                                                                                                                                <div class="input-group-append">
-                                                                                                                                                    <button class="btn btn-danger" type="button">อัพโหลด</button>
-                                                                                                                                                </div>   -->
-                                                                                                                                                <span class="input-group-btn" style="vertical-align: top;"> 
-                                                                                                                                                        <button type="button" class="btn btn-warning">เลือกไฟล์</button> 
-                                                                                                                                                        </span> 
-                                                                                                                                                        <input type="text" name="name" class="form-control col-2" aria-label="Default" aria-describedby="inputGroup-sizing-default" style="background-color: rgb(255, 255, 255);" />
-                                                                                                                                                        <div class="input-group-btn"> 
-                                                                                                                                                        <button type="submit" class="btn btn-warning"> Search </button> 
-                                                                                                                                                        </div> 
-                                                                                                                                            </div>
-                                                                                                                                    </form>
-                                                                                                                                    </div>
-                                                                                                                            </div>
-                                                                                                                            <div *ngIf="tab==6">
-                                                                                                                                    <div>
-                                                                                                                                            <h5 class="card-title">ชนิดหนังสือ6</h5>
-                                                                                                                                            <p class="card-text">กรอกข้อมูล</p>
-                                                                                                                                        </div>
-                                                                                                                                        <br>
-                                                                                                                                    <div class="">
-                                                                                                                                    <form class="col-12 col-sm-12 col-md-12">
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">เลขทะเบียน :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <input type="password" class="form-control" id="inputPassword" placeholder="จะเเสดงเลขทะเบียน"readonly>
-                                                                                                                                                </div>
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">เลขหนังสือ :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <input type="password" class="form-control" id="inputPassword" placeholder="จะแสดงเลขหนังสือ"readonly>
-                                                                                                                                                </div>
-                                                                                                                                            </div>                      
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 78px;">เรื่อง :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหัวข้อเรื่อง">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 78px;">วันที่ :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="ลงวันที่"readonly>
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 22px;">จากหน่วยงาน :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหน่วยงาน">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 30px;">ถึงหน่วยงาน :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกหน่วยงาน">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 55px;">จากผู้ส่ง :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="จากผู้ส่ง">
-                                                                                                                                                </div>
-                                                                                                                                                <div class="input-group col-sm-6 mb-3">
-                                                                                                                                                <div class="input-group-prepend">
-                                                                                                                                                    <span class="input-group-text" id="basic-addon3" style="padding-right: 48px;">ถึงถึงผู้รับ :</span>
-                                                                                                                                                </div>
-                                                                                                                                                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="กรอกถึงผู้รับ">
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row">
-                                                                                                                                                    <label for="inputPassword" class="col-sm-2 col-form-label">ลำดับชั้นความเร็ว :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <select class="custom-select">
-                                                                                                                                                        <option selected></option>
-                                                                                                                                                        <option value="1">ด่วน</option>
-                                                                                                                                                        <option value="2">ด่วนมาก</option>
-                                                                                                                                                        <option value="3">ด่วนที่สุด</option>
-                                                                                                                                                    </select>
-                                                                                                                                                </div>
-                                                                                                                                                    <label for="inputPassword" class="col-sm-2 col-form-label">ลำดับชั้นความลับ :</label>
-                                                                                                                                                <div class="col-sm-4">
-                                                                                                                                                    <select class="custom-select">
-                                                                                                                                                        <option selected></option>
-                                                                                                                                                        <option value="1">ลับ</option>
-                                                                                                                                                        <option value="2">ลับมา</option>
-                                                                                                                                                        <option value="3">ลับที่สุด</option>
-                                                                                                                                                        </select>
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row" >
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">สถานะการใช้งาน :</label>
-                                                                                                                                                <div  class="custom-control custom-radio custom-control-inline">
-                                                                                                                                                    <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-                                                                                                                                                    <label class="custom-control-label" for="customRadioInline1">สถานะถูกใช้งาน</label>
-                                                                                                                                                </div>
-                                                                                                                                                <div class="custom-control custom-radio custom-control-inline">
-                                                                                                                                                    <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                                                                                                                                                    <label class="custom-control-label" for="customRadioInline2">สถานะไม่ถูกใช้งาน</label>
-                                                                                                                                                </div>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="form-group row col-sm-6">
-                                                                                                                                                <label for="exampleFormControlTextarea1">*หมายเหตุ</label>
-                                                                                                                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                                                                                            </div>
-                                                                                                                                            
-                                                                                                                                            <!-- <div class="input-group row col-sm-12">
-                                                                                                                                                <label for="inputPassword" class="col-sm-2 col-form-label">การอัพโหลดไฟล์ :</label>
-                                                                                                                                                <div class="btn-group btn-group-toggle col-sm-4" data-toggle="buttons" >
-                                                                                                                                                    <label class="btn btn-dark">
-                                                                                                                                                    <input type="radio" name="options" id="option1" autocomplete="off"> เลือกไฟล์
-                                                                                                                                                    </label>
-                                                                                                                                                    <label class="btn btn-secondary">
-                                                                                                                                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="เลือกไฟล์">
-                                                                                                                                                    </label>
-                                                                                                                                                    <label class="btn btn-dark">
-                                                                                                                                                    <input type="radio" name="options" id="option3" autocomplete="off"> อัพโหลด
-                                                                                                                                                    </label>
-                                                                                                                                                </div>
-                                                                                                                                            </div> -->
-                                                                                                                                            <div class="input-group input-group-sm mb-3 row ">
-                                                                                                                                                <label  class="col-sm-2 col-form-label">การอัพโหลดไฟล์ :</label>
-                                                                                                                                                <!-- <div class="input-group-prepend">
-                                                                                                                                                    <button class="btn btn-danger" type="button">เลือกไฟล์</button>
-                                                                                                                                                </div>
-                                                                                                                                                <input type="text" class="form-control col-sm-2" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                                                                                                                                                <div class="input-group-append">
-                                                                                                                                                    <button class="btn btn-danger" type="button">อัพโหลด</button>
-                                                                                                                                                </div>   -->
-                                                                                                                                                <span class="input-group-btn" style="vertical-align: top;"> 
-                                                                                                                                                        <button type="button" class="btn btn-warning">เลือกไฟล์</button> 
-                                                                                                                                                        </span> 
-                                                                                                                                                        <input type="text" name="name" class="form-control col-2" aria-label="Default" aria-describedby="inputGroup-sizing-default" style="background-color: rgb(255, 255, 255);" />
-                                                                                                                                                        <div class="input-group-btn"> 
-                                                                                                                                                        <button type="submit" class="btn btn-warning"> Search </button> 
-                                                                                                                                                        </div> 
-                                                                                                                                            </div>
-                                                                                                                                    </form>
-                                                                                                                                    </div>
-                                                                                                                            </div>
-                                                            </div> 
-                                                            <div class="card-footer" style="background-color: #650DAD;">
-                                                                    <button type="button" class="btn btn-primary">ตกลง</button>
-                                                                    <button type="button" class="btn btn-danger">ยกเลิก</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>      
+                                                <div class="col-md-8">
+                                                    <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="inputGroupSelect01">ชื่อหน่วยงาน</label>
+                                                    </div>
+                                                    <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="formm" name="formm">
+                                                        <option selected  value="เลือก...">เลือก...</option>
+                                                        <option value="สาขาวิศวกรรมคอมพิวเตอร์ คณะเทคโนโลยีสารสนเทศและการสื่อสาร">สาขาวิศวกรรมคอมพิวเตอร์ คณะเทคโนโลยีสารสนเทศและการสื่อสาร</option>
+                                                    </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="inputGroupSelect01">ลงวันที่จองหนังสือ</label>
+                                                    </div>
+                                                    <input type="text" class="form-control" value="{{hour}}:{{minute}}:{{second}} {{date}}/{{mounth}}/{{year}}"readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="inputGroupSelect01">ชื่อเรื่องหนังสือ</label>
+                                                    </div>
+                                                    <input type="text" class="form-control"  placeholder="ลงชื่อเรื่องหนังสือ" [(ngModel)]="name" name="name">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="inputGroupSelect01">ลงวันที่หนังสือ</label>
+                                                    </div>
+                                                        <input type="date" class="form-control" [(ngModel)]="datepicker" (change)="datePicker($event)" name="datepicker" id="datepicker">
+                                                        <!-- <input class="input-medium" type="text" data-provide="datepicker" data-date-language="th-th"> -->
+                                                        <!-- <input class="input-medium" type="text" data-provide="datepicker" data-date-language="th-th"> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="inputGroupSelect01">เรียน</label>
+                                                    </div>
+                                                    <input type="text" class="form-control"  placeholder="เรียน" [(ngModel)]="to" name="to">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="inputGroupSelect01">ผู้ลงนามในหนังสือ</label>
+                                                    </div>
+                                                    <input type="text" id="typeahead-basic" class="form-control"  placeholder="ผู้ลงนามในหนังสือ" [(ngModel)]="sender" name="sender" [ngbTypeahead]="search" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <!-- <div class="col-md-6">
+                                                    <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="inputGroupSelect01">สถานะการดำเนินการ</label>
+                                                    </div>  
+                                                   
+                                                    <div class="form-check form-check-inline" style="padding-left: 30px;">
+                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                                            <label class="form-check-label" for="inlineRadio1">เสร็จสมบูรณ์</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                                            <label class="form-check-label" for="inlineRadio1">กำลังดำเนินการ</label>
+                                                    </div>
+                                                
+                                                    </div>
+                                                    
+                                                </div> -->
+                                                <!-- <div class="col-md-6">
+                                                    <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">โหลดไฟล์</span>
+                                                    </div>
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile01" id="avatar" (change)="onFileChange($event)">
+                                                        <label class="custom-file-label" for="inputGroupFile01" (click)="onUpload()">เลือกไฟล์เอกสาร</label>
+                                                    </div>
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6" style="text-align: left ">
+                                                    <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">**หมายเหตุ**</label>
+                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="note" name="note"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6" style="text-align: left ">
+                                                    <div class="form-group">
+                                                <label for="exampleFormControlTextarea1">**การปฏิบัติ**</label>
+                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="practice" name="practice"></textarea>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        </div> 
+
+                                    <div class="card-footer" style="background-color: #650DAD;">
+                                            <button type="button" (click)="postDocumnet()" class="btn btn-primary">บันทึก</button>
+                                            <button type="button" (click)="onClickReset()" class="btn btn-danger">ยกเลิก</button>
+                                    </div>
+                                    </div>
+                                </div>      
+                                </div>
+                                </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -833,8 +193,7 @@
 </div>
 </section>
 <section style="background: #282b2f;color: #bdbdbd;padding: 30px; font-family: 'Dosis', sans-serif;
-text-align: center;
-text-transform: uppercase;">
+text-align: center; text-transform: uppercase; ">
         <div class="container" style="margin-right: auto;margin-left: auto;padding-left: 15px;padding-right: 15px;">       
             <div class="row" style="margin-left: -15px;margin-right: -15px;">
                     <!-- <div class="counter col-md-4" style="font-family: 'Dosis', sans-serif;text-align: center;text-transform: uppercase;"> 
@@ -850,32 +209,34 @@ text-transform: uppercase;">
                             <small style="display: block;font-size: 12px;letter-spacing: 3px;">Matches Today</small> 
                     </div> -->
                     <div class="container col-md-4">
-                        <span style="font-size: 56px">370</span>
+                        <span style="font-size: 56px">{{iddocc}}</span>
                         <br>
                         <small>จำนวนเอกสารทั้งหมด</small>
                     </div>
                     <div class="container col-md-4">
-                        <span style="font-size: 56px">5</span>
+                        <span style="font-size: 56px">{{idnum}}</span>
                         <br>
-                        <small>จำานวนผู้ใชเว็บไชต์</small>
+                        <small>จำนวนผู้ใชเว็บไชต์</small>
                     </div>
                     <div class="container col-md-4">
-                        <span style="font-size: 56px">370</span>
+                        <span style="font-size: 56px"></span>
                         <br>
                         <small>จำนวนเอกสารต่อปี</small>
                     </div>
             </div>
         </div>
 </section>
-<section>
+<section style="padding-bottom: 100px;">
+
+</section>
+<!-- <section>
 <div class="container-fluid">
     <div class="row">  
         <div class="col-12 col-sm-12 col-md-12">
             <div id="middleblock">
                 <div class="card text-center">
                     <div class="card-body text-center" style="background-color:#832EBF">
-                        <!-- <div class="container-fluid">
-                        <div class="row"> -->
+                       
                         <div class="card col-sm-12 col-md-12" style="background-color:#a6c9e2">
                             <div class="card-body">
                                     <div class="container">
@@ -884,50 +245,33 @@ text-transform: uppercase;">
                                                    <div id="middleblock">
                                                    <div class="card">
                                                         <div class="card-body">
+                                                            <div class="container">
                                                                 <div class="row" style="margin-top: 15px"> 
-                                                                        <img src="/assets/P/ict2.png" width="200" height="150" alt="" class="img-responsive" style="display: block; margin-left: auto; margin-right: auto;" /> 
+                                                                    <img src="/assets/P/cpe.png" width="200" height="250" alt="" class="img-responsive" style="display: block; margin-left: auto; margin-right: auto;" /> 
                                                                 </div>
-                                                            <div>
-                                                                <form id="home-search" accept-charset="UTF-8" action="/search" method="post"> 
-                                                                    <div class="input-group input-group-lg"> 
-                                                                     <span class="input-group-btn"> 
-                                                                    <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span id="type-text" class="hidden-xs">ค้นหาจาก</span>  </button> 
-                                                                      <ul id="type-select" class="dropdown-menu" style="text-align: center;"> 
-                                                                       <li><a>วันที่</a></li>
-                                                                       <div class="dropdown-divider"></div> 
-                                                                       <li><a>เรื่อง</a></li>
-                                                                       <div class="dropdown-divider"></div>
-                                                                       <li><a>เลขหนังสือ</a></li>
-                                                                       <div class="dropdown-divider"></div>
-                                                                       <li><a>เลขทะเบียน</a></li> 
-                                                                       <div class="dropdown-divider"></div>
-                                                                       <li><a>จากหน่วยงาน</a></li> 
-                                                                      </ul> 
-                                                                    </span> 
-                                                                     <input type="hidden" id="type" name="type" value="Player" /> 
-                                                                     <input type="text" name="name" class="form-control" style="background-color: rgb(255, 255, 255);" /> 
-                                                                     <input type="hidden" name="" value="" /> 
-                                                                     <input type="hidden" name="" value="" /> 
-                                                                     <div class="input-group-btn"> 
-                                                                      <button type="submit" class="btn btn-primary btn-lg" ><i class="fas fa-search"></i> ค้นหา </button> 
-                                                                     </div> 
-                                                                    </div> 
-                                                                   </form> 
+                                                                <br>
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <div class="input-group input-group-lg">
+                                                                            <input type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm" placeholder="ค้นหาหนังสือทั้งหมดในช่องนี้">
+                                                                            <div>
+                                                                                <button type="button" class="btn btn-primary btn-lg">ปุ่มค้นหา <i class="fas fa-search"></i></button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div> 
-                                                        <div class="card-footer" style="background-color: #650DAD;">
-                                                            <div id="regions" class="btn-group" data-toggle="buttons"> 
-                                                                    <ul class="nav nav-pills"> 
-                                                                        <li class="nav-item"> <a class="nav-link btn btn-outline-light" href="#">ชนิดที่1</a> </li> 
-                                                                        <li class="nav-item"> <a class="nav-link btn btn-outline-light" href="#">ชนิดที่2</a> </li> 
-                                                                        <li class="nav-item"> <a class="nav-link btn btn-outline-light" href="#">ชนิดที่3</a> </li> 
-                                                                        <li class="nav-item"> <a class="nav-link btn btn-outline-light" href="#">ชนิดที่4</a> </li> 
-                                                                        <li class="nav-item"> <a class="nav-link btn btn-outline-light" href="#">ชนิดที่5</a> </li> 
-                                                                        <li class="nav-item"> <a class="nav-link btn btn-outline-light" href="#">ชนิดที่6</a> </li> 
-                                                                    </ul> 
-                                                            </div> 
+                                                        <div class="card-footer" style="background-color: #650DAD; padding-bottom: 50px;">
+                                                            
                                                         </div>
-                                                      </div>
+                                                    </div>
                                                    </div>  
                                                </div>
                                             </div>
@@ -940,6 +284,6 @@ text-transform: uppercase;">
         </div>
     </div>
 </div>
-</section>
+</section> -->
 <app-footer></app-footer>   
 {{ rak }}

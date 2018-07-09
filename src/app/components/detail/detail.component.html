@@ -1,10 +1,8 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12 col-sm-12 col-md-12">
+
 
         <ng-template #content let-c="close" let-d="dismiss">
             <div class="modal-header">
-              <h3 class="modal-title">รายละเอียดของหนังสือ</h3>
+              <h3 class="modal-title">แสดงรายละเอียดหนังสือ</h3>
               <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -12,65 +10,49 @@
             <div class="modal-body">
               <p style="text-align: center;">ข้อมูลของเอกสาร</p>
               <div class="container">
-              <div class="row col-12 col-md-12">
-              <div class="col-12 col-md-12">
-                <table class="col-12 col-md-12 col-sm-12">
-                         <tbody style="text-align:left;font-size: 1em;">
-                           <tr>
-                             <td scope="row"width="30%"><b>เขลทะเบียน :</b></td>
-                             <td ></td>                                       
-                           </tr>
-                           <tr>
-                             <th scope="row">เลขหนังสือ :</th>
-                             <td></td>                                       
-                           </tr>
-                           <tr>
-                             <th scope="row">เรื่อง :</th>
-                             <td></td>                                       
-                           </tr>
-                           <tr>
-                             <th scope="row">วันที่ :</th>
-                             <td></td>                                       
-                           </tr>
-                           <tr>
-                             <th scope="row">จากหน่วยงาน :</th>
-                             <td></td>                                       
-                           </tr>
-                           <tr>
-                             <th scope="row">ถึงหน่วยงาน :</th>
-                             <td></td>                                       
-                           </tr>
-                           <tr>
-                             <th scope="row">ผู้รับ :</th>
-                             <td></td>                                       
-                           </tr>
-                           <tr>
-                            <th scope="row">ผู้ส่ง :</th>
-                            <td></td>                                       
-                          </tr>      
-                          <tr>
-                            <th scope="row">ลำดับชั้นความเร็ว :</th>
-                            <td></td>                                       
-                          </tr> 
-                          <tr>
-                            <th scope="row">ลำดับชั้นความลับ :</th>
-                            <td></td>                                       
-                          </tr> 
-                          <tr>
-                            <th scope="row">สถานะการใช้งาน :</th>
-                            <td></td>                                       
-                          </tr> 
-                          <tr>
-                            <th scope="row">*หมายเหตุ :</th>
-                            <td></td>                                       
-                          </tr>
-                          <tr>
-                            <th scope="row">ไฟล์ :</th>
-                            <td></td>                                       
-                          </tr> 
-                         </tbody>
-                       </table>
+
+                <div class="row" style="text-align: center">
+                  <div class="col-md-6">
+                    <p>ชั้นความเร็ว :</p>
+                  </div>
+                  <div class="col-md-6">
+                    <p>ชั้นความลับ :</p>
+                  </div>
+                </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div>
+                      <p>การปฏิบัติ :</p>
+                  </div>
+                </div>
               </div>
+             
+              <div class="row">
+                <div class="col-md-12">
+                  <div>
+                      <p>หมายเหตุ :</p>
+                  </div>
+                </div>
+              </div>
+             
+              <div class="row">
+                <div class="col-md-4">
+                  <div>
+                    <p>ไฟล์เอกสาร :</p>
+                  </div>
+                </div>
+                <div class="col-md-4" style="text-align: center;">
+                    <div>
+                        <button type="button" class="btn btn-danger">ดูเอกสาร</button>
+                        <button type="button" class="btn btn-danger">ดาวน์โหลดเอกสาร</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div>
+                      
+                    </div>
+                </div>
               </div>
               </div>
             </div>
@@ -83,8 +65,4 @@
           <button class="btn btn-outline-primary mb-1" (click)="openBackDropCustomClass(content)">Modal with backdrop custom class</button>
           <button class="btn btn-outline-primary mb-1" (click)="openSm(content)">Small modal</button>
           <button class="btn btn-outline-primary mb-1" (click)="openLg(content)">Large modal</button> -->
-          <button class="btn btn-outline-primary btn-sm" (click)="openVerticallyCentered(content)">รายละเอียด</button>
-
-    </div>
-  </div>
-</div>
+          <button class="btn btn-primary  " (click)="openVerticallyCentered(content)">แสดง</button>

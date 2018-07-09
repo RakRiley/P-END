@@ -1,7 +1,7 @@
 <nav class="navbar fixed-top navbar-expand-lg " style="background-color:#832EBF;color: aliceblue">
     <!-- <a class="navbar-brand" href="#">Navbar</a> -->
     <a class="navbar-brand" href="javascript:void(0)" (click)="goTo('0')">
-        <img src="/assets/P/Flash2.jpg" width="30" height="30" alt="" style="border-radius: 6px;">
+        <img src="/assets/P/cpe.png" width="50" height="50" alt="" style="border-radius: 2px;">
       </a>
   <button style="border-color: white;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"><i class="fas fa-bars fa-lg" style="color: white"></i></span>
@@ -12,26 +12,14 @@
       <li class="nav-item active">
         <a class="nav-link" href="javascript:void(0)" (click)="goTo('0')">หน้าแรก<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="javascript:void(0)" (click)="goTo('1')">ออกเลขหนังสือ</a>
-      </li>
-      <li class="nav-item">
+      </li> -->
+      <!-- <li class="nav-item">
           <a class="nav-link" href="javascript:void(0)" (click)="goTo('2')">ค้นหาหนังสือ</a>
-        </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          ชนิดของหนังสือ  
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['/table1']" href="#">ชนิดที่1</a>
-          <a class="dropdown-item" [routerLink]="['/table1']" href="#">ชนิดที่2</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" [routerLink]="['/table1']"  href="#">ชนิดที่3</a>
-          <a class="dropdown-item" [routerLink]="['/table1']"  href="#">ชนิดที่4</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" [routerLink]="['/table1']"  href="#">ชนิดที่5</a>
-          <a class="dropdown-item" [routerLink]="['/table1']"  href="#">ชนิดที่6</a>
-        </div>
+      </li> -->
+      <li class="nav-item">
+        <a class="nav-link" href="#" [routerLink]="['/table1']">หนังสือทั้งหมด</a>
       </li>
       <li class="nav-item">
         <a class="nav-link " href="#" [routerLink]="['/profile']">ข้อมูลส่วนตัว</a>

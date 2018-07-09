@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HttpModule} from '@angular/http'
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgxPaginationModule} from 'ngx-pagination';
 ///
 import {LoginService} from './provider/login/login.service';
 import { GetApiService } from './get-api.service';
@@ -18,6 +19,13 @@ import { Table2Component } from './components/table-2/table-2.component';
 import { DetailComponent } from './components/detail/detail.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { DocumnetService } from './components/service/documnet.service';
+import { DateService } from './components/service/date.service';
+import { SignerService } from './components/service/signer.service';
+import { HttpClientModule } from "@angular/common/http";
+import { FileService } from './components/service/file.service';
+import { MomentModule } from 'angular2-moment';
+import { FilterpipeComponent } from './components/filterpipe/filterpipe.component';
 const router : Routes =[
   { path: 'home',  component: HomeComponent },
   { path: 'login', component: LoginComponent},
@@ -41,8 +49,8 @@ const router : Routes =[
     Table2Component,
     DetailComponent,
     ProfileComponent,
-    AdminComponent
-    
+    AdminComponent,
+    FilterpipeComponent
     
   ],
   imports: [
@@ -50,9 +58,12 @@ const router : Routes =[
     RouterModule.forRoot(router),
     FormsModule,
     HttpModule,
-    NgbModule.forRoot()
+    HttpClientModule,
+    NgbModule.forRoot(),
+    NgxPaginationModule,
+    MomentModule
   ],
-  providers: [LoginService, GetApiService, UserService
+  providers: [LoginService, GetApiService, UserService ,DocumnetService, DateService, FileService, SignerService, 
   
   ],
   bootstrap: [AppComponent]

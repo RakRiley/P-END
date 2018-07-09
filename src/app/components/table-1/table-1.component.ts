@@ -4,6 +4,8 @@ import { Http }       from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { DocumnetService } from '../service/documnet.service';
+import { DateService } from '../service/date.service';
 
 @Component({
   selector: 'app-table-1',
@@ -11,10 +13,37 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./table-1.component.css']
 })
 export class Table1Component implements OnInit {
-
+  numpage: number = 0;
   data:any;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, 
+  private documentService : DocumnetService, 
+  private dateService : DateService) { }
+  
+  numPage(event){
+    
+    this.numpage = (event-1)*10;
+    
+    
+   }
+
+    show : any;
+  Showdatatable(){
+    this.documentService.getDocument().then((docc:any)=>{
+      console.log(docc,'ข้อมูลของตารางdoc')
+      this.show=docc;
+    });
+    this.dateService.getDate().then((dataa:any)=>{
+      dataa.forEach(t => {
+        this.show.forEach(l => {
+          if(t.id == l.date_id){
+            l.date_id = t;
+          }
+        });
+      });
+      console.log(dataa,'ข้อมูลของตารางdate')
+    });
+  }
 
   getData() {
  
@@ -28,6 +57,7 @@ export class Table1Component implements OnInit {
 
   ngOnInit() {
     this.getData();
+    this.Showdatatable();
   }
 
 }

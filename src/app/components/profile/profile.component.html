@@ -8,7 +8,7 @@
               <div class="container-fluid">
               <div class="row">
                   <div class="card col-sm-12 col-md-12" style="background-color:#a6c9e2">
-                    <div class="card-body"><h2>ข้อมูลส่วนตัว</h2><br>
+                    <div class="card-body"><h2>ข้อมูลผู้ใช้</h2><br>
                       <div class="border border-primary" style="padding-right: 15px;padding-left: 15px;border-radius: 6px;background-color:rgba(223, 215, 215, 0.904)">
                         <br>
                       <div class="row">
@@ -22,17 +22,10 @@
                           </div>
                         </div>
                         <div class="col-10 border-left border-warning">
+
                           <div class="container border border-warning" style="padding-top: 30px;padding-right: 30px;padding-bottom: 30px;padding-left: 30px;border-radius: 6px; background-color:rgba(150, 150, 196, 0.959)">
                             <div class="row col-12">
                                 <table class="col-12 col-md-12">
-                             <!--   <thead>
-                                      <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
-                                      </tr>
-                                    </thead> -->
                                     <tbody style="text-align:left;font-size: 1em;">
                                       <tr>
                                         <td scope="row" width="20%"><b>รหัสพนักงาน :</b></td>
@@ -49,23 +42,38 @@
                                       <tr>
                                         <th scope="row">สถานะ :</th>
                                         <td>{{ln.CurrentStatus}}</td>                                       
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">จำนวนเอกสารที่มี :</th>
-                                        <td></td>                                       
-                                      </tr>
+                                      </tr>                                   
                                       <tr>
                                         <th scope="row">หน่วยงาน :</th>
+                                        <td>{{ln.ProgramName_TH}}</td>                                       
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">สังกัด :</th>
                                         <td>{{ln.FacultyName_TH}}</td>                                       
                                       </tr>
                                       <tr>
-                                        <th scope="row">เบอร์โทร :</th>
+                                        <th scope="row">เบอร์มือถือ :</th>
                                         <td>{{ln.Telephone}}</td>                                       
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">เบอร์โทร :</th>
+                                        <td>054-466-666 ต่อ2319, 2330</td>                                       
                                       </tr>     
+                                      <tr>
+                                        <th scope="row">จำนวนเอกสารที่มี :</th>
+                                        <td>{{newdoc.length}}</td>                                       
+                                      </tr>
                                     </tbody>
                                   </table>
                             </div>
                           </div>
+                          <!-- <br>
+                          <div class="container border border-success" style="padding-top: 30px;padding-right: 30px;padding-bottom: 30px;padding-left: 30px;border-radius: 6px; background-color:rgba(150, 150, 196, 0.959)">
+                            <div class="row col-12">
+                                 
+                            </div>
+                          </div> -->
+
                         </div>
                       </div>
                       <br>
@@ -76,63 +84,140 @@
               <br>
               <div class="row">
                   <div class="card col-sm-12 col-md-12" style="background-color:#a6c9e2">
-                    <div class="card-body"><h2>หนังสือทั้งหมด</h2>
+                    <div class="card-body"><h2>หนังสือทั้งหมดของผู้ใช้งาน</h2>
                       <br>
                       <div class="card">
                         <div class="card-header" style="background-color: #650DAD;">
                           <div class="box-tools">
                             <div class="input-group input-group-sm ml-auto" style="width: 300px;">
-                              <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา">             
+                              <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา" [(ngModel)]="searchText" >
+                              <ul>
+                                <li *ngFor="let c of characters | filter : searchText">
+                                  {{c}}
+                                </li>
+                              </ul>
                               <div class="input-group-btn">
                                 <button type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="card-body" >
+                        <div class="card-body">
                           <div class="table-responsive">
-                              <table class="table table-hover border-bottom" >
-                                  <thead style="background: #2d60c6;color: aliceblue">
-                                    <tr>
-                                      <th scope="col">เลขหนังสือ</th>
-                                      <th scope="col">วันที่</th>
-                                      <th scope="col">เรื่อง</th>
-                                      <th scope="col">จากหน่วยงาน</th>
-                                      <th scope="col">ราละเอียด</th>
-                                      <th scope="col">ไฟล์</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td>1</td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td><a href="javacript:void(0)" ><app-detail></app-detail></a></td>
-                                      <td></td>
-                                    </tr>
-                                    <tr>
-                                      <td>2</td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td><a href="javacript:void(0)" ><app-detail></app-detail></a></td>
-                                      <td></td>
-                                    </tr>
-                                    <tr>
-                                      <td>3</td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td><a href="javacript:void(0)" ><app-detail></app-detail></a></td>
-                                      <td></td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+                              <table class="table border-bottom">
+                                <thead class="thead" style="background: #2d60c6;color: aliceblue">
+                                  <tr>
+                                  <th scope="col">ลำดับ</th>
+                                  <th scope="col">ที่ ศธ.</th>
+                                  <th scope="col">เลขทะเบียนส่ง</th>
+                                  <th scope="col">ลงวันที่</th>
+                                  <th scope="col">ลงที่จอง</th>
+                                  <th scope="col">จาก</th>
+                                  <th scope="col">ถึง</th>
+                                  <th scope="col">เรื่อง</th>
+                                  <th scope="col">รายละเอียด</th>
+                                  <th scope="col">อัฟโหลดไฟล์</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let doc of newdoc | paginate: { itemsPerPage: 10, currentPage: p }; let i = index ">
+                                  <th scope="row">{{numpage+(i + 1)}}</th>
+                                  <td>ศธ. ๐๕๙๐.๑๕(๔)/</td>
+                                  <td>{{doc.number_of_book}}</td>
+                                  <td>{{doc.date_id.day_time}}/{{doc.date_id.mounth_time}}/{{doc.date_id.year_time}}</td>
+                                  <td>{{doc.date_id.day}}/{{doc.date_id.month}}/{{doc.date_id.year}}<br>{{doc.date_id.hour}}:{{doc.date_id.minute}} น.</td>
+                                  <td>{{doc.sender}}</td>
+                                  <td>{{doc.to}}</td>
+                                  <td>{{doc.name}}</td>                                                
+                                  <!-- <td><a href="javacript:void(0)" ><app-detail></app-detail></a></td> -->
+                                  <td><!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#exampleModal'+i">
+                                      แสดง
+                                    </button>
+                                    
+                                    <!-- Modal -->
+                                    <div class="modal fade bd-example-modal-lg" id="exampleModal{{i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h3 class="modal-title">แสดงรายละเอียดหนังสือ</h3>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                              <p style="text-align: center;">ข้อมูลของเอกสาร</p>
+                                              <div class="container">
+                                
+                                                <div class="row" style="text-align: center">
+                                                  <div class="col-md-6">
+                                                    <p>ชั้นความเร็ว : {{doc.speed}}</p>
+                                                  </div>
+                                                  <div class="col-md-6">
+                                                    <p>ชั้นความลับ : {{doc.secret}}</p>
+                                                  </div>
+                                                </div>
+                                
+                                              <div class="row" style="text-align: left">
+                                                <div class="col-md-12">
+                                                  <div>
+                                                      <p>การปฏิบัติ : {{doc.practice}}</p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                             
+                                              <div class="row" style="text-align: left">
+                                                <div class="col-md-12">
+                                                  <div>
+                                                      <p>หมายเหตุ : {{doc.note}}</p>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                             
+                                              <div class="row" style="text-align: left">
+                                                <div class="col-md-4">
+                                                  <div>
+                                                    <p>ไฟล์เอกสาร :</p>
+                                                  </div>
+                                                </div>
+                                                <div class="col-md-4" style="text-align: center;">
+                                                    <div>
+                                                        <!-- <button type="button" class="btn btn-danger"><i class="fas fa-eye"></i></button>
+                                                        <button type="button" class="btn btn-danger"><i class="fas fa-download"></i></button> -->
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div>
+                                                      
+                                                    </div>
+                                                </div>
+                                              </div>
+                                              </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div></td>
+                                  <td><label class="btn btn-success">เลือกไฟล์ <input type="file" (change)="putFile($event,doc.id)" name="file" hidden class="form-control-file" id="exampleFormControlFile1" ></label></td>
+                                  </tr>
+                              </tbody>
+                              </table>
                           </div>
-                        </div> 
+                      </div> 
                         <div class="card-footer text-center" style="background-color: #650DAD;">
-                            <nav aria-label="Page navigation example">
+                            <!-- <p>Restricted size with rotation:</p> -->
+                            <!-- <ul class="pagination fa-pull-right"> -->
+                                <!-- <ngb-pagination [collectionSize]="150" [(page)]="page" [maxSize]="4" [rotate]="true" [boundaryLinks]="true"></ngb-pagination> -->
+                            <!-- </ul> -->
+
+                            <ul class="pagination fa-pull-right">
+                            <pagination-controls (pageChange)="p = $event" style="border-radius: 5px;" (pageChange)="numPage($event)"></pagination-controls>
+                            </ul>
+
+                            <!-- <nav aria-label="Page navigation example">
                                 <ul class="pagination fa-pull-right">
                                   <li class="page-item">
                                     <a class="page-link" href="#" aria-label="Previous">
@@ -150,7 +235,7 @@
                                     </a>
                                   </li>
                                 </ul>
-                              </nav>
+                              </nav> -->
                         </div>
                       </div>
                     </div>

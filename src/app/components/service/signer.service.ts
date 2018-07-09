@@ -5,24 +5,13 @@ import 'rxjs/add/operator/map';
 import { resolve } from 'url';
 import { reject } from 'q';
 @Injectable()
-export class UserService {
+export class SignerService {
 
-  constructor(private http: Http) { }
+  constructor(private http:Http) { }
 
-  // getUser(){
-  //   return new Promise((reject,resolve)=>{
-  //     this.http.get('http://localhost:8000/getUser').map(res=>res.json())
-  //     .subscribe((data)=>{
-  //       resolve(data)
-  //     },error=>{
-  //       reject(error);
-  //     })
-  //   })
-  // }
-
-  getUser() {
+  getSigner() {
     return new Promise((resolve,reject)=>{
-      this.http.get('http://localhost:8000/getUser').map(res=>res.json())
+      this.http.get('http://localhost:8000/getSigner').map(res=>res.json())
       .subscribe((data)=>{
         resolve(data)
       },error=>{
@@ -31,11 +20,11 @@ export class UserService {
     })
   }
 
-   postUser(data){
+   postSigner(data){
     return new Promise((resolve,reject)=>{
       let headers = new Headers({ "Content-Type": "application/json" });
       let options = new RequestOptions({ headers: headers });
-      this.http.post( "http://localhost:8000/postUser", JSON.stringify(data), options)
+      this.http.post( "http://localhost:8000/postSigner", JSON.stringify(data), options)
         .map(res => res.json())
         .subscribe((data)=>{
           resolve(data)
@@ -44,4 +33,5 @@ export class UserService {
         });
     });
   }
+
 }

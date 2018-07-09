@@ -23,9 +23,9 @@ export class NavbarComponent implements OnInit {
   goTo(input){
     this.router.navigate(['home'])
     if(input==1){
-      window.scroll(0,150)
+      window.scroll(0,140)
     }else if(input==2){
-      window.scroll(0,1400)
+      window.scroll(0,1175)
     }else{
       window.scroll(0,0)
     }
