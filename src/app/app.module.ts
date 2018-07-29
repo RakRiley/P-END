@@ -25,7 +25,10 @@ import { SignerService } from './components/service/signer.service';
 import { HttpClientModule } from "@angular/common/http";
 import { FileService } from './components/service/file.service';
 import { MomentModule } from 'angular2-moment';
-import { FilterpipeComponent } from './components/filterpipe/filterpipe.component';
+import { FilterPipe } from './components/filterpipe/filterpipe.component';
+import { MyDatePickerModule } from 'mydatepicker-thai';
+import { AdminService } from './components/service/admin.service';
+
 const router : Routes =[
   { path: 'home',  component: HomeComponent },
   { path: 'login', component: LoginComponent},
@@ -50,7 +53,7 @@ const router : Routes =[
     DetailComponent,
     ProfileComponent,
     AdminComponent,
-    FilterpipeComponent
+    FilterPipe
     
   ],
   imports: [
@@ -61,9 +64,10 @@ const router : Routes =[
     HttpClientModule,
     NgbModule.forRoot(),
     NgxPaginationModule,
-    MomentModule
+    MomentModule,
+    MyDatePickerModule
   ],
-  providers: [LoginService, GetApiService, UserService ,DocumnetService, DateService, FileService, SignerService, 
+  providers: [LoginService, GetApiService, UserService ,DocumnetService, DateService, FileService, SignerService, AdminService, 
   
   ],
   bootstrap: [AppComponent]

@@ -3,6 +3,7 @@ import { Http, Response, RequestOptions, Headers  } from '@angular/http';
 
 import 'rxjs/add/operator/map';
 import { UrlResolver } from '@angular/compiler';
+import { environment } from '../../../environments/environment';
  var swal = require('sweetalert');
 // import swal from 'sweetalert';
 @Injectable()
@@ -13,7 +14,7 @@ export class DocumnetService {
 
   getDocument() {
     return new Promise((resolve,reject)=>{
-      this.http.get('http://localhost:8000/getDocument').map(res=>res.json())
+      this.http.get(environment.api+'/getDocument').map(res=>res.json())
       .subscribe((data)=>{
         resolve(data)
       },error=>{
@@ -27,7 +28,7 @@ export class DocumnetService {
       let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: cpHeaders });
       console.log('success post doucument');
-      this.http.post("http://localhost:8000/postDocument", JSON.stringify(data), options)
+      this.http.post(environment.api+"/postDocument", JSON.stringify(data), options)
           .map(res => res.json())
           .subscribe((data)=>{
             resolve(data)

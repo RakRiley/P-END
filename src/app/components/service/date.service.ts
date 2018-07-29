@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, Headers  } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { UrlResolver } from '@angular/compiler';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class DateService {
@@ -10,7 +11,7 @@ export class DateService {
 
   getDate() {
     return new Promise((resolve,reject)=>{
-      this.http.get('http://localhost:8000/getDate').map(res=>res.json())
+      this.http.get(environment.api+'/getDate').map(res=>res.json())
       .subscribe((data)=>{
         resolve(data)
       },error=>{
@@ -24,7 +25,7 @@ export class DateService {
       let headers = new Headers({ "Content-Type": "application/json" });
       let options = new RequestOptions({ headers: headers });
       console.log('success post date');
-      this.http.post( "http://localhost:8000/postDate", JSON.stringify(data), options)
+      this.http.post( environment.api+"/postDate", JSON.stringify(data), options)
         .map(res => res.json())
         .subscribe((data)=>{
           resolve(data)

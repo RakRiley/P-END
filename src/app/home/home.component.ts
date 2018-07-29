@@ -16,6 +16,7 @@ import { getLocaleMonthNames } from '@angular/common';
 import { MAX_LENGTH_VALIDATOR } from '@angular/forms/src/directives/validators';
 import {Observable} from 'rxjs/Observable';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
+import { IMyDpOptions } from 'mydatepicker-thai';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -34,15 +35,18 @@ export class HomeComponent implements OnInit {
   name :any = null;
   formm :any = 'เลือก...';
   to :any = null ;
-  sender:any = null;
+  sender:any = 'ผู้ลงนามในหนังสือ';
   speed : any = 'ปกติ';
   secret : any = 'ปกติ';
   note : any = "";
-  practice :any ="" ;
+  practice :any ="";
   date_time :any;
   date_book :any;
   date_id :any;
   id :any;
+
+  private monthname: { 1: "มกราคม",2: "กุมภาพันธ์", 3: "มีนาคม", 4: "เมษายน", 5: "พฤษภาคม", 6: "มิถุนายน",
+   7: "กรกฎาคม", 8: "สิงหาคม", 9: "กันยายน", 10: "ตุลาคม", 11: "พฤศจิกายน", 12: "ธันวาคม" }
 
   private day: any;
   private date:any;
@@ -64,6 +68,16 @@ export class HomeComponent implements OnInit {
   // 'Northern Mariana Islands', 'Ohio', 'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico', 'Rhode Island',
   // 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virgin Islands', 'Virginia',
   // 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+  public myDatePickerOptions: IMyDpOptions = {
+    // other options...
+    dateFormat: 'dd/mm/yyyy',
+    dayLabels: { su: "อา", mo: "จ", tu: "อ", we: "พ", th: "พฤ", fr: "ศ", sa: "ส" },
+    monthLabels: { 1: "ม.ค", 2: "ก.พ.", 3: "มี.ค.", 4: "เม.ย.", 5: "พ.ค.", 6: "มิ.ย.", 7: "ก.ค.", 8: "ส.ค.", 9: "ก.ย.", 10: "ต.ค.", 11: "พ.ย.", 12: "ธ.ค." },
+    todayBtnTxt: "วันนี้",
+    firstDayOfWeek: "su",
+    sunHighlight: true,
+    disableWeekends: true
+  }
 
   constructor(public param:ActivatedRoute,public router:Router, 
     private userService : UserService, 
@@ -89,6 +103,7 @@ export class HomeComponent implements OnInit {
     this.showiddoc();
     this.showiduser();
     this.getDate();
+
     setInterval(() => { 
       this.getDate();
     }, 1000);
@@ -108,6 +123,7 @@ export class HomeComponent implements OnInit {
 
   NumberB :any;
   Nbook:any;
+  NumberC:any;
   Fcount(){
   this.documnetService.getDocument().then((nfb:any)=>{
     this.Nbook = nfb
@@ -119,13 +135,15 @@ export class HomeComponent implements OnInit {
       this.NumberB=this.Nbook[this.Nbook.length-1].number_of_book+1
       console.log(this.NumberB,'new numbook')
     }
-    
+    var num = 4;
+    this.NumberC = ('000'+this.NumberB).slice(-num)
   })
   }
-
+ si:any;
   getsigner(){
     this.signerService.getSigner().then((sig:any)=>{
       console.log(sig,'ดูชื่อ')
+      this.si = sig
     });
   }
   // ใช้ในการเลือกชื่อ
@@ -237,7 +255,7 @@ export class HomeComponent implements OnInit {
               lastname: this.ln.LastName_TH,
               Role: this.ln.ProgramName_TH,
               prefix: this.ln.Title,
-              status:'222222'
+              status:'1'
             };
             this.userService.postUser(data);
         }
@@ -268,11 +286,48 @@ export class HomeComponent implements OnInit {
   }
 
   postDocumnet(){
-    console.log(this.sender.id)
+    // console.log(this.sender.id)
     if(this.datepicker&&this.name&&this.formm&&this.to&&this.sender&&this.speed&&this.secret){
       var iddate
       this.dateService.getDate().then((hhh : any)=>{
         console.log(hhh);
+        console.log(this.datepicker,'เวลาลง'); 
+        // if (this.mounth == 1) {
+        //   this.mounth = 'มกราคม';
+        // }
+        // else if (this.mounth == 2) {
+        //   this.mounth = 'กุมภาพันธ์';
+        // }
+        // else if (this.mounth == 3) {
+        //   this.mounth = 'มีนาคม';
+        // } 
+        // else if (this.mounth == 4) {
+        //   this.mounth = 'เมษายน';
+        // } 
+        // else if (this.mounth == 5) {
+        //   this.mounth = 'พฤษภาคม';
+        // } 
+        // else if (this.mounth == 6) {
+        //   this.mounth = 'มิถุนายน';
+        // } 
+        // else if (this.mounth == 7) {
+        //   this.mounth = 'กรกฎาคม';
+        // } 
+        // else if (this.mounth == 8) {
+        //   this.mounth = 'สิงหาคม';
+        // } 
+        // else if (this.mounth == 9) {
+        //   this.mounth = 'กันยายน';
+        // } 
+        // else if (this.mounth == 10) {
+        //   this.mounth = 'ตุลาคม';
+        // } 
+        // else if (this.mounth == 11) {
+        //   this.mounth = 'พฤศจิกายน';
+        // } 
+        // else if (this.mounth == 12) {
+        //   this.mounth = 'ธันวาคม';
+        // } 
         if(hhh.length>0&&hhh[hhh.length-1].id) { iddate=hhh[hhh.length-1].id+1; } else { iddate = 1 }
         var dataBook ={
           id: iddate,
@@ -282,9 +337,9 @@ export class HomeComponent implements OnInit {
           hour : this.hour,
           minute : this.minute,
           second : this.second,
-          day_time : this.datepicker.substring(8 ,10),
-          mounth_time : this.datepicker.substring(5 ,7),
-          year_time : this.datepicker.substring(0 ,4)
+          day_time : this.datepicker.date.day,
+          mounth_time : this.datepicker.date.month,
+          year_time : this.datepicker.date.year
          };
          var id : any;
          console.log(dataBook);
@@ -355,6 +410,7 @@ export class HomeComponent implements OnInit {
   showname(){
 
   }
+  month4show:string;
   getDate(){
     var d = new Date();
     this.date= d.getDate();
@@ -363,6 +419,42 @@ export class HomeComponent implements OnInit {
   // } 
  
     this.mounth = d.getMonth()+1;
+    if (this.mounth == 1) {
+      this.month4show = 'มกราคม';
+    }
+    else if (this.mounth == 2) {
+      this.month4show = 'กุมภาพันธ์';
+    }
+    else if (this.mounth == 3) {
+      this.month4show = 'มีนาคม';
+    } 
+    else if (this.mounth == 4) {
+      this.month4show = 'เมษายน';
+    } 
+    else if (this.mounth == 5) {
+      this.month4show = 'พฤษภาคม';
+    } 
+    else if (this.mounth == 6) {
+      this.month4show = 'มิถุนายน';
+    } 
+    else if (this.mounth == 7) {
+      this.month4show = 'กรกฎาคม';
+    } 
+    else if (this.mounth == 8) {
+      this.month4show = 'สิงหาคม';
+    } 
+    else if (this.mounth == 9) {
+      this.month4show = 'กันยายน';
+    } 
+    else if (this.mounth == 10) {
+      this.month4show = 'ตุลาคม';
+    } 
+    else if (this.mounth == 11) {
+      this.month4show = 'พฤศจิกายน';
+    } 
+    else if (this.mounth == 12) {
+      this.month4show = 'ธันวาคม';
+    }
   //  if(this.mounth<10) {
   //   this.mounth = '0'+ this.mounth
   //  }

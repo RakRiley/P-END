@@ -91,11 +91,6 @@
                           <div class="box-tools">
                             <div class="input-group input-group-sm ml-auto" style="width: 300px;">
                               <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา" [(ngModel)]="searchText" >
-                              <ul>
-                                <li *ngFor="let c of characters | filter : searchText">
-                                  {{c}}
-                                </li>
-                              </ul>
                               <div class="input-group-btn">
                                 <button type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
                               </div>
@@ -120,10 +115,10 @@
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr *ngFor="let doc of newdoc | paginate: { itemsPerPage: 10, currentPage: p }; let i = index ">
+                                  <tr *ngFor="let doc of newdoc | paginate: { itemsPerPage: 10, currentPage: p } | filter: searchText; let i = index ">
                                   <th scope="row">{{numpage+(i + 1)}}</th>
                                   <td>ศธ. ๐๕๙๐.๑๕(๔)/</td>
-                                  <td>{{doc.number_of_book}}</td>
+                                  <td>{{('000'+doc.number_of_book).slice(-5)}}</td>
                                   <td>{{doc.date_id.day_time}}/{{doc.date_id.mounth_time}}/{{doc.date_id.year_time}}</td>
                                   <td>{{doc.date_id.day}}/{{doc.date_id.month}}/{{doc.date_id.year}}<br>{{doc.date_id.hour}}:{{doc.date_id.minute}} น.</td>
                                   <td>{{doc.sender}}</td>
@@ -131,7 +126,7 @@
                                   <td>{{doc.name}}</td>                                                
                                   <!-- <td><a href="javacript:void(0)" ><app-detail></app-detail></a></td> -->
                                   <td><!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#exampleModal'+i">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#exampleModal'+i" >
                                       แสดง
                                     </button>
                                     
@@ -175,9 +170,13 @@
                                               </div>
                                              
                                               <div class="row" style="text-align: left">
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                   <div>
-                                                    <p>ไฟล์เอกสาร :</p>
+                                                    <p>ไฟล์เอกสาร : 
+                                                      <a *ngIf="(doc.file != '')" class="btn" (click)="openfile(doc.file)"><span >ดูไฟล์เอกสาร</span  > </a>    
+                                                      <a *ngIf="(doc.file == '')" class="btn"><span >ไม่มีไฟล์เอกสาร</span  > </a></p>
+                                                    
+                                                    
                                                   </div>
                                                 </div>
                                                 <div class="col-md-4" style="text-align: center;">
@@ -201,7 +200,8 @@
                                         </div>
                                       </div>
                                     </div></td>
-                                  <td><label class="btn btn-success">เลือกไฟล์ <input type="file" (change)="putFile($event,doc.id)" name="file" hidden class="form-control-file" id="exampleFormControlFile1" ></label></td>
+                                  <td><label [ngClass]="(doc.file == '') ? 'btn btn-success' : 'btn btn-success disabled'" >เลือกไฟล์ <input type="file"  (change)="putFile($event,doc.id)" 
+                                    name="file" hidden class="form-control-file" id="exampleFormControlFile1" [disabled]="doc.file != ''"></label></td>
                                   </tr>
                               </tbody>
                               </table>

@@ -5,15 +5,22 @@
             <div id="middleblock">
                 <div class="card text-center">
                     <div class="card-body text-center" style="background-color:#832EBF">    
-                        <div class="card col-sm-12 col-md-12" style="background-color:#a6c9e2">
+                        <div class="card col-sm-12 col-md-12" style="background-color:#a6c9e2">                       
                             <div class="card-body">                  
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-12">
+                                                <h2>หนังสือทั้งหมด</h2>
                                             <div id="middleblock">
                                                     <div class="card">
                                                             <div class="card-header" style="background-color: #650DAD;color: aliceblue">
-                                                                <ul class="nav nav-tabs card-header-tabs">
+                                                                    <div class="input-group input-group-sm ml-auto" style="width: 300px;">
+                                                                            <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา" [(ngModel)]="sText">             
+                                                                            <div class="input-group-btn">
+                                                                                <button type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
+                                                                            </div>
+                                                                        </div>
+                                                                <!-- <ul class="nav nav-tabs card-header-tabs">
                                                                     <li class="nav-item">
                                                                         <a class="nav-link" href="#">วันที่</a>
                                                                     </li>
@@ -34,13 +41,13 @@
                                                                         </li>
                                                                     <li class="ml-auto">                  
                                                                         <div class="input-group input-group-sm ml-auto" style="width: 300px;">
-                                                                            <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา">             
+                                                                            <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา" [(ngModel)]="sText">             
                                                                             <div class="input-group-btn">
                                                                                 <button type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
                                                                             </div>
                                                                         </div>
                                                                     </li>
-                                                                </ul>                                         
+                                                                </ul>                                          -->
                                                             </div>
                                                             <div class="card-body">
                                                                 <div class="table-responsive">
@@ -59,26 +66,36 @@
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                <tr *ngFor="let s of show | paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
+                                                                                <tr *ngFor="let s of show | paginate: { itemsPerPage: 10, currentPage: p } | filter: sText; let i = index">
                                                                                 <th scope="row">{{numpage+(i + 1)}}</th>
                                                                                 <td>ศธ. ๐๕๙๐.๑๕(๔)/</td>
-                                                                                <td>{{s.number_of_book}}</td>
+                                                                                <td>{{('000'+s.number_of_book).slice(-5)}}</td>
                                                                                 <td>{{s.date_id.day_time}}/{{s.date_id.mounth_time}}/{{s.date_id.year_time}}</td>
                                                                                 <td>{{s.date_id.day}}/{{s.date_id.month}}/{{s.date_id.year}}<br>{{s.date_id.hour}}:{{s.date_id.minute}} น.</td>
                                                                                 <td>{{s.sender}}</td>
                                                                                 <td>{{s.to}}</td>
                                                                                 <td>{{s.name}}</td>
                                                                                 <td>
-                                                                                    <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#exampleModal'+i">
+                                                                                    <button *ngIf="!admin" type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#exampleModal'+i">
                                                                                         แสดง
                                                                                       </button>
+                                                                                    <div *ngIf="admin" class="btn-group" role="group">
+                                                                                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                            Dropdown
+                                                                                        </button>
+                                                                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                                                            <a class="dropdown-item" href="#">Dropdown link</a>
+                                                                                            <a class="dropdown-item" href="#">Dropdown link</a>
+                                                                                        </div>
+                                                                                    </div>
+
                             
                                                                                       <!-- Modal -->
                                                                 <div class="modal fade bd-example-modal-lg" id="exampleModal{{i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                         <div class="modal-dialog modal-lg" role="document">
                                                                           <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                              <h3 class="modal-title">แสดงรายละเอียดหนังสือ{{s.id}}</h3>
+                                                                              <h3 class="modal-title">แสดงรายละเอียดหนังสือ</h3>
                                                                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                               </button>
@@ -115,7 +132,8 @@
                                                                                 <div class="row" style="text-align: left">
                                                                                   <div class="col-md-4">
                                                                                     <div>
-                                                                                      <p>ไฟล์เอกสาร :</p>
+                                                                                      <p>ไฟล์เอกสาร : <a *ngIf="(s.file != '')" class="btn" (click)="openfile(s.file)"><span >ดูไฟล์เอกสาร</span  > </a>    
+                                                                                        <a *ngIf="(s.file == '')" class="btn"><span >ไม่มีไฟล์เอกสาร</span  > </a></p>
                                                                                     </div>
                                                                                   </div>
                                                                                   <div class="col-md-4" style="text-align: center;">

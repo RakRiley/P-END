@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { resolve } from 'url';
 import { reject } from 'q';
+import { environment } from '../../../environments/environment';
 @Injectable()
 export class UserService {
 
@@ -11,7 +12,7 @@ export class UserService {
 
   // getUser(){
   //   return new Promise((reject,resolve)=>{
-  //     this.http.get('http://localhost:8000/getUser').map(res=>res.json())
+  //     this.http.get(environment.api+'/getUser').map(res=>res.json())
   //     .subscribe((data)=>{
   //       resolve(data)
   //     },error=>{
@@ -22,7 +23,7 @@ export class UserService {
 
   getUser() {
     return new Promise((resolve,reject)=>{
-      this.http.get('http://localhost:8000/getUser').map(res=>res.json())
+      this.http.get(environment.api+'/getUser').map(res=>res.json())
       .subscribe((data)=>{
         resolve(data)
       },error=>{
@@ -35,7 +36,7 @@ export class UserService {
     return new Promise((resolve,reject)=>{
       let headers = new Headers({ "Content-Type": "application/json" });
       let options = new RequestOptions({ headers: headers });
-      this.http.post( "http://localhost:8000/postUser", JSON.stringify(data), options)
+      this.http.post( environment.api+"/postUser", JSON.stringify(data), options)
         .map(res => res.json())
         .subscribe((data)=>{
           resolve(data)

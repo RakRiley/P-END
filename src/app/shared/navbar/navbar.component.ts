@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
 import { JsonpModule } from '@angular/http';
 import { parse } from 'url';
+import { AdminService } from '../../components/service/admin.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -10,7 +11,8 @@ import { parse } from 'url';
 export class NavbarComponent implements OnInit {
 
   is_login:boolean=false;
-  constructor(public router:Router) {
+  constructor(public router:Router,
+              private adminService: AdminService) {
     if(localStorage.getItem('token')){
       this.is_login=true;
     }else{
@@ -37,12 +39,20 @@ export class NavbarComponent implements OnInit {
     localStorage.removeItem('token');
     this.router.navigate(['/login'])
   }
-    sn:string;
+    sn:any;
   showname(){
     let item = localStorage.getItem('user_profile')
     let obj = JSON.parse(item)
-    console.log(obj)
     this.sn = obj
+    this.adminService.getAdmin().then((data: any) => {
+      data.forEach(e => {
+        if (JSON.stringify(e.student_code) == this.sn.StudentCode) {
+          this.sn["Status"] = "Admin";
+        }
+      });
+      console.log("sn=>",this.sn);
+      
+    })
 
   }
 

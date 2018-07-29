@@ -37,7 +37,7 @@
                                                     <div class="input-group-prepend">
                                                         <label class="input-group-text" for="inputGroupSelect01">เลขหนังสือ</label>
                                                     </div>
-                                                    <input type="text" class="form-control" value="{{('0000'+NumberB).slice(-5)}}" readonly>
+                                                    <input type="text" class="form-control" value="{{NumberC}}" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
@@ -84,6 +84,7 @@
                                                     <div class="input-group-prepend">
                                                         <label class="input-group-text" for="inputGroupSelect01">ลงวันที่จองหนังสือ</label>
                                                     </div>
+                                                    <!-- {{month4show}} -->
                                                     <input type="text" class="form-control" value="{{hour}}:{{minute}}:{{second}} {{date}}/{{mounth}}/{{year}}"readonly>
                                                     </div>
                                                 </div>
@@ -100,11 +101,12 @@
                                                 <div class="col-md-4">
                                                     <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
-                                                        <label class="input-group-text" for="inputGroupSelect01">ลงวันที่หนังสือ</label>
+                                                        <!-- <label class="input-group-text" for="inputGroupSelect01">ลงวันที่หนังสือ</label> -->
                                                     </div>
-                                                        <input type="date" class="form-control" [(ngModel)]="datepicker" (change)="datePicker($event)" name="datepicker" id="datepicker">
+                                                        <!-- <input type="date" class="form-control" [(ngModel)]="datepicker" (change)="datePicker($event)" name="datepicker" id="datepicker"> -->
                                                         <!-- <input class="input-medium" type="text" data-provide="datepicker" data-date-language="th-th"> -->
                                                         <!-- <input class="input-medium" type="text" data-provide="datepicker" data-date-language="th-th"> -->
+                                                        <my-date-picker name="mydate" placeholder="ลงวันที่หนังสือ" [options]="myDatePickerOptions"  name="datepicker" id="datepicker" [(ngModel)]="datepicker" required></my-date-picker>
                                                     </div>
                                                 </div>
                                             </div>
@@ -122,11 +124,25 @@
                                                     <div class="input-group-prepend">
                                                         <label class="input-group-text" for="inputGroupSelect01">ผู้ลงนามในหนังสือ</label>
                                                     </div>
+                                                    <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="sender" name="sender">
+                                                        <option value="ผู้ลงนามในหนังสือ">ผู้ลงนามในหนังสือ....</option>
+                                                        <option value="{{ln.FirstName_TH}} {{ln.LastName_TH}}">{{ln.FirstName_TH}} {{ln.LastName_TH}}</option>
+                                                        <option *ngFor="let cc of si " value="{{cc.name}}">{{cc.name}}</option>
+                                                        <!-- <option value="ลับมาก">ลับมาก</option>
+                                                        <option value="ลับที่สุด">ลับที่สุด</option> -->
+                                                    </select>
+                                                        </div>        
+                                                </div>
+                                                <!-- <div class="col-md-6">
+                                                    <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="inputGroupSelect01">ผู้ลงนามในหนังสือ</label>
+                                                    </div>
                                                     <input type="text" id="typeahead-basic" class="form-control"  placeholder="ผู้ลงนามในหนังสือ" [(ngModel)]="sender" name="sender" [ngbTypeahead]="search" >
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
-                                            <div class="row">
+                                            <!-- <div class="row"> -->
                                                 <!-- <div class="col-md-6">
                                                     <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
@@ -156,7 +172,7 @@
                                                     </div>
                                                     </div>
                                                 </div> -->
-                                            </div>
+                                            <!-- </div> -->
                                             <div class="row">
                                                 <div class="col-md-6" style="text-align: left ">
                                                     <div class="form-group">
