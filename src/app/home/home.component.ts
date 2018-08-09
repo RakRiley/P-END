@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute,Router, Data, Data } from '@angular/router';
 import { FormsModule } from '@angular/forms'
 import { UserService } from '../components/service/user.service';
 import { forEach } from '@angular/router/src/utils/collection';
@@ -20,6 +20,7 @@ import { IMyDpOptions } from 'mydatepicker-thai';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import { async } from '../../../node_modules/@angular/core/testing';
 declare var $: any;
 @Component({
   selector: 'app-home',
@@ -32,9 +33,9 @@ export class HomeComponent implements OnInit {
   userData = [];
   ln : any;
   
-  name :any = null;
+  name :any = "";
   formm :any = 'เลือก...';
-  to :any = null ;
+  to :any = "" ;
   sender:any = 'ผู้ลงนามในหนังสือ';
   speed : any = 'ปกติ';
   secret : any = 'ปกติ';
@@ -44,6 +45,8 @@ export class HomeComponent implements OnInit {
   date_book :any;
   date_id :any;
   id :any;
+  checktable:number = 0;
+  
 
   private monthname: { 1: "มกราคม",2: "กุมภาพันธ์", 3: "มีนาคม", 4: "เมษายน", 5: "พฤษภาคม", 6: "มิถุนายน",
    7: "กรกฎาคม", 8: "สิงหาคม", 9: "กันยายน", 10: "ตุลาคม", 11: "พฤศจิกายน", 12: "ธันวาคม" }
@@ -96,17 +99,110 @@ export class HomeComponent implements OnInit {
     
   }
   ngOnInit(){
-    this.Fcount();
-    this.getsigner();
-    this.owndoc();
-    this.baseinstates();
-    this.showiddoc();
-    this.showiduser();
-    this.getDate();
-
+    this.param.queryParams.subscribe(data => {
+      if (data.number_of_book) {
+        this.getParams();
+      }
+      else if (data.numbook) {
+        this.getParamsDupNumBook();
+      }
+      else {
+        this.getsigner();
+        this.owndoc();
+        this.baseinstates();
+        this.showiddoc();
+        this.showiduser();
+        this.getDate();
+        this.Fcount();
+      }
+    })
     setInterval(() => { 
       this.getDate();
     }, 1000);
+  }
+  button_change: boolean;
+  getParams() {
+    
+      this.param.queryParams.subscribe(data => {
+        console.log("paramssss", data);
+        
+        if (data.check==1) {
+          console.log("param after", data);
+          var num = 4;
+          this.NumberC = ('000'+data.number_of_book).slice(-num);
+          this.speed = data.speed;
+          this.secret = data.secret;
+          this.formm = data.form;
+          this.name = data.name;
+          this.to = data.to;
+          this.sender = data.sender;
+          this.note = data.note;
+          this.practice = data.practice;
+          this.datepicker = { date : { year: data.year, month: data.month, day: data.day_time}};
+          this.id = data.id,
+          this.button_change = true;
+          this.checktable = 1;
+        }
+        else if (data.check==2) {
+          console.log("param after", data);
+          var num = 4;
+          this.NumberC = ('000'+data.number_of_book).slice(-num);
+          this.speed = data.speed;
+          this.secret = data.secret;
+          this.formm = data.form;
+          this.name = data.name;
+          this.to = data.to;
+          this.sender = data.sender;
+          this.note = data.note;
+          this.practice = data.practice;
+          this.datepicker = { date : { year: data.year, month: data.month, day: data.day_time}};
+          this.id = data.id,
+          this.button_change = true;
+         
+          this.checktable = 2;
+        }
+         else {
+          
+          this.button_change = false;
+          this.checktable = 0;
+          
+        }
+      });
+     
+  }
+
+  onClickReset(){
+    this.datepicker=""
+    this.name=""
+    this.formm="เลือก..."
+    this.to=""
+    this.sender=""
+    this.speed="ปกติ"
+    this.secret="ปกติ"
+    this.note =""
+    this.practice =""
+  }
+
+
+
+
+  getParamsDupNumBook() {
+    this.param.queryParams.subscribe(data => {
+      if (data.numbook) {
+        console.log("param numbook after", data);
+        this.documnetService.getDocumentNumBook(data.numbook).then(numbook => {
+          console.log("numbookkkkkkk", numbook);
+          var num = 6;
+          this.NumberB = numbook[0].number_of_book+0.1;
+          this.NumberC = ('000'+this.NumberB).slice(-num);
+          this.datepicker = { date : { year: data.year, month: data.month, day: data.day_time}};
+        })
+        this.checktable = 3;
+        
+      } else {
+
+      }
+    });
   }
   // datePicker(event) {
   //   console.log("time1=",event.target.value);
@@ -122,22 +218,60 @@ export class HomeComponent implements OnInit {
   // }
 
   NumberB :any;
-  Nbook:any;
+  Nbook:any = [];
   NumberC:any;
-  Fcount(){
-  this.documnetService.getDocument().then((nfb:any)=>{
-    this.Nbook = nfb
-    if (nfb.length==0) {
-      this.NumberB = 1
-    }
-    else {
-      console.log(this.Nbook[this.Nbook.length-1],'num of book')
-      this.NumberB=this.Nbook[this.Nbook.length-1].number_of_book+1
-      console.log(this.NumberB,'new numbook')
-    }
-    var num = 4;
-    this.NumberC = ('000'+this.NumberB).slice(-num)
-  })
+  getDoc() {
+    
+    this.documnetService.getDocument().then((data:any)=>{
+      data.forEach(e => {
+        this.Nbook.push(e.number_of_book);
+      });
+      console.log("Nbook before ",this.Nbook);
+      this.Nbook = this.Nbook.sort();
+      console.log("Nbook after ",this.Nbook);
+      
+      if (data.length==0) {
+        this.NumberB = 1
+      }
+      else {
+        console.log(this.Nbook[this.Nbook.length-1],'num of book')
+        this.NumberB=this.Nbook[this.Nbook.length-1]+1
+        console.log(this.NumberB,'new numbook')
+      }
+      var num = 4;
+      this.NumberC = ('000'+this.NumberB).slice(-num);
+      console.log("66666666666666666",this.NumberC)
+    })
+  }
+  getDocDistinct() {
+    this.documnetService.getDocumentDistinct().then((nfb:any)=>{
+      console.log("nfb ", nfb);
+      
+      if (nfb.length==0) {
+        if (this.Nbook.length==0) {
+          this.NumberB = 1
+        }
+        else {
+          this.NumberB=this.Nbook[this.Nbook.length-1]+1
+        }
+        var num = 4;
+        this.NumberC = ('000'+this.NumberB).slice(-num)
+      }
+      else {
+        nfb.forEach(x => {
+          if (this.Nbook.indexOf(x.number_of_book)<0) {
+            this.NumberB = x.number_of_book;
+            return false
+          }
+        });
+      }
+      var num = 4;
+      this.NumberC = ('000'+this.NumberB).slice(-num)
+    })
+  }
+  async Fcount(){
+    const a = await this.getDoc();
+    const b = await this.getDocDistinct();
   }
  si:any;
   getsigner(){
@@ -229,7 +363,7 @@ export class HomeComponent implements OnInit {
           lastname: this.ln.LastName_TH,
           Role: this.ln.ProgramName_TH,
           prefix: this.ln.Title,
-          status:'222222'
+          status:'1'
         };
         this.userService.postUser(data);
       }
@@ -355,19 +489,20 @@ export class HomeComponent implements OnInit {
                   user_id : this.id,
                   speed : this.speed,
                   secret : this.secret,
+                  status : "U",
                   practice : this.practice,
                   note : this.note,
                   number_of_book :this.NumberB
                 
               };
-              console.log(this.name)
-              console.log(this.formm)
-              console.log(this.to)
-              console.log(this.sender)
-              console.log(this.secret)
-              console.log(this.speed)
-              console.log(this.note)
-              console.log(this.practice)
+              // console.log(this.name)
+              // console.log(this.formm)
+              // console.log(this.to)
+              // console.log(this.sender)
+              // console.log(this.secret)
+              // console.log(this.speed)
+              // console.log(this.note)
+              // console.log(this.practice)
               
               this.documnetService.postDocument(dataD)
               this.datepicker=""
@@ -377,10 +512,10 @@ export class HomeComponent implements OnInit {
               this.sender=""
               this.speed="ปกติ"
               this.secret="ปกติ"
-              this.note = ""
+              this.note =""
               this.practice =""
          });
-         swal("ได้!", "เสร็จสิ้น", "success");
+         swal("เรียบร้อย!", "เสร็จสิ้น", "success");
       });
         
     }else{
@@ -389,6 +524,38 @@ export class HomeComponent implements OnInit {
 
         
 
+  }
+
+  putDocumnet(id) {
+    var datat = {
+      
+      name : this.name,
+      form : this.formm,
+      to : this.to,
+      sender : this.sender,
+      user_id : this.id,
+      speed : this.speed,
+      secret : this.secret,
+      status : "U",
+      practice : this.practice,
+      note : this.note,
+      number_of_book :this.NumberB
+  };
+    this.documnetService.putDocument(datat,id).then((res)=>{
+      if(res){
+        console.log("ได้",id);
+      }
+    })
+    swal("อัพเดทเรียบร้อย!", "เสร็จสิ้น", "success");
+    this.datepicker=""
+              this.name=""
+              this.formm="เลือก..."
+              this.to=""
+              this.sender=""
+              this.speed="ปกติ"
+              this.secret="ปกติ"
+              this.note =""
+              this.practice =""
   }
 
  

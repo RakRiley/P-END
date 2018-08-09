@@ -20,6 +20,17 @@ export class DateService {
     })
   }
 
+  getNumYear() {
+    return new Promise((resolve,reject)=>{
+      this.http.get(environment.api+'/getNumYear').map(res=>res.json())
+      .subscribe((data)=>{
+        resolve(data)
+      },error=>{
+        reject(error);
+      })
+    })
+  }
+
    postDate(data){
     return new Promise((resolve,reject)=>{
       let headers = new Headers({ "Content-Type": "application/json" });

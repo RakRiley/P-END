@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {  Router } from '@angular/router';
+import {  Router, NavigationExtras } from '@angular/router';
 import { JsonpModule } from '@angular/http';
 import { parse } from 'url';
 import { GetApiService } from '../../get-api.service';
@@ -15,6 +15,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { async } from '../../../../node_modules/@types/q';
 import {environment} from '../../../environments/environment'
 // import { FilterPipe } from '../filterpipe/filterpipe.component';
+var swal = require('sweetalert');
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -39,7 +40,8 @@ export class ProfileComponent implements OnInit {
     'Beemo1',
     'Beemo2'
   ]
-  searchText:any
+  searchText:any;
+  admin:boolean;
   constructor(
     public router:Router, 
     public getApiService:GetApiService, 
@@ -55,11 +57,66 @@ export class ProfileComponent implements OnInit {
     }
     
    }
+
+   A:any
+   showstatus(){
+     let item = localStorage.getItem('user_profile')
+     let obj = JSON.parse(item)
+     this.A = obj
+     if(this.A.Status == "Admin"){
+       this.admin = true;
+     }else{
+       this.admin = false;
+     }
+     console.log("Admin=>",this.admin);
+     
+ 
+   }
+
+
    numPage(event){
     //  console.log((event-1)*5);
     this.numpage = (event-1)*10;
     // console.log(this.numpage);
    }
+
+   goToHome(data) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        created_at: data.created_at,
+        date_created_at: data.date_id.created_at,
+        day: data.date_id.day,
+        day_time: data.date_id.day_time,
+        date_deleted_at: data.date_id.deleted_at,
+        hour: data.date_id.hour,
+        date_id: data.date_id.id,
+        minute: data.date_id.minute,
+        month: data.date_id.month,
+        mounth_time: data.date_id.mounth_time,
+        second: data.date_id.second,
+        date_updated_at: data.date_id.updated_at,
+        year: data.date_id.year,
+        year_time: data.date_id.year_time,
+        deleted_at: data.deleted_at,
+        form: data.form,
+        id: data.id,
+        name: data.name,
+        note: data.note,
+        number_of_book: data.number_of_book,
+        practice: data.practice,
+        secret: data.secret,
+        sender: data.sender,
+        speed: data.speed,
+        status: data.status,
+        to: data.to,
+        updated_at: data.updated_at,
+        user_id: data.user_id,
+        check :1
+      },
+      skipLocationChange : true
+    };    
+    this.router.navigate(["home"], navigationExtras);
+  }
 
     
    //  [ngbTypeahead]="search"
@@ -149,6 +206,7 @@ export class ProfileComponent implements OnInit {
             this.fileService.putFile(this.file, id).then(res => {
               if(res) {
                 console.log("Add file success");  
+                swal("อัพโหลดเรียบร้อย!", "เสร็จสิ้น", "success");
               }
             })
           }
@@ -247,6 +305,7 @@ this.datadoc=doc
   ngOnInit() {
     this.sname();
     this.showdata();
+    this.showstatus();
     // this.baseinstates();
   }
 

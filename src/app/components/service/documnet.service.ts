@@ -23,6 +23,48 @@ export class DocumnetService {
     })
   }
   
+  getDocumentC() {
+    return new Promise((resolve,reject)=>{
+      this.http.get(environment.api+'/getDocumentC').map(res=>res.json())
+      .subscribe((data)=>{
+        resolve(data)
+      },error=>{
+        reject(error);
+      })
+    })
+  }
+
+  getDocumentDistinct() {
+    return new Promise((resolve,reject)=>{
+      this.http.get(environment.api+'/getDocumentDistinct').map(res=>res.json())
+      .subscribe((data)=>{
+        resolve(data)
+      },error=>{
+        reject(error);
+      })
+    })
+  }
+  getDocumentNumBook(num) {
+    return new Promise((resolve,reject)=>{
+      this.http.get(environment.api+'/getNumBook?numbook='+num).map(res=>res.json())
+      .subscribe((data)=>{
+        resolve(data)
+      },error=>{
+        reject(error);
+      })
+    })
+  }
+  getDocfromYear(year) {
+    return new Promise((resolve,reject)=>{
+      this.http.get(environment.api+'/getDocfromYear?year='+year).map(res=>res.json())
+      .subscribe((data)=>{
+        resolve(data)
+      },error=>{
+        reject(error);
+      })
+    })
+  }
+
   postDocument(data){
     return new Promise((resolve,reject)=>{
       let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
@@ -43,5 +85,34 @@ export class DocumnetService {
         
 } 
 
+
+putStatusDocument(data,id){
+  return new Promise((resolve,reject)=>{
+    let header = new Headers({ "Content-Type": "application/json" });
+    let options = new RequestOptions({ headers: header });
+    this.http.put( environment.api+"/putStatusDocument/"+id, data, options)
+      .map(res => res)
+      .subscribe((data)=>{
+        resolve(data)
+      },error=>{
+        reject(error);
+      });
+  });
+}
+
+
+putDocument(data,id){
+  return new Promise((resolve,reject)=>{
+    let header = new Headers({ "Content-Type": "application/json" });
+    let options = new RequestOptions({ headers: header });
+    this.http.put( environment.api+"/putDocument/"+id, data, options)
+      .map(res => res)
+      .subscribe((data)=>{
+        resolve(data)
+      },error=>{
+        reject(error);
+      });
+  });
+}
 
 }

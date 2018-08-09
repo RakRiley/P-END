@@ -14,20 +14,37 @@
                                             <div id="middleblock">
                                                     <div class="card">
                                                             <div class="card-header" style="background-color: #650DAD;color: aliceblue">
-                                                                    <div class="input-group input-group-sm ml-auto" style="width: 300px;">
-                                                                            <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา" [(ngModel)]="sText">             
-                                                                            <div class="input-group-btn">
-                                                                                <button type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
-                                                                            </div>
+                                                                  <div *ngIf="admin == false" class="row">
+                                                                        <div class="input-group input-group-sm ml-auto" style="width: 300px;"> 
+                                                                                <input type="text" name="table_search" class="form-control" placeholder="ค้นหา" [(ngModel)]="sText">             
+                                                                                <div class="input-group-btn">
+                                                                                    <button type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
+                                                                                </div>
                                                                         </div>
-                                                                <!-- <ul class="nav nav-tabs card-header-tabs">
+                                                                  </div>
+                                                                <ul *ngIf="admin == true" class="nav nav-tabs card-header-tabs">
                                                                     <li class="nav-item">
-                                                                        <a class="nav-link" href="#">วันที่</a>
+                                                                        <a *ngIf="btnStatus == true" (click)="changeDocUC(1)" class="nav-link " href="javascript:void(0)" >หนังสือปัจจุบัน</a>
+                                                                        <a *ngIf="btnStatus != true" (click)="changeDocUC(1)" class="nav-link active" href="javascript:void(0)" >หนังสือปัจจุบัน</a>
                                                                     </li>
                                                                     <li class="nav-item">
-                                                                        <a class="nav-link" href="#">เลขหนังสือ</a>
+                                                                        <a *ngIf="btnStatus == false" (click)="changeDocUC(0)" class="nav-link " href="javascript:void(0)" >หนังสือที่ถูกยกเลิก</a>
+                                                                        <a *ngIf="btnStatus != false" (click)="changeDocUC(0)" class="nav-link active" href="javascript:void(0)" >หนังสือที่ถูกยกเลิก</a>
                                                                     </li>
+                                                                    <li class="nav-item dropdown">
+                                                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ปีของเอกสาร</a>
+                                                                        <div class="dropdown-menu">
+                                                                            <!-- <a class="dropdown-item" href="#">Action</a>
+                                                                            <a class="dropdown-item" href="#">Another action</a> -->
+                                                                            <div *ngFor="let n of num_year;let i = index">
+                                                                                <a class="dropdown-item" (click)="getDocfromYear(n.year_time)">{{n.year_time}}</a>
+                                                                                <div class="dropdown-divider"></div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                        </li>
                                                                     <li class="nav-item">
+                                                                    <!-- <li class="nav-item">
                                                                         <a class="nav-link" href="#">เลขทะเบียน</a>
                                                                     </li>
                                                                     <li class="nav-item">
@@ -38,7 +55,7 @@
                                                                     </li>
                                                                     <li class="nav-item">
                                                                             <a class="nav-link" href="#">ปี</a>
-                                                                        </li>
+                                                                    </li> -->
                                                                     <li class="ml-auto">                  
                                                                         <div class="input-group input-group-sm ml-auto" style="width: 300px;">
                                                                             <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา" [(ngModel)]="sText">             
@@ -47,7 +64,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </li>
-                                                                </ul>                                          -->
+                                                                </ul>
                                                             </div>
                                                             <div class="card-body">
                                                                 <div class="table-responsive">
@@ -63,33 +80,22 @@
                                                                                 <th scope="col">ถึง</th>
                                                                                 <th scope="col">เรื่อง</th>
                                                                                 <th scope="col">รายละเอียด</th>
+                                                                                <th *ngIf="admin" scope="col">เพิ่มเติม</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
                                                                                 <tr *ngFor="let s of show | paginate: { itemsPerPage: 10, currentPage: p } | filter: sText; let i = index">
                                                                                 <th scope="row">{{numpage+(i + 1)}}</th>
-                                                                                <td>ศธ. ๐๕๙๐.๑๕(๔)/</td>
+                                                                                <td>ศธ.1590.15(4)/</td>
                                                                                 <td>{{('000'+s.number_of_book).slice(-5)}}</td>
-                                                                                <td>{{s.date_id.day_time}}/{{s.date_id.mounth_time}}/{{s.date_id.year_time}}</td>
-                                                                                <td>{{s.date_id.day}}/{{s.date_id.month}}/{{s.date_id.year}}<br>{{s.date_id.hour}}:{{s.date_id.minute}} น.</td>
+                                                                                <td>{{s.day_time}}/{{s.mounth_time}}/{{s.year_time}}</td>
+                                                                                <td>{{s.day}}/{{s.month}}/{{s.year}}<br>{{s.hour}}:{{s.minute}} น.</td>
                                                                                 <td>{{s.sender}}</td>
                                                                                 <td>{{s.to}}</td>
                                                                                 <td>{{s.name}}</td>
                                                                                 <td>
-                                                                                    <button *ngIf="!admin" type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#exampleModal'+i">
-                                                                                        แสดง
-                                                                                      </button>
-                                                                                    <div *ngIf="admin" class="btn-group" role="group">
-                                                                                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                            Dropdown
-                                                                                        </button>
-                                                                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                                                            <a class="dropdown-item" href="#">Dropdown link</a>
-                                                                                            <a class="dropdown-item" href="#">Dropdown link</a>
-                                                                                        </div>
-                                                                                    </div>
-
-                            
+                                                                                    <button *ngIf="(s.file == '')" type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#exampleModal'+i">แสดง</button>
+                                                                                    <button *ngIf="(s.file != '')" type="button" class="btn btn-success" data-toggle="modal" [attr.data-target]="'#exampleModal'+i">แสดง</button>
                                                                                       <!-- Modal -->
                                                                 <div class="modal fade bd-example-modal-lg" id="exampleModal{{i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                         <div class="modal-dialog modal-lg" role="document">
@@ -151,12 +157,27 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="modal-footer">
-                                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                <button type="button" (click)="goToHomeDupNumBook(s.number_of_book, s)" class="btn btn-info mr-auto" data-dismiss="modal" >ใช้เลขซ้ำ</button>
+                                                                               <button type="button"  class="btn btn-danger" data-dismiss="modal">ปิด</button>                                                                             
                                                                               <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                                                                             </div>
                                                                           </div>
                                                                         </div>
                                                                       </div>
+                                                                        </td>
+                                                                        <td *ngIf="admin">
+                                                                            <div class="dropdown">
+                                                                                <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                  จัดการ
+                                                                                </button>
+                                                                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                                                                  <button id="tapone" (click)="goToHome(s)" class="dropdown-item" type="button"><i class="fas fa-wrench"></i>  แก้ไข</button>
+                                                                                  <button id="taptwo" (click)="putstatus(s.id)" class="dropdown-item" type="button"><i class="fas fa-trash-alt"></i>  ยกเลิก</button>
+                                                                                  <label id="tapthree" for="file{{i}}" class="dropdown-item"><i class="fas fa-upload"></i>  อัพโหลดไฟล์
+                                                                                   <input type="file" (change)="putFile($event,s.id)" name="file" id="file{{i}}"  hidden>
+                                                                                  </label>
+                                                                                </div>
+                                                                              </div>
                                                                         </td>
                                                                         </tr>                        
                                                                             </tbody>

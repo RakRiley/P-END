@@ -48,9 +48,12 @@ export class NavbarComponent implements OnInit {
       data.forEach(e => {
         if (JSON.stringify(e.student_code) == this.sn.StudentCode) {
           this.sn["Status"] = "Admin";
+        } else {
+          this.sn["Status"] = "User";
         }
       });
       console.log("sn=>",this.sn);
+      localStorage.setItem('user_profile',JSON.stringify(this.sn));
       
     })
 

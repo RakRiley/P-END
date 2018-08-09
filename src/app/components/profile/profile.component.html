@@ -117,7 +117,7 @@
                               <tbody>
                                   <tr *ngFor="let doc of newdoc | paginate: { itemsPerPage: 10, currentPage: p } | filter: searchText; let i = index ">
                                   <th scope="row">{{numpage+(i + 1)}}</th>
-                                  <td>ศธ. ๐๕๙๐.๑๕(๔)/</td>
+                                  <td>ศธ.1590.15(4)/</td>
                                   <td>{{('000'+doc.number_of_book).slice(-5)}}</td>
                                   <td>{{doc.date_id.day_time}}/{{doc.date_id.mounth_time}}/{{doc.date_id.year_time}}</td>
                                   <td>{{doc.date_id.day}}/{{doc.date_id.month}}/{{doc.date_id.year}}<br>{{doc.date_id.hour}}:{{doc.date_id.minute}} น.</td>
@@ -126,9 +126,8 @@
                                   <td>{{doc.name}}</td>                                                
                                   <!-- <td><a href="javacript:void(0)" ><app-detail></app-detail></a></td> -->
                                   <td><!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#exampleModal'+i" >
-                                      แสดง
-                                    </button>
+                                    <button *ngIf="(doc.file == '')" type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#exampleModal'+i">แสดง</button>
+                                    <button *ngIf="(doc.file != '')" type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#exampleModal'+i">แสดง</button>
                                     
                                     <!-- Modal -->
                                     <div class="modal fade bd-example-modal-lg" id="exampleModal{{i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -194,14 +193,16 @@
                                               </div>
                                           </div>
                                           <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-info mr-auto" data-dismiss="modal" >ใช้เลขซ้ำ</button>
+                                            <button type="button" (click)="goToHome(doc)" class="btn btn-warning mr-auto" data-dismiss="modal" >แก้ไขข้อมูล</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
                                             <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                                           </div>
                                         </div>
                                       </div>
                                     </div></td>
-                                  <td><label [ngClass]="(doc.file == '') ? 'btn btn-success' : 'btn btn-success disabled'" >เลือกไฟล์ <input type="file"  (change)="putFile($event,doc.id)" 
-                                    name="file" hidden class="form-control-file" id="exampleFormControlFile1" [disabled]="doc.file != ''"></label></td>
+                                  <td><label [ngClass]="(admin == true || doc.file == '') ? 'btn btn-success' : 'btn btn-success disabled'" >เลือกไฟล์ <input type="file"  (change)="putFile($event,doc.id)" 
+                                    name="file" hidden class="form-control-file" id="exampleFormControlFile1" [disabled]="admin == false && doc.file != ''"></label></td>
                                   </tr>
                               </tbody>
                               </table>

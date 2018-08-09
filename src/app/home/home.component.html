@@ -29,7 +29,7 @@
                                                     <div class="input-group-prepend">
                                                         <label class="input-group-text" for="inputGroupSelect01">ที่ ศธ.</label>
                                                     </div>
-                                                    <input type="text" class="form-control" value="ศธ ๐๕๙๐.๑๕(๔)/" readonly>
+                                                    <input type="text" class="form-control" value="ศธ. 1590.15(4)/" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
@@ -95,7 +95,7 @@
                                                     <div class="input-group-prepend">
                                                         <label class="input-group-text" for="inputGroupSelect01">ชื่อเรื่องหนังสือ</label>
                                                     </div>
-                                                    <input type="text" class="form-control"  placeholder="ลงชื่อเรื่องหนังสือ" [(ngModel)]="name" name="name">
+                                                    <input type="text" class="form-control"  placeholder="ลงชื่อเรื่องหนังสือ" [(ngModel)]="name" name="name" (ngModelChange)="name = $event">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
@@ -107,6 +107,7 @@
                                                         <!-- <input class="input-medium" type="text" data-provide="datepicker" data-date-language="th-th"> -->
                                                         <!-- <input class="input-medium" type="text" data-provide="datepicker" data-date-language="th-th"> -->
                                                         <my-date-picker name="mydate" placeholder="ลงวันที่หนังสือ" [options]="myDatePickerOptions"  name="datepicker" id="datepicker" [(ngModel)]="datepicker" required></my-date-picker>
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
@@ -191,8 +192,12 @@
                                         </div> 
 
                                     <div class="card-footer" style="background-color: #650DAD;">
-                                            <button type="button" (click)="postDocumnet()" class="btn btn-primary">บันทึก</button>
-                                            <button type="button" (click)="onClickReset()" class="btn btn-danger">ยกเลิก</button>
+                                        <button type="button" *ngIf="button_change" (click)="putDocumnet(id)" class="btn btn-warning">อัพเดท</button>
+                                        <button type="button" *ngIf="!button_change" (click)="postDocumnet()" class="btn btn-primary">บันทึก</button>
+                                        <button type="button" (click)="onClickReset()" *ngIf="checktable == 0 " class="btn btn-danger">ยกเลิก</button>
+                                        <button type="button" (click)="onClickReset()" *ngIf="checktable == 2 " [routerLink]="['/table1']" class="btn btn-danger">กลับ</button>
+                                        <button type="button" (click)="onClickReset()" *ngIf="checktable == 1 " [routerLink]="['/profile']" class="btn btn-danger">กลับ</button>
+                                        <button type="button" (click)="onClickReset()" *ngIf="checktable == 3 " [routerLink]="['/table1']" class="btn btn-danger">กลับ</button>
                                     </div>
                                     </div>
                                 </div>      

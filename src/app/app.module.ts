@@ -67,7 +67,7 @@ const router : Routes =[
     MomentModule,
     MyDatePickerModule
   ],
-  providers: [LoginService, GetApiService, UserService ,DocumnetService, DateService, FileService, SignerService, AdminService, 
+  providers: [LoginService, GetApiService, UserService ,DocumnetService, DateService, FileService, SignerService, AdminService,  
   
   ],
   bootstrap: [AppComponent]
