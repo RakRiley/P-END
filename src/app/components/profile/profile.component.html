@@ -22,7 +22,6 @@
                           </div>
                         </div>
                         <div class="col-10 border-left border-warning">
-
                           <div class="container border border-warning" style="padding-top: 30px;padding-right: 30px;padding-bottom: 30px;padding-left: 30px;border-radius: 6px; background-color:rgba(150, 150, 196, 0.959)">
                             <div class="row col-12">
                                 <table class="col-12 col-md-12">
@@ -193,7 +192,7 @@
                                               </div>
                                           </div>
                                           <div class="modal-footer">
-                                            <button type="button" class="btn btn-info mr-auto" data-dismiss="modal" >ใช้เลขซ้ำ</button>
+                                            <button type="button" (click)="goToHomeDupNumBook(doc.number_of_book, doc)"  class="btn btn-info mr-auto" data-dismiss="modal" >ใช้เลขซ้ำ</button>
                                             <button type="button" (click)="goToHome(doc)" class="btn btn-warning mr-auto" data-dismiss="modal" >แก้ไขข้อมูล</button>
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
                                             <!-- <button type="button" class="btn btn-primary">Save changes</button> -->

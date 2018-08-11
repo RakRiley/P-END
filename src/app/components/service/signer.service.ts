@@ -35,4 +35,19 @@ export class SignerService {
     });
   }
 
+
+  putSigner(data,id){
+    return new Promise((resolve,reject)=>{
+      let header = new Headers({ "Content-Type": "application/json" });
+      let options = new RequestOptions({ headers: header });
+      this.http.put( environment.api+"/putSigner/"+id, data, options)
+        .map(res => res)
+        .subscribe((data)=>{
+          resolve(data)
+        },error=>{
+          reject(error);
+        });
+    });
+  }
+
 }

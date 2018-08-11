@@ -65,6 +65,28 @@ export class DocumnetService {
     })
   }
 
+  getDatepicker(num) {
+    return new Promise((resolve,reject)=>{
+      this.http.get(environment.api+'/getDatepicker?numbook='+num).map(res=>res.json())
+      .subscribe((data)=>{
+        resolve(data)
+      },error=>{
+        reject(error);
+      })
+    })
+  }
+
+  getDocumentnumN(){
+    return new Promise((resolve,reject)=>{
+      this.http.get(environment.api+'/getDocumentnumN').map(res=>res.json())
+      .subscribe((data)=>{
+        resolve(data)
+      },error=>{
+        reject(error);
+      })
+    })
+  }
+
   postDocument(data){
     return new Promise((resolve,reject)=>{
       let cpHeaders = new Headers({ 'Content-Type': 'application/json' });

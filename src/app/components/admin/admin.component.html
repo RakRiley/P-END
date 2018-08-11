@@ -10,16 +10,142 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-12">
-                                                <h4>แก้ไขผู็ที่ลงนาม</h4>
+                                                <!-- <h4>แก้ไขผู็ที่ลงนาม</h4> -->
                                             <div id="middle">
                                                 <div class="card">
-                                                    <div class="card-header">
-
+                                                    <div id="cb1" class="card-header">
+                                                            Header
                                                     </div>
                                                     <div class="card-body">
-
+                                                        <div class="row">
+                                                            <div class="col-3">
+                                                                <div class="card">
+                                                                    <div class="card-header bg-warning">Header</div>
+                                                                    <div class="card-body">
+                                                                       <div class="card" style="border-radius: 20px;">
+                                                                           <div class="card-body">
+                                                                                <ul class="nav flex-column">
+                                                                                    <li class="nav-item">
+                                                                                        <a *ngIf="link==1" (click)="linkchange(1)"class="nav-link btn-dark" href="javascript:void(1)">ดูจำนวนผู้ใช้</a>
+                                                                                        <a *ngIf="link!=1" (click)="linkchange(1)"class="nav-link" href="javascript:void(0)">ดูจำนวนผู้ใช้</a>
+                                                                                    </li>
+                                                                                    <li class="nav-item">
+                                                                                        <a *ngIf="link==2" (click)="linkchange(2)"class="nav-link btn-dark" href="javascript:void(2)">แก้ไขชื่อผู้ลงนาม</a>
+                                                                                        <a *ngIf="link!=2" (click)="linkchange(2)"class="nav-link" href="javascript:void(0)">แก้ไขชื่อผู้ลงนาม</a>
+                                                                                    </li>
+                                                                                    <li class="nav-item">
+                                                                                        <a *ngIf="link==3" (click)="linkchange(3)"class="nav-link btn-dark" href="javascript:void(3)">Link</a>
+                                                                                        <a *ngIf="link!=3" (click)="linkchange(3)"class="nav-link" href="javascript:void(0)">Link</a>
+                                                                                    </li>
+                                                                                    <li class="nav-item">
+                                                                                        <a *ngIf="link==4" (click)="linkchange(4)"class="nav-link btn-dark" href="javascript:void(4)">หลักของเลขหนังสือ</a>
+                                                                                        <a *ngIf="link!=4" (click)="linkchange(4)"class="nav-link" href="javascript:void(0)">หลักของเลขหนังสือ</a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                           </div>
+                                                                       </div>
+                                                                    </div> 
+                                                                    <div class="card-footer bg-warning">Footer</div>
+                                                                </div>
+                                                            </div>
+                                                            <div *ngIf="link==1" class="col-9">
+                                                                <div class="card">
+                                                                    <div class="card-header bg-warning">Header</div>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                        <div class="col-12">
+                                                                            <div class="row">
+                                                                                dfgdfg
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+                                                                    </div> 
+                                                                    <div class="card-footer bg-warning">Footer</div>
+                                                                </div>
+                                                            </div>
+                                                            <div *ngIf="link==2" class="col-9">
+                                                                <div class="card">
+                                                                    <div class="card-header bg-warning">Header</div>
+                                                                    <div class="card-body">
+                                                                       <div class="row">
+                                                                        <div class="col-12">
+                                                                            <div class="row">
+                                                                                <div class="col-md-12">
+                                                                                        <p style="text-align: left">ชื่อผู้ลงนามในหนังสือปัจจุบัน</p>
+                                                                                    <div class="input-group mb-3">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <label class="input-group-text" for="inputGroupSelect01">เลือกชื่อ</label>
+                                                                                    </div>
+                                                                                    <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="name" name="name">
+                                                                                        <option selected  value="เลือก...">เลือก...</option>
+                                                                                        <option *ngFor="let N of si " [ngValue]="N">{{N.name}}</option>
+                                                                                    </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-12">
+                                                                                    <p style="text-align: left">ชื่อผู้ลงนามในหนังสือที่ต้องการแก้ไข</p>
+                                                                                    <div class="input-group mb-3">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <label class="input-group-text" for="inputGroupSelect01" >แก้ไขชื่อ</label>
+                                                                                    </div>
+                                                                                    <input type="text" class="form-control" placeholder="ทำการแก้ไขชื่อ" [(ngModel)]="name.name" name="name">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-12">
+                                                                                    <button type="button" class="btn btn-warning" (click)="putSigner()">ยืนยันการแก้ไขชื่อ</button>
+                                                                                </div>
+                                                                                <div class="col-md-12">
+                                                                                    <p style="text-align: left">ชื่อผู้ลงนามในหนังสือที่ต้องการเพิ่ม</p>
+                                                                                    <div class="input-group mb-3">
+                                                                                    <div class="input-group-prepend">
+                                                                                        <label class="input-group-text" for="inputGroupSelect01">เพิ่มชื่อ</label>
+                                                                                    </div>
+                                                                                    <input type="text" class="form-control"  placeholder="ทำการเพิ่มชื่อ" [(ngModel)]="Aname" name="Aname">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-12">
+                                                                                    <button type="button" class="btn btn-warning" (click)="postSigner()">ยืนยันการเพิ่มชื่อ</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                       </div>
+                                                                    </div> 
+                                                                    <div class="card-footer bg-warning">Footer</div>
+                                                                </div>
+                                                            </div>
+                                                            <div *ngIf="link==3" class="col-9">
+                                                                <div class="card">
+                                                                    <div class="card-header bg-warning">Header</div>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                        <div class="col-12">
+                                                                            <div class="row">
+                                                                                dfgdfg
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+                                                                    </div> 
+                                                                    <div class="card-footer bg-warning">Footer</div>
+                                                                </div>
+                                                            </div>
+                                                            <div *ngIf="link==4" class="col-9">
+                                                                <div class="card">
+                                                                    <div class="card-header bg-warning">Header</div>
+                                                                    <div class="card-body">
+                                                                        <div class="row">
+                                                                        <div class="col-12">
+                                                                            <div class="row">
+                                                                                dfgdfg
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
+                                                                    </div> 
+                                                                    <div class="card-footer bg-warning">Footer</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="card-footer">
+                                                    <div id="cb1" class="card-footer">
 
                                                     </div>
                                                 </div>

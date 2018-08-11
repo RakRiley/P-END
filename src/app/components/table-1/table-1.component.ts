@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 import { DocumnetService } from '../service/documnet.service';
 import { DateService } from '../service/date.service';
 import {environment} from '../../../environments/environment'
+var swal = require('sweetalert');
 @Component({
   selector: 'app-table-1',
   templateUrl: './table-1.component.html',
@@ -63,6 +64,20 @@ export class Table1Component implements OnInit {
   
   }
 
+//   putstatusU(id){
+//     console.log("id xxxx", id);
+    
+//     var status = {status: "U"};
+//     this.documentService.putStatusDocument(status,id).then(res => {
+//       if(res) {
+//         console.log("Add status success");  
+//       }
+//       this.Showdatatable();
+//     })
+
+// }
+
+
   putFile(event,id){
     if(event.target.files){
       // console.log(event.target.files[0]);
@@ -81,15 +96,14 @@ export class Table1Component implements OnInit {
         this.fileService.putFile(this.file, id).then(res => {
           if(res) {
             console.log("Add file success");  
+            swal("อัพโหลดเรียบร้อย!", "เสร็จสิ้น", "success");
           }
           this.Showdatatable();
         })
       }
       reader.readAsDataURL(event.target.files[0]);
-    
   // }
       }
-      
   }
 
 
@@ -303,12 +317,37 @@ export class Table1Component implements OnInit {
       queryParams: {
         numbook: num,
         day_time: data.day_time,
-        month: data.month,
-        year: data.year,
+        month_time: data.mounth_time,
+        year_time: data.year_time,
+        check: 3
       },
       skipLocationChange : true
     };    
     this.router.navigate(["home"], navigationExtras);
   }
+
+
+  goToHomeNumC(num_book,data) {
+    console.log("goToHomeNumC ", num_book,data);
+    this.documentService.getDatepicker(num_book).then(date => {
+      let navigationExtras: NavigationExtras = {
+        queryParams: {
+          id:data.id,
+          numbook: num_book,
+          day1: date[0].day_time,
+          day2: date[1].day_time,
+          month1: date[0].mounth_time,
+          month2: date[1].mounth_time,
+          year1: date[0].year_time,
+          year2: date[1].year_time,
+          check: 4
+        },
+        skipLocationChange : true
+      };    
+      this.router.navigate(["home"], navigationExtras);
+    })
+    
+  }
+
 
 }

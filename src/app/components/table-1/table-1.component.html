@@ -166,18 +166,19 @@
                                                                       </div>
                                                                         </td>
                                                                         <td *ngIf="admin">
-                                                                            <div class="dropdown">
+                                                                            <div class="dropdown" *ngIf="btnStatus == false">
                                                                                 <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                   จัดการ
                                                                                 </button>
                                                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                                                  <button id="tapone" (click)="goToHome(s)" class="dropdown-item" type="button"><i class="fas fa-wrench"></i>  แก้ไข</button>
+                                                                                  <button id="tapone" (click)="goToHome(s)" class="dropdown-item" type="button"><i class="fas fa-wrench"></i>  แก้ไข</button>                                                                                  
                                                                                   <button id="taptwo" (click)="putstatus(s.id)" class="dropdown-item" type="button"><i class="fas fa-trash-alt"></i>  ยกเลิก</button>
                                                                                   <label id="tapthree" for="file{{i}}" class="dropdown-item"><i class="fas fa-upload"></i>  อัพโหลดไฟล์
                                                                                    <input type="file" (change)="putFile($event,s.id)" name="file" id="file{{i}}"  hidden>
                                                                                   </label>
                                                                                 </div>
                                                                               </div>
+                                                                            <button type="button" (click)="goToHomeNumC(s.number_of_book,s)"  *ngIf="btnStatus != false"  class="btn btn-danger" data-dismiss="modal">ใช้เลขเก่า</button>                                                                             
                                                                         </td>
                                                                         </tr>                        
                                                                             </tbody>

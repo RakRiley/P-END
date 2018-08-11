@@ -129,8 +129,6 @@
                                                         <option value="ผู้ลงนามในหนังสือ">ผู้ลงนามในหนังสือ....</option>
                                                         <option value="{{ln.FirstName_TH}} {{ln.LastName_TH}}">{{ln.FirstName_TH}} {{ln.LastName_TH}}</option>
                                                         <option *ngFor="let cc of si " value="{{cc.name}}">{{cc.name}}</option>
-                                                        <!-- <option value="ลับมาก">ลับมาก</option>
-                                                        <option value="ลับที่สุด">ลับที่สุด</option> -->
                                                     </select>
                                                         </div>        
                                                 </div>
@@ -192,12 +190,14 @@
                                         </div> 
 
                                     <div class="card-footer" style="background-color: #650DAD;">
-                                        <button type="button" *ngIf="button_change" (click)="putDocumnet(id)" class="btn btn-warning">อัพเดท</button>
-                                        <button type="button" *ngIf="!button_change" (click)="postDocumnet()" class="btn btn-primary">บันทึก</button>
+                                            <button type="button" *ngIf="checktable == 4 " (click)="putDocumnet(id)" class="btn btn-warning">อัพเดท</button>
+                                        <button type="button" *ngIf="button_change" (click)="putDocumnet()" class="btn btn-warning">อัพเดท</button>
+                                        <button type="button" *ngIf="!button_change&&checktable != 4" (click)="postDocumnet()" class="btn btn-primary">บันทึก</button>
                                         <button type="button" (click)="onClickReset()" *ngIf="checktable == 0 " class="btn btn-danger">ยกเลิก</button>
                                         <button type="button" (click)="onClickReset()" *ngIf="checktable == 2 " [routerLink]="['/table1']" class="btn btn-danger">กลับ</button>
                                         <button type="button" (click)="onClickReset()" *ngIf="checktable == 1 " [routerLink]="['/profile']" class="btn btn-danger">กลับ</button>
                                         <button type="button" (click)="onClickReset()" *ngIf="checktable == 3 " [routerLink]="['/table1']" class="btn btn-danger">กลับ</button>
+                                        <button type="button" (click)="onClickReset()" *ngIf="checktable == 4 " [routerLink]="['/table1']" class="btn btn-danger">กลับ</button>
                                     </div>
                                     </div>
                                 </div>      

@@ -8,7 +8,6 @@ import { UserService } from '../service/user.service';
 import { DateService } from '../service/date.service';
 import { DocumnetService } from '../service/documnet.service';
 import { FileService } from '../service/file.service';
-import {NgxPaginationModule} from 'ngx-pagination';
 import {Observable} from 'rxjs/Observable';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 import { Pipe, PipeTransform } from '@angular/core';
@@ -208,12 +207,33 @@ export class ProfileComponent implements OnInit {
                 console.log("Add file success");  
                 swal("อัพโหลดเรียบร้อย!", "เสร็จสิ้น", "success");
               }
+              this.showdata()
             })
           }
           reader.readAsDataURL(event.target.files[0]);
         
       // }
     }
+  }
+
+  goToHomeDupNumBook(num_book, data) {
+    console.log("goToHomeDupNumBook ", num_book);
+    console.log("dataaaaaaaaa333 ", data);
+    var num = num_book.toLocaleString();
+    num = num.split(".");
+    num = Number(num[0]);
+    
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        numbook: num,
+        day_time: data.day_time,
+        month_time: data.mounth_time,
+        year_time: data.year_time,
+        check: 3
+      },
+      skipLocationChange : true
+    };    
+    this.router.navigate(["home"], navigationExtras);
   }
 
 
@@ -224,6 +244,15 @@ showdata(){
   this.documentService.getDocument().then((doc:any)=>{
 console.log("ตาราง1",doc);
 this.datadoc=doc
+this.datadoc.sort((a, b) => {
+  if (a.number_of_book < b.number_of_book) {
+    return -1;
+  } else if (a.number_of_book > b.number_of_book) {
+    return 1;
+  } else {
+    return 0;
+  }
+});
   })
   this.dateService.getDate().then((date1:any)=>{
     date1.forEach(e => {
