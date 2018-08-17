@@ -306,40 +306,67 @@ export class Table1Component implements OnInit {
     };    
     this.router.navigate(["home"], navigationExtras);
   }
+  NBR:any;
   goToHomeDupNumBook(num_book, data) {
     console.log("goToHomeDupNumBook ", num_book);
     console.log("dataaaaaaaaa333 ", data);
-    var num = num_book.toLocaleString();
-    num = num.split(".");
-    num = Number(num[0]);
-    
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-        numbook: num,
-        day_time: data.day_time,
-        month_time: data.mounth_time,
-        year_time: data.year_time,
-        check: 3
-      },
-      skipLocationChange : true
-    };    
-    this.router.navigate(["home"], navigationExtras);
+    this.documentService.getNumber_of_book_repeatedly(parseInt(num_book)).then((nbr:any)=>{
+      this.NBR = nbr
+      console.log("NBR ",this.NBR);
+      
+      if (this.NBR.length==6) {
+        alert("55555555555555555555555555");
+      }
+      else{
+        var num = num_book.toLocaleString();
+        num = num.split(".");
+        num = Number(num[0]);
+        
+        let navigationExtras: NavigationExtras = {
+          queryParams: {
+            numbook: num,
+            day_time: data.day_time,
+            month_time: data.mounth_time,
+            year_time: data.year_time,
+            check: 3
+          },
+          skipLocationChange : true
+        };    
+        this.router.navigate(["home"], navigationExtras);
+      }
+    })
   }
 
 
   goToHomeNumC(num_book,data) {
     console.log("goToHomeNumC ", num_book,data);
+    var day1,day2,month1,month2,year1,year2;
     this.documentService.getDatepicker(num_book).then(date => {
+      if (Number(num_book) === num_book && num_book % 1 !== 0) {
+          day1 = date[0].day_time
+          day2 = date[0].day_time
+          month1 = date[0].mounth_time
+          month2 = date[0].mounth_time
+          year1 = date[0].year_time
+          year2 = date[0].year_time
+      } else {
+          day1 = date[0].day_time
+          day2 = date[1].day_time
+          month1 = date[0].mounth_time
+          month2 = date[1].mounth_time
+          year1 = date[0].year_time
+          year2 = date[1].year_time
+      }
       let navigationExtras: NavigationExtras = {
         queryParams: {
           id:data.id,
           numbook: num_book,
-          day1: date[0].day_time,
-          day2: date[1].day_time,
-          month1: date[0].mounth_time,
-          month2: date[1].mounth_time,
-          year1: date[0].year_time,
-          year2: date[1].year_time,
+          day1: day1,
+          day2: day2,
+          month1: month1,
+          month2: month2,
+          year1: year1,
+          year2: year2,
           check: 4
         },
         skipLocationChange : true
@@ -348,6 +375,5 @@ export class Table1Component implements OnInit {
     })
     
   }
-
 
 }

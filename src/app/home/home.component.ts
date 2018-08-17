@@ -33,14 +33,14 @@ export class HomeComponent implements OnInit {
   userData = [];
   ln : any;
   
-  name :any = "";
-  formm :any = 'เลือก...';
-  to :any = "" ;
-  sender:any = 'ผู้ลงนามในหนังสือ';
-  speed : any = 'ปกติ';
-  secret : any = 'ปกติ';
-  note : any = "";
-  practice :any ="";
+  name :any ;
+  formm :any ;
+  to :any  ;
+  sender:any;
+  speed : any = "ปกติ";
+  secret : any = "ปกติ";
+  note : any ;
+  practice :any ;
   date_time :any;
   date_book :any;
   date_id :any;
@@ -81,6 +81,7 @@ export class HomeComponent implements OnInit {
     firstDayOfWeek: "su",
     sunHighlight: true,
     disableWeekends: true,
+    
     // disableDateRanges: [{begin: {year: new Date().getFullYear() - 100, month: 1, day: 1}, end: {year: 2018, month: 8, day: 9}},{begin: {year: 2018, month: 8, day: 20}, end: {year: new Date().getFullYear() + 100, month: 8, day: 9}}]
   }
 
@@ -192,9 +193,10 @@ export class HomeComponent implements OnInit {
         this.documnetService.getDocumentNumBook(data.numbook).then(numbook => {
           console.log("numbookkkkkkk", numbook);
           var num = 6;
-          this.NumberB = numbook[0].number_of_book+0.1;
-          console.log("this.NumberB", this.NumberB.toFixed(2));
-          this.NumberC = ('000'+this.NumberB.toFixed(2)).slice(-num);
+          this.NumberB = (Number(numbook[0].number_of_book)+0.1).toFixed(1);
+        
+          console.log("this.NumberB", this.NumberB);
+          this.NumberC = ('000'+this.NumberB).slice(-num);
           console.log("this.NumberC", this.NumberC);
           this.datepicker = { date : { year: data.year_time, month: data.month_time, day: data.day_time}};
         })
@@ -264,7 +266,7 @@ export class HomeComponent implements OnInit {
     // const b = await this.getDocDistinct();
     this.documnetService.getDocumentnumN().then((data:any)=>{
       data.forEach(e => {
-        this.Nbook.push(e.number_of_book);
+        this.Nbook.push(parseInt(e.number_of_book));
       });
       console.log("Nbook before ",this.Nbook);
       this.Nbook = this.Nbook.sort();
@@ -384,6 +386,7 @@ export class HomeComponent implements OnInit {
           if(this.ln.StudentCode == this.userData[i].student_code){
             console.log('OH YES');
             check = 1;
+            return false;
           }else{
             console.log('OH ON');
             check = 2;
@@ -415,8 +418,7 @@ export class HomeComponent implements OnInit {
   }
 
   postDocumnet(){
-    // console.log(this.sender.id)
-    if(this.datepicker&&this.name&&this.formm&&this.to&&this.sender&&this.speed&&this.secret){
+    // console.log(this.sender.id)   
       var iddate
       this.dateService.getDate().then((hhh : any)=>{
         console.log(hhh);
@@ -458,56 +460,62 @@ export class HomeComponent implements OnInit {
         //   this.mounth = 'ธันวาคม';
         // } 
         if(hhh.length>0&&hhh[hhh.length-1].id) { iddate=hhh[hhh.length-1].id+1; } else { iddate = 1 }
-        var dataBook ={
-          id: iddate,
-          day : this.date,
-          month : this.mounth,
-          year : this.year,
-          hour : this.hour,
-          minute : this.minute,
-          second : this.second,
-          day_time : this.datepicker.date.day,
-          mounth_time : this.datepicker.date.month,
-          year_time : this.datepicker.date.year
-         };
-         var id : any;
-         console.log(dataBook);
-         this.dateService.postDate(dataBook).then((data:any)=>{
-          console.log(data.id);
-  
-                        var dataD = {
-                  date_id : iddate,
-                  name : this.name,
-                  form : this.formm,
-                  to : this.to,
-                  sender : this.sender,
-                  user_id : this.user_id,
-                  speed : this.speed,
-                  secret : this.secret,
-                  status : "U",
-                  practice : this.practice,
-                  note : this.note,
-                  number_of_book :this.NumberB
-                
-              };
-              this.documnetService.postDocument(dataD)
-              this.Fcount()
-              this.datepicker=""
-              this.name=""
-              this.formm="เลือก..."
-              this.to=""
-              this.sender=""
-              this.speed="ปกติ"
-              this.secret="ปกติ"
-              this.note =""
-              this.practice =""
-         });
-         swal("เรียบร้อย!", "เสร็จสิ้น", "success");
+        
+         var dataD = {
+          date_id : iddate,
+          name : this.name,
+          form : this.formm,
+          to : this.to,
+          sender : this.sender,
+          user_id : this.user_id,
+          speed : this.speed,
+          secret : this.secret,
+          status : "U",
+          practice : this.practice,
+          note : this.note,
+          number_of_book :this.NumberB
+      };
+      if(this.datepicker&&this.name&&this.formm&&this.to&&this.sender&&this.speed&&this.secret){
+         this.documnetService.postDocument(dataD).then(e => {
+          if (e) {
+            
+            var dataBook ={
+              id: iddate,
+              day : this.date,
+              month : this.mounth,
+              year : this.year,
+              hour : this.hour,
+              minute : this.minute,
+              second : this.second,
+              day_time : this.datepicker.date.day,
+              mounth_time : this.datepicker.date.month,
+              year_time : this.datepicker.date.year
+             };
+             var id : any;
+             console.log(dataBook);
+             this.dateService.postDate(dataBook).then((data:any)=>{
+              console.log(data.id);
+                  this.Fcount()
+                  this.datepicker=""
+                  this.name=""
+                  this.formm="เลือก..."
+                  this.to=""
+                  this.sender=""
+                  this.speed="ปกติ"
+                  this.secret="ปกติ"
+                  this.note =""
+                  this.practice =""
+             });
+            swal("เรียบร้อย!", "เสร็จสิ้น", "success");
+            
+          }
+        });
+        }else{
+          swal("ไม่ได้!", "กรุณากรอกข้อมูลให้ครบถ้วน", "warning");
+        }
       });
         
-    }else{
-      swal("ไม่ได้!", "กรุณากรอกข้อมูลให้ครบถ้วน", "warning");
-    }
+    
   }
 
   putDocumnet(id) {
@@ -540,6 +548,8 @@ export class HomeComponent implements OnInit {
               this.secret="ปกติ"
               this.note =""
               this.practice =""
+
+  this.router.navigate(["profile"]);
   }
 
  

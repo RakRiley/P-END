@@ -46,7 +46,7 @@
                                                         <label class="input-group-text" for="inputGroupSelect01">ชั้นความเร็ว</label>
                                                     </div>
                                                     <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="speed" name="speed">
-                                                        <option  value="ปกติ">ปกติ</option>
+                                                        <option  value="ปกติ" selected>ปกติ</option>
                                                         <option value="ด่วน">ด่วน</option>
                                                         <option value="ด่วนมาก">ด่วนมาก</option>
                                                         <option value="ด่วนที่สุด">ด่วนที่สุด</option>
@@ -59,7 +59,7 @@
                                                         <label class="input-group-text" for="inputGroupSelect01">ชั้นความลับ</label>
                                                     </div>
                                                     <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="secret" name="secret">
-                                                        <option value="ปกติ">ปกติ</option>
+                                                        <option value="ปกติ" selected>ปกติ</option>
                                                         <option value="ลับ">ลับ</option>
                                                         <option value="ลับมาก">ลับมาก</option>
                                                         <option value="ลับที่สุด">ลับที่สุด</option>
@@ -74,7 +74,7 @@
                                                         <label class="input-group-text" for="inputGroupSelect01">ชื่อหน่วยงาน</label>
                                                     </div>
                                                     <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="formm" name="formm">
-                                                        <option selected  value="เลือก...">เลือก...</option>
+                                                        <option selected value="undefined" disabled>เลือก...</option>
                                                         <option value="สาขาวิศวกรรมคอมพิวเตอร์ คณะเทคโนโลยีสารสนเทศและการสื่อสาร">สาขาวิศวกรรมคอมพิวเตอร์ คณะเทคโนโลยีสารสนเทศและการสื่อสาร</option>
                                                     </select>
                                                     </div>
@@ -126,7 +126,7 @@
                                                         <label class="input-group-text" for="inputGroupSelect01">ผู้ลงนามในหนังสือ</label>
                                                     </div>
                                                     <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="sender" name="sender">
-                                                        <option value="ผู้ลงนามในหนังสือ">ผู้ลงนามในหนังสือ....</option>
+                                                        <option value="undefined" disabled selected>ผู้ลงนามในหนังสือ....</option>
                                                         <option value="{{ln.FirstName_TH}} {{ln.LastName_TH}}">{{ln.FirstName_TH}} {{ln.LastName_TH}}</option>
                                                         <option *ngFor="let cc of si " value="{{cc.name}}">{{cc.name}}</option>
                                                     </select>
