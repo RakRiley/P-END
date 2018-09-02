@@ -34,8 +34,8 @@
                                                                                         <a *ngIf="link!=2" (click)="linkchange(2)"class="nav-link" href="javascript:void(0)">แก้ไขชื่อผู้ลงนาม</a>
                                                                                     </li>
                                                                                     <li class="nav-item">
-                                                                                        <a *ngIf="link==3" (click)="linkchange(3)"class="nav-link btn-dark" href="javascript:void(3)">Link</a>
-                                                                                        <a *ngIf="link!=3" (click)="linkchange(3)"class="nav-link" href="javascript:void(0)">Link</a>
+                                                                                        <a *ngIf="link==3" (click)="linkchange(3)"class="nav-link btn-dark" href="javascript:void(3)">ดูสถิติ</a>
+                                                                                        <a *ngIf="link!=3" (click)="linkchange(3)"class="nav-link" href="javascript:void(0)">ดูสถิติ</a>
                                                                                     </li>
                                                                                     <li class="nav-item">
                                                                                         <a *ngIf="link==4" (click)="linkchange(4)"class="nav-link btn-dark" href="javascript:void(4)">หลักของเลขหนังสือ</a>
@@ -120,7 +120,21 @@
                                                                         <div class="row">
                                                                         <div class="col-12">
                                                                             <div class="row">
-                                                                                dfgdfg
+                                                                                <div class="container">
+                                                                                    <div>
+                                                                                        <div style="display: block">
+                                                                                          <canvas baseChart
+                                                                                                  [datasets]="barChartData"
+                                                                                                  [labels]="barChartLabels"
+                                                                                                  [options]="barChartOptions"
+                                                                                                  [legend]="barChartLegend"
+                                                                                                  [chartType]="barChartType"
+                                                                                                  (chartHover)="chartHovered($event)"
+                                                                                                  (chartClick)="chartClicked($event)"></canvas>
+                                                                                        </div>
+                                                                                        <!-- <button (click)="getallYear()">Update</button> -->
+                                                                                      </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                         </div>
@@ -131,11 +145,36 @@
                                                             <div *ngIf="link==4" class="col-9">
                                                                 <div class="card">
                                                                     <div class="card-header bg-warning">Header</div>
-                                                                    <div class="card-body">
+                                                                    <div class="card-body test-center">
                                                                         <div class="row">
                                                                         <div class="col-12">
-                                                                            <div class="row">
-                                                                                dfgdfg
+                                                                            <div class="container">
+                                                                                <div>
+                                                                                    <p>หลักของเลขหนังสือ</p> 
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="input-group input-group-sm col-4" style=" height:36px">
+                                                                                        <input type="text" style="border-radius:6px;" class="form-control" placeholder="กรอกจำนวนหลัก"  [(ngModel)]="peg_change" name="peg_change">
+                                                                                        <div class="input-group-btn">
+                                                                                            <button type="button" (click)="putYear_peg()" class="btn btn-warning">ยืนยัน</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-4">
+                                                                                        <div class="input-group mb-3">
+                                                                                            <div class="input-group-prepend">
+                                                                                                <label class="input-group-text" for="inputGroupSelect01">เลือกปี</label>
+                                                                                            </div>
+                                                                                            <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="year_change" name="year_change">
+                                                                                                <option selected value="เลือกปี">เลือกปี</option>
+                                                                                                <option *ngFor="let cc of Year_peg" value="{{cc.year_change}}">{{cc.year_change}}</option>
+                                                                                                <!-- <option value="{{Year_peg[Year_peg.length-1].year_change+1}}">{{Year_peg[Year_peg.length-1].year_change+1}}</option> -->
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-4">
+                                                                                        <p>ข้อความ</p>
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                         </div>
@@ -146,7 +185,7 @@
                                                         </div>
                                                     </div>
                                                     <div id="cb1" class="card-footer">
-
+                                                            Footer
                                                     </div>
                                                 </div>
                                             </div>
@@ -161,4 +200,4 @@
         </div>
     </div>
 </div>
-<!-- <app-footer></app-footer>  -->
+<app-footer></app-footer> 

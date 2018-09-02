@@ -20,9 +20,42 @@ export class DateService {
     })
   }
 
+  getNewDate() {
+    return new Promise((resolve,reject)=>{
+      this.http.get(environment.api+'/getNewDate').map(res=>res.json())
+      .subscribe((data)=>{
+        resolve(data)
+      },error=>{
+        reject(error);
+      })
+    })
+  }
+
   getNumYear() {
     return new Promise((resolve,reject)=>{
       this.http.get(environment.api+'/getNumYear').map(res=>res.json())
+      .subscribe((data)=>{
+        resolve(data)
+      },error=>{
+        reject(error);
+      })
+    })
+  }
+
+  getNumMounth() {
+    return new Promise((resolve,reject)=>{
+      this.http.get(environment.api+'/getNumMounth').map(res=>res.json())
+      .subscribe((data)=>{
+        resolve(data)
+      },error=>{
+        reject(error);
+      })
+    })
+  }
+
+  getallYear() {
+    return new Promise((resolve,reject)=>{
+      this.http.get(environment.api+'/getallYear').map(res=>res.json())
       .subscribe((data)=>{
         resolve(data)
       },error=>{

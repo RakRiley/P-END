@@ -65,6 +65,17 @@ export class DocumnetService {
     })
   }
 
+  getDocfrommonth(mounth) {
+    return new Promise((resolve,reject)=>{
+      this.http.get(environment.api+'/getDocfrommonth?mounth='+mounth).map(res=>res.json())
+      .subscribe((data)=>{
+        resolve(data)
+      },error=>{
+        reject(error);
+      })
+    })
+  }
+  
   getDatepicker(num) {
     return new Promise((resolve,reject)=>{
       this.http.get(environment.api+'/getDatepicker?numbook='+num).map(res=>res.json())

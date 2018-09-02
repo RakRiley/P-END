@@ -16,9 +16,9 @@ export class FilterPipe implements PipeTransform {
         ||it.day_time.toLowerCase().includes(searchText)
         ||it.mounth_time.toLowerCase().includes(searchText)
         ||it.year_time.toLowerCase().includes(searchText)
-        ||it.day == Number(searchText)
-        ||it.month == Number(searchText)
-        ||it.year == Number(searchText)
+        // ||it.day == Number(searchText)
+        // ||it.month == Number(searchText)
+        // ||it.year == Number(searchText)
       });
     }
 

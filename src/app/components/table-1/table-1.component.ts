@@ -9,6 +9,8 @@ import { DocumnetService } from '../service/documnet.service';
 import { DateService } from '../service/date.service';
 import {environment} from '../../../environments/environment'
 var swal = require('sweetalert');
+import { YearPegService } from '../service/year-peg.service';
+import {  } from '@angular/core'
 @Component({
   selector: 'app-table-1',
   templateUrl: './table-1.component.html',
@@ -24,7 +26,8 @@ export class Table1Component implements OnInit {
   public router:Router, 
   private documentService : DocumnetService, 
   private dateService : DateService,
-  private fileService : FileService) { 
+  private fileService : FileService,
+  private year_pegService :YearPegService,) { 
   
   }
   A:any
@@ -49,7 +52,6 @@ export class Table1Component implements OnInit {
    openfile(filepath){
     window.open(this.urlapi+'/'+filepath);
   }
-
 
   putstatus(id){
       console.log("id xxxx", id);
@@ -106,9 +108,24 @@ export class Table1Component implements OnInit {
       }
   }
 
-
-
-
+  
+  D;
+  DD;
+  i;
+  getYear_peg(){
+    this.year_pegService.getYear_peg().then((yp:any)=>{
+        this.numpeg = yp;
+        this.numpeg.forEach(e => {
+          if (new Date().getFullYear()+543 == e.year_change) {
+            this.nuu = e.peg_change;
+            return false;
+          }
+        });
+     
+    })
+  }  
+  numpeg;
+  nuu
     show : any;
   Showdatatable(){
     this.documentService.getDocument().then((docc:any)=>{
@@ -123,6 +140,26 @@ export class Table1Component implements OnInit {
           return 0;
         }
       });
+      this.year_pegService.getYear_peg().then((yp:any)=>{
+        this.numpeg = yp;
+        this.numpeg.forEach(e => {
+          if (new Date().getFullYear()+543 == e.year_change) {
+            this.nuu = e.peg_change;
+            return false;
+          }
+        });
+        this.show.forEach(e => {
+          if (Number(e.number_of_book) === e.number_of_book && e.number_of_book % 1 === 0) {
+            e.number_of_book = ('0000000'+e.number_of_book).slice(-this.nuu)
+          }
+          else {
+            e.number_of_book = ('0000000'+e.number_of_book).slice(-this.nuu-2)
+          }
+        });
+        console.log("showssssssww",this.show);  
+        
+      });
+      
     });
     
     // this.dateService.getDate().then((dataa:any)=>{
@@ -188,6 +225,15 @@ export class Table1Component implements OnInit {
     this.documentService.getDocumentC().then((docc:any)=>{
       console.log(docc,'ข้อมูลของตารางdoc')
       this.show=docc;
+      this.show.forEach(e => {
+        if (Number(e.number_of_book) === e.number_of_book && e.number_of_book % 1 === 0) {
+          e.number_of_book = ('0000000'+e.number_of_book).slice(-this.nuu)
+        }
+        else {
+          e.number_of_book = ('0000000'+e.number_of_book).slice(-this.nuu-2)
+        }
+      });
+      console.log("showscccccc",this.show); 
     });
     
     // this.dateService.getDate().then((dataa:any)=>{
@@ -253,6 +299,8 @@ export class Table1Component implements OnInit {
     this.Showdatatable();
     this.showstatus();
     this.getNumYear()
+    this.getNumMounth();
+    this.getYear_peg();
   }
   num_year: any;
   getNumYear() {
@@ -266,8 +314,45 @@ export class Table1Component implements OnInit {
     this.documentService.getDocfromYear(year).then(data => {
       console.log("doc from year ", data);
       this.show = data;
+      this.show.forEach(e => {
+        if (Number(e.number_of_book) === e.number_of_book && e.number_of_book % 1 === 0) {
+          e.number_of_book = ('0000000'+e.number_of_book).slice(-this.nuu)
+        }
+        else {
+          e.number_of_book = ('0000000'+e.number_of_book).slice(-this.nuu-2)
+        }
+      });
+      console.log("showsyyyyyyyy",this.show); 
     })
   }
+
+  num_mounth: any;
+  getNumMounth() {
+    this.dateService.getNumMounth().then(nummounth => {
+      console.log("num mounth ", nummounth);
+      this.num_mounth = nummounth;
+    })
+  }
+
+  getDocfrommonth(mounth) {
+    this.documentService.getDocfrommonth(mounth).then(data => {
+      console.log("doc from mounth ", data);
+      this.show = data;
+      this.show.forEach(e => {
+        if (Number(e.number_of_book) === e.number_of_book && e.number_of_book % 1 === 0) {
+          e.number_of_book = ('0000000'+e.number_of_book).slice(-this.nuu)
+        }
+        else {
+          e.number_of_book = ('0000000'+e.number_of_book).slice(-this.nuu-2)
+        }
+      });
+      console.log("showsmmmmmm",this.show); 
+    })
+    
+     
+
+  }
+
 
   goToHome(data) {
     let navigationExtras: NavigationExtras = {
@@ -315,7 +400,8 @@ export class Table1Component implements OnInit {
       console.log("NBR ",this.NBR);
       
       if (this.NBR.length==6) {
-        alert("55555555555555555555555555");
+        // alert("55555555555555555555555555");
+        swal("ไม่ได้!", "จำนวนเลขถึงขีดจำกัด", "warning");
       }
       else{
         var num = num_book.toLocaleString();

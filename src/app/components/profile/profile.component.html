@@ -117,7 +117,7 @@
                                   <tr *ngFor="let doc of newdoc | paginate: { itemsPerPage: 10, currentPage: p } | filter: searchText; let i = index ">
                                   <th scope="row">{{numpage+(i + 1)}}</th>
                                   <td>ศธ.1590.15(4)/</td>
-                                  <td>{{('000'+doc.number_of_book).slice(-5)}}</td>
+                                  <td>{{doc.number_of_book}}</td>
                                   <td>{{doc.date_id.day_time}}/{{doc.date_id.mounth_time}}/{{doc.date_id.year_time}}</td>
                                   <td>{{doc.date_id.day}}/{{doc.date_id.month}}/{{doc.date_id.year}}<br>{{doc.date_id.hour}}:{{doc.date_id.minute}} น.</td>
                                   <td>{{doc.sender}}</td>

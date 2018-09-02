@@ -16,11 +16,13 @@ import { getLocaleMonthNames } from '@angular/common';
 import { MAX_LENGTH_VALIDATOR } from '@angular/forms/src/directives/validators';
 import {Observable} from 'rxjs/Observable';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
-import { IMyDpOptions } from 'mydatepicker-thai';
+import { IMyDpOptions, IMyDateModel } from 'mydatepicker-thai';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { async } from '../../../node_modules/@angular/core/testing';
+import { YearPegService } from '../components/service/year-peg.service';
+import { log } from 'util';
 declare var $: any;
 @Component({
   selector: 'app-home',
@@ -47,8 +49,9 @@ export class HomeComponent implements OnInit {
   id :any;
   user_id: any;
   checktable:number = 0;
-  
-
+  year_change :any;
+  peg_change :any;
+  admin :boolean = true;
   private monthname: { 1: "มกราคม",2: "กุมภาพันธ์", 3: "มีนาคม", 4: "เมษายน", 5: "พฤษภาคม", 6: "มิถุนายน",
    7: "กรกฎาคม", 8: "สิงหาคม", 9: "กันยายน", 10: "ตุลาคม", 11: "พฤศจิกายน", 12: "ธันวาคม" }
 
@@ -90,13 +93,15 @@ export class HomeComponent implements OnInit {
     private documnetService : DocumnetService, 
     private http :HttpClient, 
     private dateService : DateService,
-    private signerService : SignerService) {
+    private signerService : SignerService,
+    private year_pegService : YearPegService,) {
     if(!JSON.parse(localStorage.getItem('user_profile'))){
       this.router.navigate(['/login'])
    }
     this.tab=1
     this.sname();
     this.getUser();
+    this.getuserforadmin();
     console.log(this.ln.StudentCode);
     
   }
@@ -114,8 +119,9 @@ export class HomeComponent implements OnInit {
       else {
         this.baseinstates();
         this.getDate();
-        this.Fcount();
+        this.getYear_peg();
       }
+      
       this.showiddoc();
       this.showiduser();
       this.getsigner();
@@ -132,7 +138,7 @@ export class HomeComponent implements OnInit {
         
         if (data.check==1) {
           console.log("param after", data);
-          var num = 4;
+          var num = this.nuu;
           this.NumberC = ('000'+data.number_of_book).slice(-num);
           this.speed = data.speed;
           this.secret = data.secret;
@@ -149,7 +155,7 @@ export class HomeComponent implements OnInit {
         }
         else if (data.check==2) {
           console.log("param after", data);
-          var num = 4;
+          var num = this.nuu;
           this.NumberC = ('000'+data.number_of_book).slice(-num);
           this.speed = data.speed;
           this.secret = data.secret;
@@ -192,7 +198,7 @@ export class HomeComponent implements OnInit {
         console.log("param numbook after", data);
         this.documnetService.getDocumentNumBook(data.numbook).then(numbook => {
           console.log("numbookkkkkkk", numbook);
-          var num = 6;
+          var num = this.nuu;
           this.NumberB = (Number(numbook[0].number_of_book)+0.1).toFixed(1);
         
           console.log("this.NumberB", this.NumberB);
@@ -230,7 +236,7 @@ export class HomeComponent implements OnInit {
         this.NumberB=this.Nbook[this.Nbook.length-1]+1
         console.log(this.NumberB,'new numbook')
       }
-      var num = 4;
+      var num = this.nuu;
       this.NumberC = ('000'+this.NumberB).slice(-num);
       console.log("66666666666666666",this.NumberC)
     })
@@ -246,7 +252,7 @@ export class HomeComponent implements OnInit {
         else {
           this.NumberB=this.Nbook[this.Nbook.length-1]+1
         }
-        var num = 4;
+        var num = this.nuu;
         this.NumberC = ('000'+this.NumberB).slice(-num)
       }
       else {
@@ -257,11 +263,12 @@ export class HomeComponent implements OnInit {
           }
         });
       }
-      var num = 4;
+      var num = this.nuu;
       this.NumberC = ('000'+this.NumberB).slice(-num)
     })
   }
-  async Fcount(){
+  Fcount(){
+    
     // const a = await this.getDoc();
     // const b = await this.getDocDistinct();
     this.documnetService.getDocumentnumN().then((data:any)=>{
@@ -280,8 +287,20 @@ export class HomeComponent implements OnInit {
         this.NumberB=this.Nbook[this.Nbook.length-1]+1
         console.log(this.NumberB,'new numbook')
       }
-      var num = 4;
-      this.NumberC = ('000'+this.NumberB).slice(-num);
+      console.log("this.nuu",this.nuu);
+      this.year_pegService.getYear_peg().then((yp:any)=>{
+        if (yp&&yp.length>0) {
+          this.numpeg = yp;
+          this.numpeg.forEach(e => {
+            if (new Date().getFullYear() == e.year_change) {
+              this.nuu = e.peg_change;
+              return false;
+            }
+          });
+        }
+      });
+      var num = this.nuu;
+      this.NumberC = ('0000000000'+this.NumberB).slice(-num);
       console.log("66666666666666666",this.NumberC)
     })
   }
@@ -410,6 +429,15 @@ export class HomeComponent implements OnInit {
       });
 
   }
+  se:any
+  getuserforadmin(){
+      this.userService.getUser().then((U:any)=>{
+        this.se = U;
+        console.log('uuuuuuuuuuu',this.se);
+        
+      })
+  }
+
   sname(){
     let item = localStorage.getItem('user_profile')
     let obj = JSON.parse(item)
@@ -636,7 +664,7 @@ export class HomeComponent implements OnInit {
     this.param.queryParams.subscribe(data => {
       if (data.check==4) {
         console.log("param numbook cancel", data);
-        var num = 6;
+        var num = this.nuu;
         this.NumberC = ('000'+data.numbook).slice(-num);
         this.myDatePickerOptions = {
           // other options...
@@ -650,7 +678,78 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-
+  numpeg;
+  nuu;
+  D;
+  DD;
+  i;
+  getYear_peg(){
+    this.year_pegService.getYear_peg().then((yp:any)=>{
+      if (yp&&yp.length>0) {
+        this.numpeg = yp;
+        this.numpeg.forEach(e => {
+          if (new Date().getFullYear()+543 == e.year_change) {
+            this.nuu = e.peg_change;
+            return false;
+          }
+        });
+        this.dateService.getDate().then((date:any)=>{
+          console.log('yp2',date);
+          this.D = date;
+          if (date&&date.length>0) {
+            if (new Date().getFullYear() == 31&&new Date().getMonth() == 12&&new Date().getFullYear() == Number(date[0].year_time)) {
+              
+              var data ={
+                year_change : new Date().getFullYear(),
+                peg_change : 3
+              }
+              this.year_pegService.postYear_peg(data).then((res)=>{
+                this.NumberB = 1
+                var num = this.nuu;
+                this.NumberC = ('0000000000'+this.NumberB).slice(-num);
+              });
+      
+            }else{
+              this.Fcount();
+            }
+          } else {
+            this.NumberB = 1
+            var num = this.nuu;
+            this.NumberC = ('0000000000'+this.NumberB).slice(-num);
+            console.log(this.NumberC);
+            
+          }
+        })
+      }
+      else {
+        var data ={
+          year_change : new Date().getFullYear(),
+          peg_change : 3
+        }
+        this.year_pegService.postYear_peg(data).then((res)=>{
+          this.NumberB = 1
+          var num = 3;
+          this.NumberC = ('0000000000'+this.NumberB).slice(-num);
+        });
+      }
+      
+      
+    })
+    
+    
+  }  
+  newdatepicker(event: IMyDateModel) {
+    // console.log("new date", event);
+    if (event != null) {
+      event.date.year = event.date.year+543;
+      this.datepicker = event;
+      console.log("getDate ", this.datepicker);
+      return event;
+    }
+    // this.datepicker = { date : { year: event.date.year+543, month: event.date.month, day: event.date.day}};
+    // console.log("New datepicker", this.datepicker);
+    
+  }
 
   // NumberN:any;
   // getDocumentnumN(){

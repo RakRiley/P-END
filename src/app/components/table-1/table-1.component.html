@@ -34,14 +34,30 @@
                                                                     <li class="nav-item dropdown">
                                                                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ปีของเอกสาร</a>
                                                                         <div class="dropdown-menu">
-                                                                            <!-- <a class="dropdown-item" href="#">Action</a>
-                                                                            <a class="dropdown-item" href="#">Another action</a> -->
-                                                                            <div *ngFor="let n of num_year;let i = index">
-                                                                                <a class="dropdown-item" (click)="getDocfromYear(n.year_time)">{{n.year_time}}</a>
-                                                                                <div class="dropdown-divider"></div>
+                                                                            <div class="dropdown-submenu" *ngFor="let n of num_year;let i = index">
+                                                                                <a class="dropdown-item" (click)="getDocfromYear(n.year_time)">{{n.year_time}}</a>                                                                                
+                                                                                <div class="dropdown-menu">
+                                                                                    <div class="dropdown-item">
+                                                                                        <li class="dropdown" *ngFor="let nm of num_mounth;let i = index">
+                                                                                        <a *ngIf="nm.mounth_time == 1" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน มกราคม</a>
+                                                                                        <a *ngIf="nm.mounth_time == 2" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน กุมภาพันธ์</a>
+                                                                                        <a *ngIf="nm.mounth_time == 3" tabindex="-3" (click)="getDocfrommonth(nm.mounth_time)">เดือน มีนาคม</a>
+                                                                                        <a *ngIf="nm.mounth_time == 4" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน เมษายน</a>
+                                                                                        <a *ngIf="nm.mounth_time == 5" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน พฤษภาคม</a>
+                                                                                        <a *ngIf="nm.mounth_time == 6" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน มิถุนายน</a>
+                                                                                        <a *ngIf="nm.mounth_time == 7" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน กรกฎาคม</a>
+                                                                                        <a *ngIf="nm.mounth_time == 8" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน สิงหาคม</a>
+                                                                                        <a *ngIf="nm.mounth_time == 9" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน กันยายน</a>
+                                                                                        <a *ngIf="nm.mounth_time == 10" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน ตุลาคม</a>
+                                                                                        <a *ngIf="nm.mounth_time == 11" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน พฤศจิกายน</a>
+                                                                                        <a *ngIf="nm.mounth_time == 12" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน ธันวาคม</a>
+                                                                                        <!-- <div class="dropdown-divider"></div> -->
+                                                                                        </li>                                                                                                    
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                        </li>
+                                                                    </li>
                                                                     <li class="nav-item">
                                                                     <!-- <li class="nav-item">
                                                                         <a class="nav-link" href="#">เลขทะเบียน</a>
@@ -55,6 +71,14 @@
                                                                     <li class="nav-item">
                                                                             <a class="nav-link" href="#">ปี</a>
                                                                     </li> -->
+                                                                    <li class="ml-auto">                  
+                                                                        <div class="input-group input-group-sm ml-auto" style="width: 300px;">
+                                                                            <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา" [(ngModel)]="shText">             
+                                                                            <div class="input-group-btn">
+                                                                                <button type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
                                                                     <li class="ml-auto">                  
                                                                         <div class="input-group input-group-sm ml-auto" style="width: 300px;">
                                                                             <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา" [(ngModel)]="sText">             
@@ -83,10 +107,10 @@
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                <tr *ngFor="let s of show | paginate: { itemsPerPage: 10, currentPage: p } | filter: sText; let i = index">
+                                                                                <tr *ngFor="let s of show| paginate: { itemsPerPage: 10, currentPage: p } | filter: sText | filterii: shText;  let i = index">
                                                                                 <th scope="row">{{numpage+(i + 1)}}</th>
                                                                                 <td>ศธ.1590.15(4)/</td>
-                                                                                <td>{{('000'+s.number_of_book).slice(-5)}}</td>
+                                                                                <td >{{s.number_of_book}}</td>
                                                                                 <td>{{s.day_time}}/{{s.mounth_time}}/{{s.year_time}}</td>
                                                                                 <td>{{s.day}}/{{s.month}}/{{s.year}}<br>{{s.hour}}:{{s.minute}} น.</td>
                                                                                 <td>{{s.sender}}</td>

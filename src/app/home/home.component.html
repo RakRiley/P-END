@@ -106,7 +106,7 @@
                                                         <!-- <input type="date" class="form-control" [(ngModel)]="datepicker" (change)="datePicker($event)" name="datepicker" id="datepicker"> -->
                                                         <!-- <input class="input-medium" type="text" data-provide="datepicker" data-date-language="th-th"> -->
                                                         <!-- <input class="input-medium" type="text" data-provide="datepicker" data-date-language="th-th"> -->
-                                                        <my-date-picker name="mydate" placeholder="ลงวันที่หนังสือ" [options]="myDatePickerOptions"  name="datepicker" id="datepicker" [(ngModel)]="datepicker" required></my-date-picker>
+                                                        <my-date-picker name="mydate" placeholder="ลงวันที่หนังสือ" [options]="myDatePickerOptions"  name="datepicker" id="datepicker" (ngModelChange)="newdatepicker($event)" [(ngModel)]="datepicker" required></my-date-picker>
                                                        
                                                     </div>
                                                 </div>
@@ -127,7 +127,8 @@
                                                     </div>
                                                     <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="sender" name="sender">
                                                         <option value="undefined" disabled selected>ผู้ลงนามในหนังสือ....</option>
-                                                        <option value="{{ln.FirstName_TH}} {{ln.LastName_TH}}">{{ln.FirstName_TH}} {{ln.LastName_TH}}</option>
+                                                        <ng-container *ngIf="ln.Status == 'Admin'"><option  *ngFor="let sa of se " value="{{sa.firstname}} {{sa.lastname}}">{{sa.firstname}} {{sa.lastname}}</option></ng-container>
+                                                        <option *ngIf="ln.Status != 'Admin'" value="{{ln.FirstName_TH}} {{ln.LastName_TH}}">{{ln.FirstName_TH}} {{ln.LastName_TH}}</option>
                                                         <option *ngFor="let cc of si " value="{{cc.name}}">{{cc.name}}</option>
                                                     </select>
                                                         </div>        

@@ -10,6 +10,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { HttpModule} from '@angular/http'
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { ChartsModule } from 'ng2-charts';
 ///
 import {LoginService} from './provider/login/login.service';
 import { GetApiService } from './get-api.service';
@@ -28,6 +29,8 @@ import { MomentModule } from 'angular2-moment';
 import { FilterPipe } from './components/filterpipe/filterpipe.component';
 import { MyDatePickerModule } from 'mydatepicker-thai';
 import { AdminService } from './components/service/admin.service';
+import { YearPegService } from './components/service/year-peg.service';
+import { FilterPipeii } from './components/filterpipeii/filterpipeii.component';
 
 const router : Routes =[
   { path: 'home',  component: HomeComponent },
@@ -53,7 +56,8 @@ const router : Routes =[
     DetailComponent,
     ProfileComponent,
     AdminComponent,
-    FilterPipe
+    FilterPipe,
+    FilterPipeii,
     
   ],
   imports: [
@@ -65,9 +69,10 @@ const router : Routes =[
     NgbModule.forRoot(),
     NgxPaginationModule,
     MomentModule,
-    MyDatePickerModule
+    MyDatePickerModule,
+    ChartsModule
   ],
-  providers: [LoginService, GetApiService, UserService ,DocumnetService, DateService, FileService, SignerService, AdminService,  
+  providers: [LoginService, GetApiService, UserService ,DocumnetService, DateService, FileService, SignerService, AdminService,YearPegService,  
   
   ],
   bootstrap: [AppComponent]

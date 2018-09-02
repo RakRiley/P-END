@@ -8,6 +8,7 @@ import { UserService } from '../service/user.service';
 import { DateService } from '../service/date.service';
 import { DocumnetService } from '../service/documnet.service';
 import { FileService } from '../service/file.service';
+import { YearPegService } from '../service/year-peg.service';
 import {Observable} from 'rxjs/Observable';
 import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 import { Pipe, PipeTransform } from '@angular/core';
@@ -47,7 +48,8 @@ export class ProfileComponent implements OnInit {
     private userService : UserService , 
     private dateService : DateService , 
     private documentService : DocumnetService,
-    private fileService: FileService) {
+    private fileService: FileService,
+    private year_pegService :YearPegService) {
 
     if(localStorage.getItem('token')){
       this.p_login=true;
@@ -215,28 +217,56 @@ export class ProfileComponent implements OnInit {
       // }
     }
   }
-
+  NBR:any;
   goToHomeDupNumBook(num_book, data) {
     console.log("goToHomeDupNumBook ", num_book);
     console.log("dataaaaaaaaa333 ", data);
-    var num = num_book.toLocaleString();
-    num = num.split(".");
-    num = Number(num[0]);
-    
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-        numbook: num,
-        day_time: data.day_time,
-        month_time: data.mounth_time,
-        year_time: data.year_time,
-        check: 3
-      },
-      skipLocationChange : true
-    };    
-    this.router.navigate(["home"], navigationExtras);
+    this.documentService.getNumber_of_book_repeatedly(parseInt(num_book)).then((nbr:any)=>{
+      this.NBR = nbr
+      console.log("NBR ",this.NBR);
+      
+      if (this.NBR.length==6) {
+        // alert("55555555555555555555555555");
+        swal("ไม่ได้!", "จำนวนเลขถึงขีดจำกัด", "warning");
+      }
+      else{
+        var num = num_book.toLocaleString();
+        num = num.split(".");
+        num = Number(num[0]);
+        
+        let navigationExtras: NavigationExtras = {
+          queryParams: {
+            numbook: num,
+            day_time: data.day_time,
+            month_time: data.mounth_time,
+            year_time: data.year_time,
+            check: 3
+          },
+          skipLocationChange : true
+        };    
+        this.router.navigate(["home"], navigationExtras);
+      }
+    })
   }
 
+  D;
+  DD;
+  i;
+  getYear_peg(){
+    this.year_pegService.getYear_peg().then((yp:any)=>{
+        this.numpeg = yp;
+        this.numpeg.forEach(e => {
+          if (new Date().getFullYear() == e.year_change) {
+            this.nuu = e.peg_change;
+            return false;
+          }
+        });
+     
+    })
+  }  
 
+  numpeg;
+  nuu
   datadoc : any;
   newdoc: any;
 showdata(){
@@ -261,6 +291,25 @@ this.datadoc.sort((a, b) => {
           x.date_id = e;
         }
       }); 
+    });
+    this.year_pegService.getYear_peg().then((yp:any)=>{
+      this.numpeg = yp;
+      this.numpeg.forEach(e => {
+        if (new Date().getFullYear() == e.year_change) {
+          this.nuu = e.peg_change;
+          return false;
+        }
+      });
+      this.newdoc.forEach(e => {
+        if (Number(e.number_of_book) === e.number_of_book && e.number_of_book % 1 === 0) {
+          e.number_of_book = ('0000000'+e.number_of_book).slice(-this.nuu)
+        }
+        else {
+          e.number_of_book = ('0000000'+e.number_of_book).slice(-this.nuu-2)
+        }
+      });
+      console.log("showssssssww",this.newdoc);  
+      
     });
     this.datadoc.forEach(sss=>{
       if(sss.user_id == this.userID){
@@ -335,6 +384,7 @@ this.datadoc.sort((a, b) => {
     this.sname();
     this.showdata();
     this.showstatus();
+    this.getYear_peg();
     // this.baseinstates();
   }
 
