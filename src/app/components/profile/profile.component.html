@@ -6,7 +6,7 @@
         <div class="card text-center">
             <div class="card-body text-center" style="background-color:#832EBF">
               <div class="container-fluid">
-              <div class="row">
+              <!-- <div class="row">
                   <div class="card col-sm-12 col-md-12" style="background-color:#a6c9e2">
                     <div class="card-body"><h2>ข้อมูลผู้ใช้</h2><br>
                       <div class="border border-primary" style="padding-right: 15px;padding-left: 15px;border-radius: 6px;background-color:rgba(223, 215, 215, 0.904)">
@@ -65,14 +65,7 @@
                                     </tbody>
                                   </table>
                             </div>
-                          </div>
-                          <!-- <br>
-                          <div class="container border border-success" style="padding-top: 30px;padding-right: 30px;padding-bottom: 30px;padding-left: 30px;border-radius: 6px; background-color:rgba(150, 150, 196, 0.959)">
-                            <div class="row col-12">
-                                 
-                            </div>
-                          </div> -->
-
+                          </div>                        
                         </div>
                       </div>
                       <br>
@@ -80,20 +73,39 @@
                     </div>
                   </div>   
               </div>
-              <br>
+              <br> -->
               <div class="row">
                   <div class="card col-sm-12 col-md-12" style="background-color:#a6c9e2">
-                    <div class="card-body"><h2>หนังสือทั้งหมดของผู้ใช้งาน</h2>
+                    <div class="card-body">
+                      <h2>หนังสือทั้งหมดของผู้ใช้งาน</h2>
                       <br>
                       <div class="card">
                         <div class="card-header" style="background-color: #650DAD;">
                           <div class="box-tools">
-                            <div class="input-group input-group-sm ml-auto" style="width: 300px;">
-                              <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา" [(ngModel)]="searchText" >
-                              <div class="input-group-btn">
-                                <button type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
+                           <div class="row">
+                             <div class="box col-5">
+                             
+                             </div>
+                            <div class="col-3">
+                                <!-- <div class="input-group input-group-sm ml-auto" style="width: 250px;">
+                                  <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา..." [(ngModel)]="shText" >
+                                  <div class="input-group-btn">
+                                    <button id="submit" type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
+                                  </div>
+                                </div> -->
+                              </div>
+                            <div class="col-1">
+                              
+                            </div>
+                            <div class="col-3">
+                              <div class="input-group input-group-sm ml-auto" style="width: 250px;">
+                                <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา..." [(ngModel)]="searchText" >
+                                <div class="input-group-btn">
+                                  <button id="submit" type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
+                                </div>
                               </div>
                             </div>
+                           </div>
                           </div>
                         </div>
                         <div class="card-body">
@@ -114,7 +126,7 @@
                                   </tr>
                               </thead>
                               <tbody>
-                                  <tr *ngFor="let doc of newdoc | paginate: { itemsPerPage: 10, currentPage: p } | filter: searchText; let i = index ">
+                                  <tr *ngFor="let doc of newdoc | paginate: { itemsPerPage: 10, currentPage: p } | filter: searchText | filterii: shText; let i = index ">
                                   <th scope="row">{{numpage+(i + 1)}}</th>
                                   <td>ศธ.1590.15(4)/</td>
                                   <td>{{doc.number_of_book}}</td>

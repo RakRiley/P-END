@@ -109,6 +109,28 @@ export class DocumnetService {
     })
   }
 
+  getStatusC() {
+    return new Promise((resolve,reject)=>{
+      this.http.get(environment.api+'/getStatusC').map(res=>res.json())
+      .subscribe((data)=>{
+        resolve(data)
+      },error=>{
+        reject(error);
+      })
+    })
+  }
+
+  getStatusU() {
+    return new Promise((resolve,reject)=>{
+      this.http.get(environment.api+'/getStatusU').map(res=>res.json())
+      .subscribe((data)=>{
+        resolve(data)
+      },error=>{
+        reject(error);
+      })
+    })
+  }
+
 
   postDocument(data){
     return new Promise((resolve,reject)=>{

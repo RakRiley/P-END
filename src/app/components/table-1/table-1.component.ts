@@ -11,6 +11,7 @@ import {environment} from '../../../environments/environment'
 var swal = require('sweetalert');
 import { YearPegService } from '../service/year-peg.service';
 import {  } from '@angular/core'
+import { NgxDrpOptions, PresetItem, Range } from 'ngx-mat-daterange-picker';
 @Component({
   selector: 'app-table-1',
   templateUrl: './table-1.component.html',
@@ -29,8 +30,58 @@ export class Table1Component implements OnInit {
   private fileService : FileService,
   private year_pegService :YearPegService,) { 
   
+    const today = new Date();
+    const fromMin = new Date(today.getFullYear(), today.getMonth()-2, 1);
+    const fromMax = new Date(today.getFullYear(), today.getMonth()+1, 0);
+    const toMin = new Date(today.getFullYear(), today.getMonth()-1, 1);
+    const toMax = new Date(today.getFullYear(), today.getMonth()+2, 0);
+    this.setupPresets();
+    this.options = {
+                    presets: this.presets,
+                    format: 'mediumDate',
+                    range: {fromDate:today, toDate: today},
+                    applyLabel: "Submit",                
+                  };
   }
+
+  range:Range = {fromDate:new Date(), toDate: new Date()};
+  options:NgxDrpOptions;
+  presets:Array<PresetItem> = [];
   A:any
+
+  // updateRange(range: Range){
+  //   this.range = range;
+  // }  
+
+  setupPresets() {
+ 
+    const backDate = (numOfDays) => {
+      const today = new Date();
+      return new Date(today.setDate(today.getDate() - numOfDays));
+    }
+    
+    const today = new Date();
+    const yesterday = backDate(1);
+    const minus7 = backDate(7)
+    const minus30 = backDate(30);
+    const currMonthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+    const currMonthEnd = new Date(today.getFullYear(), today.getMonth()+1, 0);
+    const lastMonthStart = new Date(today.getFullYear(), today.getMonth()-1, 1);
+    const lastMonthEnd = new Date(today.getFullYear(), today.getMonth(), 0);
+    
+    this.presets =  [
+      {presetLabel: "Yesterday", range:{ fromDate:yesterday, toDate:today }},
+      {presetLabel: "Last 7 Days", range:{ fromDate: minus7, toDate:today }},
+      {presetLabel: "Last 30 Days", range:{ fromDate: minus30, toDate:today }},
+      {presetLabel: "This Month", range:{ fromDate: currMonthStart, toDate:currMonthEnd }},
+      {presetLabel: "Last Month", range:{ fromDate: lastMonthStart, toDate:lastMonthEnd }}
+    ]
+  }
+
+
+
+
+  
   showstatus(){
     let item = localStorage.getItem('user_profile')
     let obj = JSON.parse(item)
@@ -298,9 +349,10 @@ export class Table1Component implements OnInit {
     // this.getData();
     this.Showdatatable();
     this.showstatus();
-    this.getNumYear()
+    this.getNumYear();
     this.getNumMounth();
     this.getYear_peg();
+    this.setupPresets();
   }
   num_year: any;
   getNumYear() {

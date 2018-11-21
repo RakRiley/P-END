@@ -18,3 +18,13 @@
 .td{
     width:50%;
 } */
+input[type="text"]{
+    border: none;
+    outline: none;
+    border-radius: 25px 0 0 25px;
+}
+#submit{
+    border: none;
+    outline: none;
+    border-radius: 0 25px 25px 0;
+}

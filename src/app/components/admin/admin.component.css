@@ -26,3 +26,13 @@
 .btn-dark{
     border-radius: 6px;
 }
+.ngx-pagination a, .ngx-pagination button {
+    border-radius: 5px !important;
+    color:rgb(20, 20, 20) !important;
+    background-color: darkblue !important;
+}
+#jame{
+    border-radius: 5px !important;
+    color:rgb(20, 20, 20) !important;
+    background-color: darkblue !important;
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../service/user.service';
+import { DocumnetService } from '../service/documnet.service';
 import { Http } from '@angular/http';
 import {SignerService} from '../service/signer.service'
 import { YearPegService } from '../service/year-peg.service';
@@ -13,7 +14,7 @@ import { ChartsModule } from 'ng2-charts';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-
+numpage: number = 0;
 link:number;
 userData:any;
 name:any = {name: ""};
@@ -27,7 +28,8 @@ year_graph: any[] = [];
   constructor(private userService : UserService,
               private signerService : SignerService,
               private year_pegService :YearPegService,
-              private dateService :DateService,) { 
+              private dateService :DateService,
+              private documentService :DocumnetService,) { 
             
   this.link=1
   }  
@@ -63,7 +65,7 @@ year_graph: any[] = [];
       this.barChartData = [
         {
           data: this.data_graph, 
-          label: '1',
+          label: 'หนังสือ',
         },
         // {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
       ];
@@ -88,8 +90,18 @@ year_graph: any[] = [];
   public barChartData:any[] = [
     {data: this.data_graph, label: 'Series A'},
     // {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-  ];
+  ];  
+  
+
+  ///สถืติเดือน
+  public MonthbarChartLabels:string[] 
+  public MonthbarChartType:string = 'bar'
+  public MonthbarChartLegend:boolean = true;
  
+  public MonthbarChartData:any[] = [
+    
+  ];
+
   // events
   public chartClicked(e:any):void {
     console.log(e);
@@ -118,7 +130,31 @@ year_graph: any[] = [];
 
 
 
-
+  getStaticMonth(){
+    let date = new Date
+    this.dateService.getStaticMonth(date.getFullYear()+543).then((data:any)=>{
+      if(data.status=='error'){
+        console.log(data);
+      }else{
+        console.log(data);  
+        let items = data.map((info)=>{
+          let month = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.'
+          ,'ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.']
+          let item = {
+            month:month[parseInt(info.mounth_time)-1],
+            books:info.books
+          }
+          return item;
+        })
+        
+        this.MonthbarChartLabels = items.map((info)=>{ return info.month })
+        this.MonthbarChartData = [
+          {data:items.map((info)=>{ return info.books }),label:'หนังสือ'}
+        ]
+        console.log(items)
+      }
+    })
+  }
 
 
   getUser(){
@@ -192,12 +228,14 @@ putYear_peg() {
     this.year_pegService.putYear_peg(datat,this.year_change).then((res)=>{
       if(res){
         swal("เปลี่ยนหลักเรียบร้อย!", "เสร็จสิ้น", "success");
+        // swal("ไม่ได้!", "ทำใหม่นะ", "warning");
         this.peg_change="";
         this.year_change="เลือกปี";
       }
     })
   }
   else{
+    // swal("เปลี่ยนหลักเรียบร้อย!", "เสร็จสิ้น", "success");
     swal("ไม่ได้!", "ทำใหม่นะ", "warning");
     this.year_change="เลือกปี";
   }
@@ -219,13 +257,72 @@ putYear_peg() {
 // }
   
 
+getStatus(){
+  this.documentService.getStatusU().then((data:any)=>{
+      if(data.status=='error'){
+        console.log(data);
+      }else{
+        console.log(data,'fdgfdsgfgh');  
+        this.statuspieChartData[0] = data
+    }
+  })
+  this.documentService.getStatusC().then((data:any)=>{
+    if(data.status=='error'){
+      console.log(data);
+    }else{
+      console.log(data,'fdgfdsgfgh');  
+      this.statuspieChartData[1] = data
+  }
+})
+}
 
+
+
+ // Pie
+ public statuspieChartLabels:string[] = ['หนังสือที่ใช้', 'หนังสือที่ถูกยกเลิก'];
+ public statuspieChartData:number[] = [0,  0];
+ public statuspieChartType:string = 'pie';
+
+ events
+ public statuschartClicked(e:any):void {
+   console.log(e);
+ }
+
+ public statuschartHovered(e:any):void {
+   console.log(e);
+ }
+
+ln:any;
+sname(){
+  let item = localStorage.getItem('user_profile')
+  let obj = JSON.parse(item)
+  console.log(obj)
+  this.ln = obj
+}
+Guse:any;
+getuser2(){
+  this.userService.getUser().then((data:any)=>{
+    console.log('rgtrgfd',data);
+    this.Guse = data;
+    
+  })
+}
+
+numPage(event){
+    
+  this.numpage = (event-1)*10;
+  
+ }
 
   ngOnInit() {
+    this.sname();
     this.getUser();
+    this.getuser2();
     this.getsigner();
     this.getYear_peg();
     this.getallYear()  
+    this.getStaticMonth();
+    this.getStatus();
   }
 
 }

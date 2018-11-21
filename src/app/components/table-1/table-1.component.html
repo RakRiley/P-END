@@ -1,232 +1,320 @@
 <app-navbar></app-navbar>
 <div class="container-fluid">
-    <div class="row">  
-        <div class="col-12 col-sm-12 col-md-12">
-            <div id="middleblock">
-                <div class="card text-center">
-                    <div class="card-body text-center" style="background-color:#832EBF">    
-                        <div class="card col-sm-12 col-md-12" style="background-color:#a6c9e2">                       
-                            <div class="card-body">                  
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                                <h2>หนังสือทั้งหมด</h2>
-                                            <div id="middleblock">
-                                                    <div class="card">
-                                                            <div class="card-header" style="background-color: #650DAD;color: aliceblue">
-                                                                  <div *ngIf="admin == false" class="row">
-                                                                        <div class="input-group input-group-sm ml-auto" style="width: 300px;"> 
-                                                                                <input type="text" name="table_search" class="form-control" placeholder="ค้นหา" [(ngModel)]="sText">             
-                                                                                <div class="input-group-btn">
-                                                                                    <button type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
-                                                                                </div>
-                                                                        </div>
-                                                                  </div>
-                                                                <ul *ngIf="admin == true" class="nav nav-tabs card-header-tabs">
-                                                                    <li class="nav-item">
-                                                                        <a *ngIf="btnStatus == true" (click)="changeDocUC(1)" class="nav-link " href="javascript:void(0)" >หนังสือปัจจุบัน</a>
-                                                                        <a *ngIf="btnStatus != true" (click)="changeDocUC(1)" class="nav-link active" href="javascript:void(0)" >หนังสือปัจจุบัน</a>
-                                                                    </li>
-                                                                    <li class="nav-item">
-                                                                        <a *ngIf="btnStatus == false" (click)="changeDocUC(0)" class="nav-link " href="javascript:void(0)" >หนังสือที่ถูกยกเลิก</a>
-                                                                        <a *ngIf="btnStatus != false" (click)="changeDocUC(0)" class="nav-link active" href="javascript:void(0)" >หนังสือที่ถูกยกเลิก</a>
-                                                                    </li>
-                                                                    <li class="nav-item dropdown">
-                                                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ปีของเอกสาร</a>
-                                                                        <div class="dropdown-menu">
-                                                                            <div class="dropdown-submenu" *ngFor="let n of num_year;let i = index">
-                                                                                <a class="dropdown-item" (click)="getDocfromYear(n.year_time)">{{n.year_time}}</a>                                                                                
-                                                                                <div class="dropdown-menu">
-                                                                                    <div class="dropdown-item">
-                                                                                        <li class="dropdown" *ngFor="let nm of num_mounth;let i = index">
-                                                                                        <a *ngIf="nm.mounth_time == 1" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน มกราคม</a>
-                                                                                        <a *ngIf="nm.mounth_time == 2" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน กุมภาพันธ์</a>
-                                                                                        <a *ngIf="nm.mounth_time == 3" tabindex="-3" (click)="getDocfrommonth(nm.mounth_time)">เดือน มีนาคม</a>
-                                                                                        <a *ngIf="nm.mounth_time == 4" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน เมษายน</a>
-                                                                                        <a *ngIf="nm.mounth_time == 5" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน พฤษภาคม</a>
-                                                                                        <a *ngIf="nm.mounth_time == 6" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน มิถุนายน</a>
-                                                                                        <a *ngIf="nm.mounth_time == 7" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน กรกฎาคม</a>
-                                                                                        <a *ngIf="nm.mounth_time == 8" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน สิงหาคม</a>
-                                                                                        <a *ngIf="nm.mounth_time == 9" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน กันยายน</a>
-                                                                                        <a *ngIf="nm.mounth_time == 10" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน ตุลาคม</a>
-                                                                                        <a *ngIf="nm.mounth_time == 11" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน พฤศจิกายน</a>
-                                                                                        <a *ngIf="nm.mounth_time == 12" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน ธันวาคม</a>
-                                                                                        <!-- <div class="dropdown-divider"></div> -->
-                                                                                        </li>                                                                                                    
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="nav-item">
-                                                                    <!-- <li class="nav-item">
-                                                                        <a class="nav-link" href="#">เลขทะเบียน</a>
-                                                                    </li>
-                                                                    <li class="nav-item">
-                                                                        <a class="nav-link" href="#">ชื่อเรื่อง</a>
-                                                                    </li>
-                                                                    <li class="nav-item">
-                                                                        <a class="nav-link" href="#">หน่วยงาน</a>
-                                                                    </li>
-                                                                    <li class="nav-item">
-                                                                            <a class="nav-link" href="#">ปี</a>
-                                                                    </li> -->
-                                                                    <li class="ml-auto">                  
-                                                                        <div class="input-group input-group-sm ml-auto" style="width: 300px;">
-                                                                            <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา" [(ngModel)]="shText">             
-                                                                            <div class="input-group-btn">
-                                                                                <button type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="ml-auto">                  
-                                                                        <div class="input-group input-group-sm ml-auto" style="width: 300px;">
-                                                                            <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา" [(ngModel)]="sText">             
-                                                                            <div class="input-group-btn">
-                                                                                <button type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <div class="table-responsive">
-                                                                    <table class="table border-bottom">
-                                                                            <thead class="thead" style="background: #2d60c6;color: aliceblue">
-                                                                                <tr>
-                                                                                <th scope="col">ลำดับ</th>
-                                                                                <th scope="col">ที่ ศธ.</th>
-                                                                                <th scope="col">เลขทะเบียนส่ง</th>
-                                                                                <th scope="col">ลงวันที่</th>
-                                                                                <th scope="col">ลงที่จอง</th>
-                                                                                <th scope="col">จาก</th>
-                                                                                <th scope="col">ถึง</th>
-                                                                                <th scope="col">เรื่อง</th>
-                                                                                <th scope="col">รายละเอียด</th>
-                                                                                <th *ngIf="admin" scope="col">เพิ่มเติม</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                                <tr *ngFor="let s of show| paginate: { itemsPerPage: 10, currentPage: p } | filter: sText | filterii: shText;  let i = index">
-                                                                                <th scope="row">{{numpage+(i + 1)}}</th>
-                                                                                <td>ศธ.1590.15(4)/</td>
-                                                                                <td >{{s.number_of_book}}</td>
-                                                                                <td>{{s.day_time}}/{{s.mounth_time}}/{{s.year_time}}</td>
-                                                                                <td>{{s.day}}/{{s.month}}/{{s.year}}<br>{{s.hour}}:{{s.minute}} น.</td>
-                                                                                <td>{{s.sender}}</td>
-                                                                                <td>{{s.to}}</td>
-                                                                                <td>{{s.name}}</td>
-                                                                                <td>
-                                                                                    <button *ngIf="(s.file == '')" type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#exampleModal'+i">แสดง</button>
-                                                                                    <button *ngIf="(s.file != '')" type="button" class="btn btn-success" data-toggle="modal" [attr.data-target]="'#exampleModal'+i">แสดง</button>
-                                                                                      <!-- Modal -->
-                                                                <div class="modal fade bd-example-modal-lg" id="exampleModal{{i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog modal-lg" role="document">
-                                                                          <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                              <h3 class="modal-title">แสดงรายละเอียดหนังสือ</h3>
-                                                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                              </button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <p style="text-align: center;">ข้อมูลของเอกสาร</p>
-                                                                                <div class="container">
-                                                                  
-                                                                                  <div class="row" style="text-align: center">
-                                                                                    <div class="col-md-6">
-                                                                                      <p>ชั้นความเร็ว : {{s.speed}}</p>
-                                                                                    </div>
-                                                                                    <div class="col-md-6">
-                                                                                      <p>ชั้นความลับ : {{s.secret}}</p>
-                                                                                    </div>
-                                                                                  </div>
-                                                                  
-                                                                                <div class="row" style="text-align: left">
-                                                                                  <div class="col-md-12">
-                                                                                    <div>
-                                                                                        <p>การปฏิบัติ : {{s.practice}}</p>
-                                                                                    </div>
-                                                                                  </div>
-                                                                                </div>
-                                                                               
-                                                                                <div class="row" style="text-align: left">
-                                                                                  <div class="col-md-12">
-                                                                                    <div>
-                                                                                        <p>หมายเหตุ : {{s.note}}</p>
-                                                                                    </div>
-                                                                                  </div>
-                                                                                </div>
-                                                                               
-                                                                                <div class="row" style="text-align: left">
-                                                                                  <div class="col-md-4">
-                                                                                    <div>
-                                                                                      <p>ไฟล์เอกสาร : <a *ngIf="(s.file != '')" class="btn" (click)="openfile(s.file)"><span >ดูไฟล์เอกสาร</span  > </a>    
-                                                                                        <a *ngIf="(s.file == '')" class="btn"><span >ไม่มีไฟล์เอกสาร</span  > </a></p>
-                                                                                    </div>
-                                                                                  </div>
-                                                                                  <div class="col-md-4" style="text-align: center;">
-                                                                                      <div>
-                                                                                        <!-- <button type="button" class="btn btn-danger"><i class="fas fa-eye"></i></button>
-                                                                                        <button type="button" class="btn btn-danger"><i class="fas fa-download"></i></button> -->
-                                                                                      </div>
-                                                                                  </div>
-                                                                                  <div class="col-md-4">
-                                                                                      <div>
-                                                                                        
-                                                                                      </div>
-                                                                                  </div>
-                                                                                </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" (click)="goToHomeDupNumBook(s.number_of_book, s)" class="btn btn-info mr-auto" data-dismiss="modal" >ใช้เลขซ้ำ</button>
-                                                                               <button type="button"  class="btn btn-danger" data-dismiss="modal">ปิด</button>                                                                             
-                                                                              <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                                                                            </div>
-                                                                          </div>
-                                                                        </div>
-                                                                      </div>
-                                                                        </td>
-                                                                        <td *ngIf="admin">
-                                                                            <div class="dropdown" *ngIf="btnStatus == false">
-                                                                                <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                  จัดการ
-                                                                                </button>
-                                                                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                                                  <button id="tapone" (click)="goToHome(s)" class="dropdown-item" type="button"><i class="fas fa-wrench"></i>  แก้ไข</button>                                                                                  
-                                                                                  <button id="taptwo" (click)="putstatus(s.id)" class="dropdown-item" type="button"><i class="fas fa-trash-alt"></i>  ยกเลิก</button>
-                                                                                  <label id="tapthree" for="file{{i}}" class="dropdown-item"><i class="fas fa-upload"></i>  อัพโหลดไฟล์
-                                                                                   <input type="file" (change)="putFile($event,s.id)" name="file" id="file{{i}}"  hidden>
-                                                                                  </label>
-                                                                                </div>
-                                                                              </div>
-                                                                            <button type="button" (click)="goToHomeNumC(s.number_of_book,s)"  *ngIf="btnStatus != false"  class="btn btn-danger" data-dismiss="modal">ใช้เลขเก่า</button>                                                                             
-                                                                        </td>
-                                                                        </tr>
-                                                                        <tr *ngIf="show&&show.length==0">
-                                                                            <div>ไม่มีข้อมูล.....</div>
-                                                                        </tr>                        
-                                                                            </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div> 
-                                                    <div class="card-footer"  style="background-color: #650DAD;">
-                                                        <ul class="pagination fa-pull-right">
-                                                            <pagination-controls (pageChange)="p = $event" style="border-radius: 5px;" (pageChange)="numPage($event)"></pagination-controls>
-                                                        </ul>         
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                             </div>
-                        </div>
-                    </div>
-                </div>
+<div class="row">  
+<div class="col-12 col-sm-12 col-md-12">
+<div id="middleblock">
+<div class="card text-center">
+<div class="card-body text-center" style="background-color:#832EBF">
+<div class="container-fluid">
+<div class="row">
+<div class="card col-sm-12 col-md-12" style="background-color:#a6c9e2">
+<div class="card-body">
+<h2>หนังสือทั้งหมด</h2>
+<br>
+<div class="card" style="background-color:#832EBF; border-style: solid ; border-width: 6px; border-color:aliceblue">
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-6">
+        <div class="row">
+        <div class="col-12" style="color: aliceblue">
+            <div class="form-group">
+                <label for="exampleFormControlInput1">ค้นหาด้วยวันที่</label>                
+                <ngx-mat-drp (selectedDateRangeChanged)="updateRange($event)" [options]="options" #dateRangePicker></ngx-mat-drp>
             </div>
         </div>
+        <!-- <div class="col-12" style="color: aliceblue">
+            <div class="form-group">
+                <label for="exampleFormControlInput1"> </label>                
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="เลือกวันที่ จาก-ถึง">
+            </div>
+        </div> -->
+        <div class="col-12">
+        <div class="input-group input-group-sm">
+            <input type="" name="" class="form-control" placeholder="ค้นหา..." [(ngModel)]="sText">             
+            <div class="input-group-btn">
+                <button id="bottom" type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
+            </div>
+        </div>       
+        </div>  
+        </div> 
+        </div>
+
+        <div class="col-6">
+        <div class="row">
+        <div class="col-6" style="color: aliceblue">
+            <div class="form-group">
+            <label for="exampleFormControlSelect1">Example select</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            </div>
+        </div>  
+        <div class="col-6" style="color: aliceblue">
+            <div class="form-group">
+            <label for="exampleFormControlSelect1">Example select</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            </div>
+        </div>
+            <div class="col-12">
+            <div class="input-group input-group-sm">
+                <input type="" name="" class="form-control" placeholder="ค้นหา..." [(ngModel)]="sText">             
+                <div class="input-group-btn">
+                    <button id="bottom" type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
+                </div>
+            </div>       
+            </div>  
+        </div> 
     </div>
+</div>
+        <br> 
+</div>
+</div>
+<br>
+<div class="card">
+        <div class="card-header" style="background-color: #650DAD;color: aliceblue">
+        <div *ngIf="admin == false" class="row">
+        <div class="input-group input-group-sm ml-auto" style="width: 300px;"> 
+        <input type="text" name="table_search" class="form-control" placeholder="ค้นหา" [(ngModel)]="sText">             
+        <div class="input-group-btn">
+        <button type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
+        </div>
+        </div>
+        </div>
+        <ul *ngIf="admin == true" class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+        <a *ngIf="btnStatus == true" (click)="changeDocUC(1)" class="nav-link " href="javascript:void(0)" >หนังสือปัจจุบัน</a>
+        <a *ngIf="btnStatus != true" (click)="changeDocUC(1)" class="nav-link active" href="javascript:void(0)" >หนังสือปัจจุบัน</a>
+        </li>
+        <li class="nav-item">
+        <a *ngIf="btnStatus == false" (click)="changeDocUC(0)" class="nav-link " href="javascript:void(0)" >หนังสือที่ถูกยกเลิก</a>
+        <a *ngIf="btnStatus != false" (click)="changeDocUC(0)" class="nav-link active" href="javascript:void(0)" >หนังสือที่ถูกยกเลิก</a>
+        </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ปีของเอกสาร</a>
+        <div class="dropdown-menu">
+        <div class="dropdown-submenu" *ngFor="let n of num_year;let i = index">
+        <a class="dropdown-item" (click)="getDocfromYear(n.year_time)">{{n.year_time}}</a>                                                                                
+        <div class="dropdown-menu">
+        <div class="dropdown-item">
+        <li class="dropdown" *ngFor="let nm of num_mounth;let i = index">
+        <a *ngIf="nm.mounth_time == 1" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน มกราคม</a>
+        <a *ngIf="nm.mounth_time == 2" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน กุมภาพันธ์</a>
+        <a *ngIf="nm.mounth_time == 3" tabindex="-3" (click)="getDocfrommonth(nm.mounth_time)">เดือน มีนาคม</a>
+        <a *ngIf="nm.mounth_time == 4" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน เมษายน</a>
+        <a *ngIf="nm.mounth_time == 5" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน พฤษภาคม</a>
+        <a *ngIf="nm.mounth_time == 6" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน มิถุนายน</a>
+        <a *ngIf="nm.mounth_time == 7" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน กรกฎาคม</a>
+        <a *ngIf="nm.mounth_time == 8" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน สิงหาคม</a>
+        <a *ngIf="nm.mounth_time == 9" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน กันยายน</a>
+        <a *ngIf="nm.mounth_time == 10" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน ตุลาคม</a>
+        <a *ngIf="nm.mounth_time == 11" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน พฤศจิกายน</a>
+        <a *ngIf="nm.mounth_time == 12" tabindex="-1" (click)="getDocfrommonth(nm.mounth_time)">เดือน ธันวาคม</a>
+        <!-- <div class="dropdown-divider"></div> -->
+        </li>                                                                                                    
+        </div>
+        </div>
+        </div>
+        </div>
+        </li>
+        <!-- <li class="nav-item">
+        <a class="nav-link" href="#">เลขทะเบียน</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">ปี</a>
+        </li> -->
+
+        <!-- <li class="ml-auto">
+        <div class="search-box">
+        <input class="search-text" type="text" name="" placeholder="test....">
+        <a class="search-btn" href=""><i class="fa fa-search"></i></a>
+        </div>
+        </li> -->
+
+        <li class="ml-auto">                  
+        <div class="input-group input-group-sm ml-auto" style="width: 250px;">
+        <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา..." [(ngModel)]="shText">             
+        <div class="input-group-btn">
+        <button id="submit" type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
+        </div>
+        </div>
+        </li>
+
+        <li class="ml-auto">                  
+            <div class="input-group input-group-sm ml-auto" style="width: 250px;">
+                <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา..." [(ngModel)]="sText">             
+                <div class="input-group-btn">
+                    <button id="submit" type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </li>
+<!-- 
+        <li class="ml-auto">
+                <form action="/action_page.php">
+                    <select name="cars">
+                      <option value="volvo">Volvo</option>
+                      <option value="saab">Saab</option>
+                      <option value="fiat">Fiat</option>
+                      <option value="audi">Audi</option>
+                    </select>                    
+                  </form>
+        </li> -->
+
+        </ul>
+        </div>
+
+        <div class="card-body">
+        <div class="table-responsive">
+        <table class="table border-bottom">
+        <thead class="thead" style="background: #2d60c6;color: aliceblue">
+        <tr>
+        <th scope="col">ลำดับ</th>
+        <th scope="col">ที่ ศธ.</th>
+        <th scope="col">เลขทะเบียนส่ง</th>
+        <th scope="col">ลงวันที่</th>
+        <th scope="col">ลงที่จอง</th>
+        <th scope="col">จาก</th>
+        <th scope="col">ถึง</th>
+        <th scope="col">เรื่อง</th>
+        <th scope="col">รายละเอียด</th>
+        <th *ngIf="admin" scope="col">เพิ่มเติม</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let s of show| paginate: { itemsPerPage: 10, currentPage: p } | filter: sText | filterii: shText;  let i = index">
+        <th scope="row">{{numpage+(i + 1)}}</th>
+        <td>ศธ.1590.15(4)/</td>
+        <td >{{s.number_of_book}}</td>
+        <td>{{s.day_time}}/{{s.mounth_time}}/{{s.year_time}}</td>
+        <td>{{s.day}}/{{s.month}}/{{s.year}}<br>{{s.hour}}:{{s.minute}} น.</td>
+        <td>{{s.sender}}</td>
+        <td>{{s.to}}</td>
+        <td>{{s.name}}</td>
+        <td>
+        
+        <button *ngIf="(s.file == '')" type="button" class="btn btn-danger " data-toggle="modal" [attr.data-target]="'#exampleModal'+i">
+                <a data-toggle="tooltip" data-placement="top" title="!ไม่มีเอกสาร">แสดง</a>
+            </button>
+        <button *ngIf="(s.file != '')" type="button" class="btn btn-success " data-toggle="modal" [attr.data-target]="'#exampleModal'+i">
+            <a data-toggle="tooltip" data-placement="top" title="มีเอกสาร">แสดง</a>
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade bd-example-modal-lg" id="exampleModal{{i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+        <h3 class="modal-title">แสดงรายละเอียดหนังสือ</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+        <p style="text-align: center;">ข้อมูลของเอกสาร</p>
+        <div class="container">
+        
+        <div class="row" style="text-align: center">
+        <div class="col-md-6">
+        <p>ชั้นความเร็ว : {{s.speed}}</p>
+        </div>
+        <div class="col-md-6">
+        <p>ชั้นความลับ : {{s.secret}}</p>
+        </div>
+        </div>
+        
+        <div class="row" style="text-align: left">
+        <div class="col-md-12">
+        <div>
+        <p>การปฏิบัติ : {{s.practice}}</p>
+        </div>
+        </div>
+        </div>
+        
+        <div class="row" style="text-align: left">
+        <div class="col-md-12">
+        <div>
+        <p>หมายเหตุ : {{s.note}}</p>
+        </div>
+        </div>
+        </div>
+        
+        <div class="row" style="text-align: left">
+        <div class="col-md-4">
+        <div>
+        <p>ไฟล์เอกสาร : <a *ngIf="(s.file != '')" class="btn" (click)="openfile(s.file)"><span >ดูไฟล์เอกสาร</span  > </a>    
+        <a *ngIf="(s.file == '')" class="btn"><span >ไม่มีไฟล์เอกสาร</span  > </a></p>
+        </div>
+        </div>
+        <div class="col-md-4" style="text-align: center;">
+        <div>
+        <!-- <button type="button" class="btn btn-danger"><i class="fas fa-eye"></i></button>
+        <button type="button" class="btn btn-danger"><i class="fas fa-download"></i></button> -->
+        </div>
+        </div>
+        <div class="col-md-4">
+        <div>
+        
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" (click)="goToHomeDupNumBook(s.number_of_book, s)" class="btn btn-info mr-auto" data-dismiss="modal" >ใช้เลขซ้ำ</button>
+        <button type="button"  class="btn btn-danger" data-dismiss="modal">ปิด</button>                                                                             
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+        </div>
+        </div>
+        </div>
+        </td>
+        <td *ngIf="admin">
+        <div class="dropdown" *ngIf="btnStatus == false">
+        <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        จัดการ
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button id="tapone" (click)="goToHome(s)" class="dropdown-item" type="button"><i class="fas fa-wrench"></i>  แก้ไข</button>                                                                                  
+        <button id="taptwo" (click)="putstatus(s.id)" class="dropdown-item" type="button"><i class="fas fa-trash-alt"></i>  ยกเลิก</button>
+        <label id="tapthree" for="file{{i}}" class="dropdown-item"><i class="fas fa-upload"></i>  อัพโหลดไฟล์
+        <input type="file" (change)="putFile($event,s.id)" name="file" id="file{{i}}"  hidden>
+        </label>
+        </div>
+        </div>
+        <button type="button" (click)="goToHomeNumC(s.number_of_book,s)"  *ngIf="btnStatus != false"  class="btn btn-danger" data-dismiss="modal">ใช้เลขเก่า</button>                                                                             
+        </td>
+        </tr>
+        <tr *ngIf="show&&show.length==0">
+        <div>ไม่มีข้อมูล.....</div>
+        </tr>                        
+        </tbody>
+        </table>
+        </div>
+        </div> 
+        <div class="card-footer"  style="background-color: #650DAD;">
+        <ul class="pagination fa-pull-right">
+        <pagination-controls (pageChange)="p = $event" style="border-radius: 5px;" (pageChange)="numPage($event)"></pagination-controls>
+        </ul>         
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
 </div>
 <app-footer></app-footer> 

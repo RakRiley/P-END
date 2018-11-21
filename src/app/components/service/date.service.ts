@@ -64,6 +64,19 @@ export class DateService {
     })
   }
 
+  getStaticMonth(year){
+    return new Promise((resolve,reject)=>{
+      this.http.get(environment.api+'/getCountMounth',{body:{
+        year:year
+      }}).map(res=>res.json())
+      .subscribe((data)=>{
+        resolve(data)
+      },error=>{
+        reject(error);
+      })
+    })
+  }
+
    postDate(data){
     return new Promise((resolve,reject)=>{
       let headers = new Headers({ "Content-Type": "application/json" });

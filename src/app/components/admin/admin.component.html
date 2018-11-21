@@ -13,15 +13,15 @@
                                                 <!-- <h4>แก้ไขผู็ที่ลงนาม</h4> -->
                                             <div id="middle">
                                                 <div class="card">
-                                                    <div id="cb1" class="card-header">
+                                                    <div id="cb1" class="card-header" style="color:#832EBF;">
                                                             Header
                                                     </div>
                                                     <div class="card-body">
                                                         <div class="row">
                                                             <div class="col-3">
                                                                 <div class="card">
-                                                                    <div class="card-header bg-warning">Header</div>
-                                                                    <div class="card-body">
+                                                                    <div class="card-header bg-warning">เมนู</div>
+                                                                    <div class="card-body" style="background-color:#a6c9e2">
                                                                        <div class="card" style="border-radius: 20px;">
                                                                            <div class="card-body">
                                                                                 <ul class="nav flex-column">
@@ -45,85 +45,150 @@
                                                                            </div>
                                                                        </div>
                                                                     </div> 
-                                                                    <div class="card-footer bg-warning">Footer</div>
+                                                                    <div class="card-footer bg-warning text-warning">Footer</div>
                                                                 </div>
                                                             </div>
                                                             <div *ngIf="link==1" class="col-9">
                                                                 <div class="card">
-                                                                    <div class="card-header bg-warning">Header</div>
-                                                                    <div class="card-body">
-                                                                        <div class="row">
-                                                                        <div class="col-12">
-                                                                            <div class="row">
-                                                                                dfgdfg
+                                                                    <div class="card-header bg-warning ">จำนวนผู้ใช้</div>
+                                                                    <div class="card-body" style="background-color:#a6c9e2">
+                                                                       <div class="card" style="border-radius:20px;background-color:#832EBF">
+                                                                            <div class="card-body">
+                                                                                <p>รายชื่อผู้ใช้</p>
+                                                                                    <div class="card" *ngFor="let n of Guse | paginate: { itemsPerPage: 10, currentPage: p } let i = index" style="border-radius:20px;background-color:rgba(150, 150, 196, 0.959)">
+                                                                                        <div class="card-body">
+                                                                                            <div class="row col-12">
+                                                                                                <div class="col-5" style="text-align: left;">
+                                                                                                        <table>
+                                                                                                            <tbody>
+                                                                                                                <tr>
+                                                                                                                    <th>รหัสพนักงาน :</th>
+                                                                                                                    <td>{{n.student_code}}</td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <th>ตำแหน่ง : </th>
+                                                                                                                    <td></td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <th>หน่วยงาน : </th>
+                                                                                                                    <td>{{n.Role}}</td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <th>เบอร์มือถือ : </th>
+                                                                                                                    <td>{{n.Telephone}}</td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <th>จำนวนเอกสาร :</th>
+                                                                                                                    <td></td>
+                                                                                                                </tr>
+                                                                                                            </tbody>
+                                                                                                        </table>                                                                              
+                                                                                                    </div>
+                                                                                                    <div class="col-7" style="text-align: left;">
+                                                                                                        <table>
+                                                                                                            <tbody>
+                                                                                                                    <tr>
+                                                                                                                    <th>ชื่อ-สกุล :</th>
+                                                                                                                    <td>{{n.firstname}} {{n.lastname}}</td>
+                                                                                                                    </tr>
+                                                                                                                    <tr>
+                                                                                                                    <th>สถานะ : </th>
+                                                                                                                    <td *ngIf="n.status == 1" >ผู้ใช้งาน</td>
+                                                                                                                    <td *ngIf="n.status == 0" >ผู้ดูแลระบบ</td>
+                                                                                                                    </tr>
+                                                                                                                    <tr>
+                                                                                                                        <th>สังกัด : </th>
+                                                                                                                        <td>{{n.FacultyName_TH}}</td>
+                                                                                                                    </tr>
+                                                                                                                    <tr>
+                                                                                                                        <th>เบอร์โทรศัพท์ : </th>
+                                                                                                                        <td>054-466-666 ต่อ2319, 2330</td>
+                                                                                                                    </tr>
+                                                                                                                    <tr>
+                                                                                                                        <!-- <th>จำนวนเอกสาร :</th>
+                                                                                                                        <td></td> -->
+                                                                                                                    </tr>
+                                                                                                            </tbody>
+                                                                                                        </table>            
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                
                                                                             </div>
-                                                                        </div>
-                                                                        </div>
+                                                                           <div>
+                                                                            <ul class="pagination fa-pull-right" >
+                                                                                <pagination-controls  (pageChange)="p = $event" (pageChange)="numPage($event)"></pagination-controls>
+                                                                            </ul> 
+                                                                           </div>
+                                                                       </div>
                                                                     </div> 
-                                                                    <div class="card-footer bg-warning">Footer</div>
+                                                                    <div class="card-footer bg-warning text-warning">Footer</div>
                                                                 </div>
                                                             </div>
                                                             <div *ngIf="link==2" class="col-9">
                                                                 <div class="card">
-                                                                    <div class="card-header bg-warning">Header</div>
-                                                                    <div class="card-body">
-                                                                       <div class="row">
-                                                                        <div class="col-12">
-                                                                            <div class="row">
-                                                                                <div class="col-md-12">
-                                                                                        <p style="text-align: left">ชื่อผู้ลงนามในหนังสือปัจจุบัน</p>
-                                                                                    <div class="input-group mb-3">
-                                                                                    <div class="input-group-prepend">
-                                                                                        <label class="input-group-text" for="inputGroupSelect01">เลือกชื่อ</label>
+                                                                    <div class="card-header bg-warning ">แก้ใขซื้อผู้ลงนาม</div>
+                                                                    <div class="card-body" style="background-color:#a6c9e2">
+                                                                       <div class="card" style="border-radius:20px;background-color:rgba(150, 150, 196, 0.959)">
+                                                                        <div class="card-body">
+                                                                                <div class="row">
+                                                                                        <div class="col-md-12">
+                                                                                                <p style="text-align: left">ชื่อผู้ลงนามในหนังสือปัจจุบัน</p>
+                                                                                            <div class="input-group mb-3">
+                                                                                            <div class="input-group-prepend">
+                                                                                                <label class="input-group-text" for="inputGroupSelect01">เลือกชื่อ</label>
+                                                                                            </div>
+                                                                                            <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="name" name="name">
+                                                                                                <option [selected]="" value="เลือก...">เลือก...</option>
+                                                                                                <option *ngFor="let N of si " [ngValue]="N">{{N.name}}</option>
+                                                                                            </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-md-12">
+                                                                                            <p style="text-align: left">ชื่อผู้ลงนามในหนังสือที่ต้องการแก้ไข</p>
+                                                                                            <div class="input-group mb-3">
+                                                                                            <div class="input-group-prepend">
+                                                                                                <label class="input-group-text" for="inputGroupSelect01" >แก้ไขชื่อ</label>
+                                                                                            </div>
+                                                                                            <input type="text" class="form-control" placeholder="ทำการแก้ไขชื่อ" [(ngModel)]="name.name" name="name">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-12">
+                                                                                            <button type="button" class="btn btn-warning" (click)="putSigner()">ยืนยันการแก้ไขชื่อ</button>
+                                                                                        </div>
+                                                                                        <div class="col-md-12">
+                                                                                            <p style="text-align: left">ชื่อผู้ลงนามในหนังสือที่ต้องการเพิ่ม</p>
+                                                                                            <div class="input-group mb-3">
+                                                                                            <div class="input-group-prepend">
+                                                                                                <label class="input-group-text" for="inputGroupSelect01">เพิ่มชื่อ</label>
+                                                                                            </div>
+                                                                                            <input type="text" class="form-control"  placeholder="ทำการเพิ่มชื่อ" [(ngModel)]="Aname" name="Aname">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-12">
+                                                                                            <button type="button" class="btn btn-warning" (click)="postSigner()">ยืนยันการเพิ่มชื่อ</button>
+                                                                                        </div>
                                                                                     </div>
-                                                                                    <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="name" name="name">
-                                                                                        <option [selected]="" value="เลือก...">เลือก...</option>
-                                                                                        <option *ngFor="let N of si " [ngValue]="N">{{N.name}}</option>
-                                                                                    </select>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-12">
-                                                                                    <p style="text-align: left">ชื่อผู้ลงนามในหนังสือที่ต้องการแก้ไข</p>
-                                                                                    <div class="input-group mb-3">
-                                                                                    <div class="input-group-prepend">
-                                                                                        <label class="input-group-text" for="inputGroupSelect01" >แก้ไขชื่อ</label>
-                                                                                    </div>
-                                                                                    <input type="text" class="form-control" placeholder="ทำการแก้ไขชื่อ" [(ngModel)]="name.name" name="name">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-12">
-                                                                                    <button type="button" class="btn btn-warning" (click)="putSigner()">ยืนยันการแก้ไขชื่อ</button>
-                                                                                </div>
-                                                                                <div class="col-md-12">
-                                                                                    <p style="text-align: left">ชื่อผู้ลงนามในหนังสือที่ต้องการเพิ่ม</p>
-                                                                                    <div class="input-group mb-3">
-                                                                                    <div class="input-group-prepend">
-                                                                                        <label class="input-group-text" for="inputGroupSelect01">เพิ่มชื่อ</label>
-                                                                                    </div>
-                                                                                    <input type="text" class="form-control"  placeholder="ทำการเพิ่มชื่อ" [(ngModel)]="Aname" name="Aname">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-12">
-                                                                                    <button type="button" class="btn btn-warning" (click)="postSigner()">ยืนยันการเพิ่มชื่อ</button>
-                                                                                </div>
-                                                                            </div>
                                                                         </div>
                                                                        </div>
                                                                     </div> 
-                                                                    <div class="card-footer bg-warning">Footer</div>
+                                                                    <div class="card-footer bg-warning text-warning">Footer</div>
                                                                 </div>
                                                             </div>
                                                             <div *ngIf="link==3" class="col-9">
                                                                 <div class="card">
-                                                                    <div class="card-header bg-warning">Header</div>
-                                                                    <div class="card-body">
-                                                                        <div class="row">
-                                                                        <div class="col-12">
+                                                                    <div class="card-header bg-warning ">สถิติ</div>
+                                                                    <div class="card-body" style="background-color:#a6c9e2">
+                                                                        <div class="card" style="border-radius: 20px;">
+                                                                        <div class="card-body">
                                                                             <div class="row">
-                                                                                <div class="container">
-                                                                                    <div>
-                                                                                        <div style="display: block">
-                                                                                          <canvas baseChart
+                                                                                <div class="container-fluid">
+                                                                                    <div class="row">
+                                                                                    <div class="col-6">
+                                                                                        <p>จำนวนหนังสือต่อปี</p>
+                                                                                        <div style="display: block ;">
+                                                                                            <canvas baseChart
                                                                                                   [datasets]="barChartData"
                                                                                                   [labels]="barChartLabels"
                                                                                                   [options]="barChartOptions"
@@ -134,20 +199,77 @@
                                                                                         </div>
                                                                                         <!-- <button (click)="getallYear()">Update</button> -->
                                                                                       </div>
+                                                                                    <div class="col-6">
+                                                                                        <p>จำนวนหนังสือต่อผู้ใช้</p>
+                                                                                        <div style="display: block">
+                                                                                            <canvas baseChart
+                                                                                                [data]="statuspieChartData"
+                                                                                                [labels]="statuspieChartLabels"
+                                                                                                [chartType]="statuspieChartType"
+                                                                                                (chartHover)="statuschartHovered($event)"
+                                                                                                (chartClick)="statuschartClicked($event)"></canvas>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                <div class="container-fluid">
+                                                                                    <div class="row">
+                                                                                        <div class="col-12">
+                                                                                           
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         </div>
+                                                                        <br>
+                                                                        <br>
+                                                                        <div class="card" style="border-radius: 20px;">
+                                                                            <div class="card-body">
+                                                                                <div class="row">
+                                                                                    <div class="container-fluid">
+                                                                                        <div class="row">                                                                                    
+                                                                                          <div class="col-12">
+                                                                                                <p>จำนวนหนังสือต่อเดือน</p>
+                                                                                            <div>
+                                                                                                <div style="display: block">
+                                                                                                  <canvas baseChart
+                                                                                                          [datasets]="MonthbarChartData"
+                                                                                                          [labels]="MonthbarChartLabels"
+                                                                                                          [options]="barChartOptions"
+                                                                                                          [legend]="MonthbarChartLegend"
+                                                                                                          [chartType]="MonthbarChartType"
+                                                                                                          ></canvas>
+                                                                                                </div>
+                                                                                                <!-- <button (click)="randomize()">Update</button> -->
+                                                                                            </div>
+                                                                                          </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="container-fluid">
+                                                                                        <div class="row">
+                                                                                            <div class="col-12">
+                                                                                                
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div> 
-                                                                    <div class="card-footer bg-warning">Footer</div>
+                                                                    <div class="card-footer bg-warning text-warning">Footer</div>
                                                                 </div>
                                                             </div>
                                                             <div *ngIf="link==4" class="col-9">
                                                                 <div class="card">
-                                                                    <div class="card-header bg-warning">Header</div>
-                                                                    <div class="card-body test-center">
-                                                                        <div class="row">
-                                                                        <div class="col-12">
+                                                                    <div class="card-header bg-warning">หลักของเลขหนังสือ</div>
+                                                                    <div class="card-body test-center" style="background-color:#a6c9e2">
+                                                                        <div class="card" style="border-radius:20px;background-color:rgba(150, 150, 196, 0.959)">
+                                                                        <div class="card-body">
                                                                             <div class="container">
                                                                                 <div>
                                                                                     <p>หลักของเลขหนังสือ</p> 
@@ -172,19 +294,19 @@
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-4">
-                                                                                        <p>ข้อความ</p>
+                                                                                        <p>ให้ทำการเลือกปีแล้วใส่จำนวนหลักของเลขหนังสือที่ต้องการ</p>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                         </div>
                                                                     </div> 
-                                                                    <div class="card-footer bg-warning">Footer</div>
+                                                                    <div class="card-footer bg-warning text-warning">Footer</div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div id="cb1" class="card-footer">
+                                                    <div id="cb1" class="card-footer" style="color:#832EBF;">
                                                             Footer
                                                     </div>
                                                 </div>

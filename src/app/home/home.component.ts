@@ -394,6 +394,8 @@ export class HomeComponent implements OnInit {
           lastname: this.ln.LastName_TH,
           Role: this.ln.ProgramName_TH,
           prefix: this.ln.Title,
+          Telephone: this.ln.Telephone,
+          FacultyName_TH: this.ln.FacultyName_TH,
           status:'1'
         };
         this.userService.postUser(data);
@@ -421,6 +423,8 @@ export class HomeComponent implements OnInit {
               lastname: this.ln.LastName_TH,
               Role: this.ln.ProgramName_TH,
               prefix: this.ln.Title,
+              Telephone: this.ln.Telephone,
+              FacultyName_TH: this.ln.FacultyName_TH,
               status:'1'
             };
             this.userService.postUser(data);

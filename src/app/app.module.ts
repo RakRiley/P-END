@@ -7,10 +7,13 @@ import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { HttpModule} from '@angular/http'
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { HttpModule } from '@angular/http'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { ChartsModule } from 'ng2-charts';
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxMatDrpModule } from 'ngx-mat-daterange-picker';
 ///
 import {LoginService} from './provider/login/login.service';
 import { GetApiService } from './get-api.service';
@@ -59,8 +62,12 @@ const router : Routes =[
     FilterPipe,
     FilterPipeii,
     
+    
   ],
   imports: [
+    
+    BrowserAnimationsModule,
+    NgxMatDrpModule,
     BrowserModule,
     RouterModule.forRoot(router),
     FormsModule,
@@ -70,7 +77,17 @@ const router : Routes =[
     NgxPaginationModule,
     MomentModule,
     MyDatePickerModule,
-    ChartsModule
+    ChartsModule,
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      // radius: 100,
+      // outerStrokeWidth: 16,
+      // innerStrokeWidth: 8,
+      // outerStrokeColor: "#78C000",
+      // innerStrokeColor: "#C7E596",
+      // animationDuration: 300,
+    })
+
   ],
   providers: [LoginService, GetApiService, UserService ,DocumnetService, DateService, FileService, SignerService, AdminService,YearPegService,  
   

@@ -295,7 +295,7 @@ this.datadoc.sort((a, b) => {
     this.year_pegService.getYear_peg().then((yp:any)=>{
       this.numpeg = yp;
       this.numpeg.forEach(e => {
-        if (new Date().getFullYear() == e.year_change) {
+        if (new Date().getFullYear()+543 == e.year_change) {
           this.nuu = e.peg_change;
           return false;
         }
@@ -308,7 +308,7 @@ this.datadoc.sort((a, b) => {
           e.number_of_book = ('0000000'+e.number_of_book).slice(-this.nuu-2)
         }
       });
-      console.log("showssssssww",this.newdoc);  
+      console.log("showww",this.newdoc);  
       
     });
     this.datadoc.forEach(sss=>{
