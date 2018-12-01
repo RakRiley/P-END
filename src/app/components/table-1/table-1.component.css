@@ -113,3 +113,17 @@ input[type="text"]{
     line-height: 40px;
     width: 0px;
 } 
+.ngx-mat-drp-date-input[_ngcontent-c3]{
+    color:aliceblue !important;
+}
+.ngx-mat-drp-date-input[_ngcontent-c3]{
+    color:aliceblue !important;
+}
+
+ngx-mat-drp {
+    color:#fff;
+}
+
+.white-text {
+    color: #fff;
+}

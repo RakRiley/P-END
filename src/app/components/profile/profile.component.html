@@ -79,6 +79,97 @@
                     <div class="card-body">
                       <h2>หนังสือทั้งหมดของผู้ใช้งาน</h2>
                       <br>
+                      <div class="card" style="background-color:#832EBF; border-style: solid ; border-width: 6px; border-color:aliceblue">
+                        <div class="container">
+                            <br>
+                            <div class="row">
+                        
+                                <div class="col-2">
+                        
+                                </div>
+                        
+                                <div class="col-8">
+                                <div class="row">
+                                <div class="col-12" style="color: aliceblue">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">ค้นหาด้วยวันที่</label>                
+                                        <ngx-mat-drp style="color:aliceblue" (selectedDateRangeChanged)="updateRange($event)" [options]="options" #dateRangePicker name="len"></ngx-mat-drp>
+                                    </div>
+                                </div>
+                                </div> 
+                                <div class="row">
+                                    <div class="col-4" style="color: aliceblue">
+                                        <div class="form-group">
+                                        <label for="exampleFormControlSelect1">เลือกหัวข้อที่จะค้นหา</label>
+                                        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="type" name="type">
+                                            <option value="" selected >ปกติ</option>
+                                            <option value="number_of_book">เลขทะเบียนส่ง</option>
+                                            <!-- <option value="">ลงวันที่</option> -->
+                                            <option value="sender">จาก</option>
+                                            <option value="to">ถึง</option>
+                                            <option value="name">เรื่อง</option>
+                                        </select>
+                                        </div>
+                                    </div>  
+                                    <div class="col-8" style="color: aliceblue">
+                                            <div class="form-group">
+                                                    <label for="exampleFormControlSelect1">ค้นหาเลย</label>
+                                        <div class="input-group input-group-sm">
+                                            <input [disabled]="!type" type="" name="" class="form-control" placeholder="ค้นหา..." [(ngModel)]="text" name="text">             
+                                            <div class="input-group-btn">
+                                                <button id="bottom" type="button" (click)="postDocumentsearch()" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
+                                            </div>
+                                        </div>   
+                                            </div>    
+                                    </div> 
+                                </div>
+                                </div>
+                        
+                                <div class="col-2">
+                        
+                                </div>
+                        
+                                <!-- <div class="col-6">
+                                <div class="row">
+                                <div class="col-12" style="color: aliceblue">
+                                    <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Example select</label>
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                    </div>
+                                </div>  
+                                <div class="col-6" style="color: aliceblue">
+                                    <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Example select</label>
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                    </div>
+                                </div>
+                                    <div class="col-12">
+                                    <div class="input-group input-group-sm">
+                                        <input type="" name="" class="form-control" placeholder="ค้นหา..." [(ngModel)]="sText">             
+                                        <div class="input-group-btn">
+                                            <button id="bottom" type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>       
+                                    </div>  
+                                </div> 
+                            </div> -->
+                        </div>
+                                <br> 
+                        </div>
+                        </div>
+                      <br>
                       <div class="card">
                         <div class="card-header" style="background-color: #650DAD;">
                           <div class="box-tools">
@@ -137,8 +228,8 @@
                                   <td>{{doc.name}}</td>                                                
                                   <!-- <td><a href="javacript:void(0)" ><app-detail></app-detail></a></td> -->
                                   <td><!-- Button trigger modal -->
-                                    <button *ngIf="(doc.file == '')" type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#exampleModal'+i">แสดง</button>
-                                    <button *ngIf="(doc.file != '')" type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#exampleModal'+i">แสดง</button>
+                                    <button *ngIf="(doc.file == '')" type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#exampleModal'+i">ไม่มีเอกสาร</button>
+                                    <button *ngIf="(doc.file != '')" type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#exampleModal'+i">มีเอกสาร</button>
                                     
                                     <!-- Modal -->
                                     <div class="modal fade bd-example-modal-lg" id="exampleModal{{i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -215,6 +306,9 @@
                                   <td><label [ngClass]="(admin == true || doc.file == '') ? 'btn btn-success' : 'btn btn-success disabled'" >เลือกไฟล์ <input type="file"  (change)="putFile($event,doc.id)" 
                                     name="file" hidden class="form-control-file" id="exampleFormControlFile1" [disabled]="admin == false && doc.file != ''"></label></td>
                                   </tr>
+                                  <tr *ngIf="newdoc&&newdoc.length==0">
+                                      <div>ไม่มีข้อมูล.....</div>
+                                  </tr>  
                               </tbody>
                               </table>
                           </div>

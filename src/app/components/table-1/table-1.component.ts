@@ -9,6 +9,7 @@ import { DocumnetService } from '../service/documnet.service';
 import { DateService } from '../service/date.service';
 import {environment} from '../../../environments/environment'
 var swal = require('sweetalert');
+import Swal from 'sweetalert2'
 import { YearPegService } from '../service/year-peg.service';
 import {  } from '@angular/core'
 import { NgxDrpOptions, PresetItem, Range } from 'ngx-mat-daterange-picker';
@@ -22,6 +23,7 @@ export class Table1Component implements OnInit {
   numpage: number = 0;
   data:any;
   file:any;
+  selectype:any;
   urlapi = environment.api
   constructor(private http: Http, 
   public router:Router, 
@@ -49,9 +51,9 @@ export class Table1Component implements OnInit {
   presets:Array<PresetItem> = [];
   A:any
 
-  // updateRange(range: Range){
-  //   this.range = range;
-  // }  
+  updateRange(range: Range){
+    this.len = range;
+  }  
 
   setupPresets() {
  
@@ -108,14 +110,41 @@ export class Table1Component implements OnInit {
       console.log("id xxxx", id);
       
       var status = {status: "C"};
-      this.documentService.putStatusDocument(status,id).then(res => {
-        if(res) {
-          console.log("Add status success");  
+      Swal({
+        title: 'คุณแน่ใจหรือไม่?',
+        text: 'คุณจะไม่สามารถใช้ไฟล์เอกสารนี้ได้.',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'ใช่, ยกเลิก ไฟล์เอกสาร!',
+        cancelButtonText: 'ไม่, ไม่ยกเลิก ไฟล์เอกสาร'
+      }).then((result) => {
+        if (result.value) {
+          Swal(
+            
+            'ยกเลิกเรียบร้อยแล้ว!',
+            'ไฟล์เอกสารของคุณได้ถูกยกเลิกแล้ว.',
+            'success'
+          );     this.documentService.putStatusDocument(status,id).then(res => {
+            // if(res) {
+            //   console.log("Add status success");  
+            // }
+            
+            this.Showdatatable();
+          })
+        // For more information about handling dismissals please visit
+        // https://sweetalert2.github.io/#handling-dismissals
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal(
+            'หยุด',
+            'ไฟล์เอกสาร ของคุณปลอยภัยแล้ว 🙂',
+            'error'
+          )
         }
-        this.Showdatatable();
-      })
+      })     
   
   }
+
+  
 
 //   putstatusU(id){
 //     console.log("id xxxx", id);
@@ -175,11 +204,22 @@ export class Table1Component implements OnInit {
      
     })
   }  
+
+
+
+  text:any="";
+  type:any="";
+  len:any=null;
+  postDocumentsearch(){
+    this.Showdatatable()
+  }
+
+
   numpeg;
   nuu
     show : any;
   Showdatatable(){
-    this.documentService.getDocument().then((docc:any)=>{
+    this.documentService.postDocumentsearch(this.type,this.text,this.len).then((docc:any)=>{
       console.log(docc,'ข้อมูลของตารางdoc')
       this.show=docc;
       this.show.sort((a, b) => {

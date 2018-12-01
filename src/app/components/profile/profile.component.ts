@@ -15,6 +15,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { async } from '../../../../node_modules/@types/q';
 import {environment} from '../../../environments/environment'
 // import { FilterPipe } from '../filterpipe/filterpipe.component';
+import { NgxDrpOptions, PresetItem, Range } from 'ngx-mat-daterange-picker';
 var swal = require('sweetalert');
 @Component({
   selector: 'app-profile',
@@ -56,8 +57,59 @@ export class ProfileComponent implements OnInit {
     }else{
       this.p_login=false;
     }
+
+    const today = new Date();
+    const fromMin = new Date(today.getFullYear(), today.getMonth()-2, 1);
+    const fromMax = new Date(today.getFullYear(), today.getMonth()+1, 0);
+    const toMin = new Date(today.getFullYear(), today.getMonth()-1, 1);
+    const toMax = new Date(today.getFullYear(), today.getMonth()+2, 0);
+    this.setupPresets();
+    this.options = {
+                    presets: this.presets,
+                    format: 'mediumDate',
+                    range: {fromDate:today, toDate: today},
+                    applyLabel: "Submit",                
+                  };
     
    }
+
+   
+
+
+   range:Range = {fromDate:new Date(), toDate: new Date()};
+   options:NgxDrpOptions;
+   presets:Array<PresetItem> = [];
+   B:any
+ 
+   updateRange(range: Range){
+     this.len = range;
+   }  
+ 
+   setupPresets() {
+  
+     const backDate = (numOfDays) => {
+       const today = new Date();
+       return new Date(today.setDate(today.getDate() - numOfDays));
+     }
+     
+     const today = new Date();
+     const yesterday = backDate(1);
+     const minus7 = backDate(7)
+     const minus30 = backDate(30);
+     const currMonthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+     const currMonthEnd = new Date(today.getFullYear(), today.getMonth()+1, 0);
+     const lastMonthStart = new Date(today.getFullYear(), today.getMonth()-1, 1);
+     const lastMonthEnd = new Date(today.getFullYear(), today.getMonth(), 0);
+     
+     this.presets =  [
+       {presetLabel: "Yesterday", range:{ fromDate:yesterday, toDate:today }},
+       {presetLabel: "Last 7 Days", range:{ fromDate: minus7, toDate:today }},
+       {presetLabel: "Last 30 Days", range:{ fromDate: minus30, toDate:today }},
+       {presetLabel: "This Month", range:{ fromDate: currMonthStart, toDate:currMonthEnd }},
+       {presetLabel: "Last Month", range:{ fromDate: lastMonthStart, toDate:lastMonthEnd }}
+     ]
+   }
+   
 
    A:any
    showstatus(){
@@ -265,13 +317,21 @@ export class ProfileComponent implements OnInit {
     })
   }  
 
+  text:any="";
+  type:any="";
+  len:any=null;
+  postDocumentsearch(){
+    this.showdata()
+  }
+
+
   numpeg;
   nuu
   datadoc : any;
   newdoc: any;
 showdata(){
   this.newdoc = [];
-  this.documentService.getDocument().then((doc:any)=>{
+  this.documentService.postDocumentsearch(this.type,this.text,this.len).then((doc:any)=>{
 console.log("ตาราง1",doc);
 this.datadoc=doc
 this.datadoc.sort((a, b) => {
@@ -386,6 +446,7 @@ this.datadoc.sort((a, b) => {
     this.showstatus();
     this.getYear_peg();
     // this.baseinstates();
+    this.setupPresets();
   }
 
 }

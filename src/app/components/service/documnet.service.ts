@@ -9,12 +9,28 @@ import { environment } from '../../../environments/environment';
 @Injectable()
 export class DocumnetService {
 
-  constructor(private http: Http) { }
-
+  constructor(private http: Http) { } 
 
   getDocument() {
     return new Promise((resolve,reject)=>{
       this.http.get(environment.api+'/getDocument').map(res=>res.json())
+      .subscribe((data)=>{
+        resolve(data)
+      },error=>{
+        reject(error);
+      })
+    })
+  }
+
+
+  postDocumentsearch(type,text,len) {
+    return new Promise((resolve,reject)=>{
+      let body = {
+        type:type,
+        text:text,
+        len:len,
+      }
+      this.http.post(environment.api+'/postDocumentsearch',body ).map(res=>res.json())
       .subscribe((data)=>{
         resolve(data)
       },error=>{

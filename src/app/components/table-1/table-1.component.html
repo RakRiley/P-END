@@ -15,34 +15,55 @@
 <div class="container">
     <br>
     <div class="row">
-        <div class="col-6">
+
+        <div class="col-2">
+
+        </div>
+
+        <div class="col-8">
         <div class="row">
         <div class="col-12" style="color: aliceblue">
             <div class="form-group">
                 <label for="exampleFormControlInput1">ค้นหาด้วยวันที่</label>                
-                <ngx-mat-drp (selectedDateRangeChanged)="updateRange($event)" [options]="options" #dateRangePicker></ngx-mat-drp>
+                <ngx-mat-drp style="color: aliceblue" (selectedDateRangeChanged)="updateRange($event)" [options]="options" #dateRangePicker name="len"></ngx-mat-drp>
             </div>
-        </div>
-        <!-- <div class="col-12" style="color: aliceblue">
-            <div class="form-group">
-                <label for="exampleFormControlInput1"> </label>                
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="เลือกวันที่ จาก-ถึง">
-            </div>
-        </div> -->
-        <div class="col-12">
-        <div class="input-group input-group-sm">
-            <input type="" name="" class="form-control" placeholder="ค้นหา..." [(ngModel)]="sText">             
-            <div class="input-group-btn">
-                <button id="bottom" type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
-            </div>
-        </div>       
-        </div>  
+        </div>        
         </div> 
+        <div class="row">
+            <div class="col-4" style="color: aliceblue">
+                <div class="form-group">
+                <label for="exampleFormControlSelect1">เลือกหัวข้อที่จะค้นหา</label>
+                <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="type" name="type">
+                    <option value="" selected >ปกติ</option>
+                    <option value="number_of_book">เลขทะเบียนส่ง</option>
+                    <!-- <option value="date">ลงวันที่</option> -->
+                    <option value="sender">จาก</option>
+                    <option value="to">ถึง</option>
+                    <option value="name">เรื่อง</option>
+                </select>
+                </div>
+            </div>  
+            <div class="col-8" style="color: aliceblue">
+                    <div class="form-group">
+                            <label for="exampleFormControlSelect1">ค้นหาเลย</label>
+                <div class="input-group input-group-sm">
+                    <input [disabled]="!type" type="" name="" class="form-control" placeholder="ค้นหา..." [(ngModel)]="text" name="text">             
+                    <div class="input-group-btn">
+                        <button id="bottom" type="button" (click)="postDocumentsearch()" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
+                    </div>
+                </div>   
+                    </div>    
+            </div> 
+        </div>
         </div>
 
-        <div class="col-6">
+        <div class="col-2">
+
+        </div>
+
+        <!-- <div class="col-6">
         <div class="row">
-        <div class="col-6" style="color: aliceblue">
+        <div class="col-12" style="color: aliceblue">
             <div class="form-group">
             <label for="exampleFormControlSelect1">Example select</label>
             <select class="form-control" id="exampleFormControlSelect1">
@@ -75,7 +96,7 @@
             </div>       
             </div>  
         </div> 
-    </div>
+    </div> -->
 </div>
         <br> 
 </div>
@@ -84,10 +105,10 @@
 <div class="card">
         <div class="card-header" style="background-color: #650DAD;color: aliceblue">
         <div *ngIf="admin == false" class="row">
-        <div class="input-group input-group-sm ml-auto" style="width: 300px;"> 
+        <div class="input-group input-group-sm ml-auto" style="width: 250px;"> 
         <input type="text" name="table_search" class="form-control" placeholder="ค้นหา" [(ngModel)]="sText">             
         <div class="input-group-btn">
-        <button type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
+        <button id="submit" type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
         </div>
         </div>
         </div>
@@ -141,14 +162,14 @@
         </div>
         </li> -->
 
-        <li class="ml-auto">                  
+        <!-- <li class="ml-auto">                  
         <div class="input-group input-group-sm ml-auto" style="width: 250px;">
         <input type="text" name="table_search" class="form-control pull-right" placeholder="ค้นหา..." [(ngModel)]="shText">             
         <div class="input-group-btn">
         <button id="submit" type="button" class="btn btn-primary">ค้นหา <i class="fa fa-search"></i></button>
         </div>
         </div>
-        </li>
+        </li> -->
 
         <li class="ml-auto">                  
             <div class="input-group input-group-sm ml-auto" style="width: 250px;">
@@ -203,10 +224,10 @@
         <td>
         
         <button *ngIf="(s.file == '')" type="button" class="btn btn-danger " data-toggle="modal" [attr.data-target]="'#exampleModal'+i">
-                <a data-toggle="tooltip" data-placement="top" title="!ไม่มีเอกสาร">แสดง</a>
+                <a data-toggle="tooltip" data-placement="top" title="!ไม่มีเอกสาร">ไม่มีเอกสาร</a>
             </button>
         <button *ngIf="(s.file != '')" type="button" class="btn btn-success " data-toggle="modal" [attr.data-target]="'#exampleModal'+i">
-            <a data-toggle="tooltip" data-placement="top" title="มีเอกสาร">แสดง</a>
+            <a data-toggle="tooltip" data-placement="top" title="มีเอกสาร">มีเอกสาร</a>
         </button>
         
         <!-- Modal -->
@@ -251,7 +272,7 @@
         <div class="row" style="text-align: left">
         <div class="col-md-4">
         <div>
-        <p>ไฟล์เอกสาร : <a *ngIf="(s.file != '')" class="btn" (click)="openfile(s.file)"><span >ดูไฟล์เอกสาร</span  > </a>    
+        <p>ไฟล์เอกสาร : <a *ngIf="(s.file != '')" class="btn" (click)="openfile(s.file)"><span >ดูไฟล์เอกสาร</span> </a>    
         <a *ngIf="(s.file == '')" class="btn"><span >ไม่มีไฟล์เอกสาร</span  > </a></p>
         </div>
         </div>

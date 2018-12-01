@@ -12,3 +12,12 @@
 /* .mydp .selection{
     
 } */
+.ngx-mat-drp-date-input[_ngcontent-c3]{
+    color:aliceblue !important;
+    /* background-color: aliceblue !important; */
+}
+.ngx-mat-drp-date-input[_ngcontent-c7] {
+    text-overflow: ellipsis;
+    color:aliceblue !important;
+    /* background-color: aliceblue !important; */
+}
