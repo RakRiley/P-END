@@ -33,10 +33,10 @@ export class Table1Component implements OnInit {
   private year_pegService :YearPegService,) { 
   
     const today = new Date();
-    const fromMin = new Date(today.getFullYear(), today.getMonth()-2, 1);
-    const fromMax = new Date(today.getFullYear(), today.getMonth()+1, 0);
-    const toMin = new Date(today.getFullYear(), today.getMonth()-1, 1);
-    const toMax = new Date(today.getFullYear(), today.getMonth()+2, 0);
+    const fromMin = new Date(today.getFullYear()+543, today.getMonth()-2, 1);
+    const fromMax = new Date(today.getFullYear()+543, today.getMonth()+1, 0);
+    const toMin = new Date(today.getFullYear()+543, today.getMonth()-1, 1);
+    const toMax = new Date(today.getFullYear()+543, today.getMonth()+2, 0);
     this.setupPresets();
     this.options = {
                     presets: this.presets,
@@ -203,15 +203,82 @@ export class Table1Component implements OnInit {
         });
      
     })
-  }  
-
-
+  }
+    
+  len:any=null;
+  postDocumentsearchdate(){
+    this.documentService.postDocumentsearch(null,null,this.len).then((docc:any)=>{
+      console.log(docc,'ข้อมูลของตารางdoc')
+      this.show=docc;
+      this.show.sort((a, b) => {
+        if (a.number_of_book < b.number_of_book) {
+          return -1;
+        } else if (a.number_of_book > b.number_of_book) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      this.year_pegService.getYear_peg().then((yp:any)=>{
+        this.numpeg = yp;
+        this.numpeg.forEach(e => {
+          if (new Date().getFullYear()+543 == e.year_change) {
+            this.nuu = e.peg_change;
+            return false;
+          }
+        });
+        this.show.forEach(e => {
+          if (Number(e.number_of_book) === e.number_of_book && e.number_of_book % 1 === 0) {
+            e.number_of_book = ('0000000'+e.number_of_book).slice(-this.nuu)
+          }
+          else {
+            e.number_of_book = ('0000000'+e.number_of_book).slice(-this.nuu-2)
+          }
+        });
+        console.log("showssssssww",this.show);  
+        
+      });
+      
+    });
+  }
 
   text:any="";
   type:any="";
-  len:any=null;
   postDocumentsearch(){
-    this.Showdatatable()
+    this.documentService.postDocumentsearch(this.type,this.text,null).then((docc:any)=>{
+      console.log(docc,'ข้อมูลของตารางdoc')
+      this.show=docc;
+      this.show.sort((a, b) => {
+        if (a.number_of_book < b.number_of_book) {
+          return -1;
+        } else if (a.number_of_book > b.number_of_book) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      this.year_pegService.getYear_peg().then((yp:any)=>{
+        this.numpeg = yp;
+        this.numpeg.forEach(e => {
+          if (new Date().getFullYear()+543 == e.year_change) {
+            this.nuu = e.peg_change;
+            return false;
+          }
+        });
+        this.show.forEach(e => {
+          if (Number(e.number_of_book) === e.number_of_book && e.number_of_book % 1 === 0) {
+            e.number_of_book = ('0000000'+e.number_of_book).slice(-this.nuu)
+          }
+          else {
+            e.number_of_book = ('0000000'+e.number_of_book).slice(-this.nuu-2)
+          }
+        });
+        console.log("showssssssww",this.show);  
+        
+      });
+      
+    });
+    
   }
 
 

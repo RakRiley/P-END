@@ -6,8 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-2.component.css']
 })
 export class Table2Component implements OnInit {
+  constructor() {
+  
+   }
 
-  constructor() { }
+
 
   ngOnInit() {
   }

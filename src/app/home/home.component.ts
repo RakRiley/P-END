@@ -156,7 +156,7 @@ export class HomeComponent implements OnInit {
         else if (data.check==2) {
           console.log("param after", data);
           var num = this.nuu;
-          this.NumberC = ('000'+data.number_of_book).slice(-num);
+          this.NumberC = (''+data.number_of_book).slice(-num);
           this.speed = data.speed;
           this.secret = data.secret;
           this.formm = data.form;
@@ -521,7 +521,8 @@ export class HomeComponent implements OnInit {
               second : this.second,
               day_time : this.datepicker.date.day,
               mounth_time : this.datepicker.date.month,
-              year_time : this.datepicker.date.year
+              year_time : this.datepicker.date.year,
+              all_date: this.datepicker.date.year+'-'+this.datepicker.date.month+'-'+this.datepicker.date.day,
              };
              var id : any;
              console.log(dataBook);
@@ -663,17 +664,38 @@ export class HomeComponent implements OnInit {
     // console.log(this.second)
 
   }
-
+y1:any;
+y2:any;
   getParamsNumC() {
     this.param.queryParams.subscribe(data => {
       if (data.check==4) {
         console.log("param numbook cancel", data);
         var num = this.nuu;
-        this.NumberC = ('000'+data.numbook).slice(-num);
+        this.NumberC = (''+data.numbook).slice(-num);
+
+        this.y1=data.year1-543;
+        this.y2=data.year2-543;
+        console.log("param  cancel", this.y2);
         this.myDatePickerOptions = {
           // other options...
           disableWeekends: true,
-          disableDateRanges: [{begin: {year: new Date().getFullYear() - 100, month: 1, day: 1}, end: {year: data.year1, month: data.month1, day: Number(data.day1)-1}},{begin: {year: data.year2, month: data.month2, day: Number(data.day2)+1}, end: {year: new Date().getFullYear() + 100, month: 12, day: 31}}]          
+          disableDateRanges: 
+          
+          // [  {begin: {year: this.y1, month: 12, day: 1}, end: {year: 2018, month: 12, day: 9}} ,
+
+          // {begin: {year: this.y2, month: 12, day: 13}, end: {year: 2018, month: 12, day: 31}} ]
+
+          //  [
+          //   {begin: {year: new Date().getFullYear(), month: 1, day: 1}, end:  {year: data.year1, month: data.month1, day: Number(data.day1)}},
+          //   {begin: {year: data.year2, month: data.month2, day: Number(data.day2)}, end: {year: new Date().getFullYear(), month: 12, day: 31}}
+          // ] 
+          
+           [{begin: {year: this.y1, month: 1, day: 1}, end: 
+            {year: this.y1, month: data.month1, day: Number(data.day1)-1}},
+            
+            {begin: {year: this.y2, month: data.month2, day: Number(data.day2)+1}, end: 
+            {year: this.y2, month: +10, day: +1000}}]
+          
         }
         this.checktable = 4;
         this.id=data.id

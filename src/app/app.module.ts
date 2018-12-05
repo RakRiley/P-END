@@ -78,6 +78,7 @@ const router : Routes =[
     MomentModule,
     MyDatePickerModule,
     ChartsModule,
+    NgbModule,
     NgCircleProgressModule.forRoot({
       // set defaults here
       // radius: 100,

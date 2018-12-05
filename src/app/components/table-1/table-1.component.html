@@ -27,6 +27,9 @@
                 <label for="exampleFormControlInput1">ค้นหาด้วยวันที่</label>                
                 <ngx-mat-drp style="color: aliceblue" (selectedDateRangeChanged)="updateRange($event)" [options]="options" #dateRangePicker name="len"></ngx-mat-drp>
             </div>
+            <div class="input-group-btn">
+                <button id="bottom" type="button" (click)="postDocumentsearchdate()" class="btn btn-secondary">ค้นหาด้วยวันที่ <i class="fa fa-search"></i></button>
+            </div>
         </div>        
         </div> 
         <div class="row">
